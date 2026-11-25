@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="龍門加工機之溫差式均溫系統及其方法：發明專利申請書互動簡報（15 頁，可旋轉 3D 模型、雙門檻控制示意）。">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0e151c">
+<meta property="og:type" content="website">
+<meta property="og:title" content="龍門溫差式均溫系統｜專利互動簡報">
+<meta property="og:description" content="龍門加工機之溫差式均溫系統及其方法：15 頁互動簡報，3D 龍門模型＋雙門檻控制示意，點一下換下一步。">
+<meta property="og:url" content="https://kungmengchien.uk/gantry-patent-deck/">
+<meta property="og:image" content="https://kungmengchien.uk/gantry-patent-deck/og.png?v=20261126a">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg?v=20261126a" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261126a">
+<title>龍門溫差式均溫系統｜專利互動簡報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* VOICE  期末專利報告，口頭簡報輔助：清楚、可信、一步一個重點
+   IDEA   一座會「上熱下冷」的龍門，跟著講稿一步步加上感測器、水冷板與控制
+   PICTURE 右側 3D 龍門（溫度色、變形放大、水路流動），第 8 頁是雙門檻控制模擬
+   COLOUR 沿用原 pptx：暖白底 #f4f3ef、深藍 #16222e、橘 #e8722c；冷用藍 #2f7dc0
+   TYPE / LAYOUT  Noto Sans TC + Roboto Mono；版面與 AEM 互動簡報相同（1600×900 舞台） */
+:root{
+  --bg:#f4f3ef; --ink:#16222e; --muted:#5d6873; --line:#d8d3c8; --blue:#1d4f7c; --blue2:#9dbad6; --cold:#2f7dc0;
+  --accent:#e8722c; --acc2:#fde9da; --deep:#a8440f; --navy:#16222e; --green:#2f7d4a; --red:#b8321a; --panel:rgba(255,255,255,.9);
+  --mono:"Roboto Mono",Consolas,monospace;
+  --ez:cubic-bezier(.65,0,.35,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#0e151c;overflow:hidden;font-family:"Noto Sans TC","Microsoft JhengHei","PingFang TC",sans-serif;color:var(--ink)}
+#stage{position:absolute;left:50%;top:50%;width:1600px;height:900px;background:radial-gradient(ellipse at 70% 40%,#fbfaf6 0%,var(--bg) 72%);overflow:hidden;transform-origin:center center;user-select:none}
+
+/* ---------- 版面方框 ---------- */
+.box{position:absolute;background:var(--panel);border:1.5px solid #d6d0c4;border-radius:12px;overflow:hidden;
+  transition:left .8s var(--ez),top .8s var(--ez),width .8s var(--ez),height .8s var(--ez),opacity .45s,border-color .45s,background .45s;
+  box-shadow:0 6px 22px rgba(22,34,46,.06)}
+#hdr{left:40px;top:24px;width:860px;height:112px;padding:16px 28px 0 30px;border-left:6px solid var(--accent)}
+#kick{font-size:15px;letter-spacing:.12em;color:var(--deep);font-weight:500;white-space:nowrap;font-family:var(--mono)}
+#ttl{margin-top:6px;font-size:36px;font-weight:900;line-height:1.2;white-space:nowrap}
+#pgb{position:absolute;right:18px;top:14px;font-family:var(--mono);font-size:13px;color:#7d8790;border:1px solid #d6d0c4;border-radius:4px;padding:2px 8px;background:#fff}
+#content{left:40px;top:152px;width:860px;height:600px;padding:26px 34px}
+#model{left:920px;top:24px;width:640px;height:544px;background:radial-gradient(ellipse at 50% 42%,#ffffff 0%,#f3f1ec 82%)}
+#mview{position:absolute;inset:0}
+#gl{position:absolute;left:0;top:0;width:100%;height:100%;display:block}
+#lbl{position:absolute;inset:0;pointer-events:none}
+#lbl svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+#mtag{position:absolute;left:16px;bottom:10px;font-size:15px;color:#7d8790;pointer-events:none;letter-spacing:.04em;z-index:3}
+#mtag b{color:var(--accent);font-weight:700}
+#param{left:920px;top:584px;width:640px;height:168px;padding:14px 20px}
+#say{position:absolute;left:40px;right:40px;top:768px;height:56px;display:flex;align-items:center;gap:14px;z-index:6;pointer-events:none}
+#say .no{font-family:var(--mono);font-size:14px;color:#fff;background:var(--accent);border-radius:20px;padding:5px 12px;white-space:nowrap}
+#say .tx{flex:1;font-size:21px;line-height:1.4;color:#1d2a35;background:rgba(255,255,255,.94);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:8px;padding:9px 16px;box-shadow:0 4px 14px rgba(22,34,46,.06);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:opacity .25s}
+#dots{display:flex;gap:6px;flex-wrap:nowrap}
+#dots b{width:10px;height:10px;border-radius:50%;background:#d3cdc1}
+#dots b.on{background:var(--accent)} #dots b.done{background:#efb48c}
+
+/* ---------- 版面模式 ---------- */
+#stage.L-wide #hdr{width:540px}
+#stage.L-wide #ttl{font-size:30px;margin-top:10px}
+#stage.L-wide #content{width:540px}
+#stage.L-wide #model{left:600px;width:960px}
+#stage.L-wide #param{left:600px;width:960px}
+#stage.L-flat #hdr{width:1520px}
+#stage.L-flat #content{width:1520px}
+#stage.L-flat #model{left:1640px;opacity:0}
+#stage.L-flat #param{left:1640px;opacity:0}
+#stage.L-cover #hdr{opacity:0;top:-140px}
+#stage.L-cover #content{top:40px;height:712px;width:800px;background:transparent;border-color:transparent;box-shadow:none;padding:70px 30px 0 44px}
+#stage.L-cover #model{left:760px;top:30px;width:820px;height:730px;background:transparent;border-color:transparent;box-shadow:none}
+#stage.L-cover #param{top:930px;opacity:0}
+
+/* ---------- 內容排版 ---------- */
+.ci{height:100%;display:flex;flex-direction:column;gap:16px;font-size:25px;line-height:1.55;animation:fin .45s ease both}
+@keyframes fin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+[data-s]{opacity:0;transform:translateY(10px);transition:opacity .45s,transform .45s,background .35s,border-color .35s,filter .35s}
+[data-s].vis{opacity:1;transform:none}
+.pt{border-left:4px solid var(--blue2);padding:4px 0 4px 16px;transition:border-color .35s,background .35s}
+.pt b{display:block;font-size:26px;font-weight:700;color:var(--blue);line-height:1.35}
+.pt span{display:block;font-size:21px;color:#3b4853;line-height:1.55}
+.pt.on{border-left-color:var(--accent);background:linear-gradient(90deg,var(--acc2),rgba(253,233,218,0))}
+.pt.on b{color:var(--deep)}
+.lead{font-size:26px;font-weight:700;line-height:1.45}
+.lead em{font-style:normal;color:var(--accent)}
+.note{font-size:16.5px;color:var(--muted);line-height:1.55}
+.warn{font-size:19px;color:#7a3a10;background:#fff4ea;border:1px solid #f0c7a3;border-radius:8px;padding:10px 14px;line-height:1.5}
+.warn b{color:var(--deep)}
+.mono{font-family:var(--mono)}
+.row{display:flex;gap:22px;align-items:stretch}
+.col{display:flex;flex-direction:column;gap:14px;flex:1;min-width:0}
+.grow{flex:1;min-height:0}
+.fig{display:flex;flex-direction:column;gap:6px;min-height:0;min-width:0}
+.fig .im{flex:1;min-height:0;background:#fff;border:1px solid #ddd7cb;border-radius:8px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.fig img{max-width:100%;max-height:100%;object-fit:contain;display:block}
+.fig .cap{font-size:16px;color:var(--muted);line-height:1.4}
+.fig .cap b{color:var(--ink)}
+.pm{font-style:normal;font-family:var(--mono);font-weight:700;font-size:1.02em;color:var(--deep);background:var(--acc2);border-radius:5px;padding:0 6px;margin:0 1px;white-space:nowrap}
+.chip{display:inline-block;font-size:15px;border:1px solid #c9c2b5;border-radius:20px;padding:0 10px;margin-right:6px;background:#fff;color:#3b4853;vertical-align:middle;line-height:1.6;white-space:nowrap}
+.chip.a{border-color:var(--accent);color:var(--deep);background:var(--acc2)}
+.chip.n{border-color:var(--navy);color:#fff;background:var(--navy)}
+
+/* 卡片 */
+.cards{display:grid;gap:16px}
+.card{background:#fcfbf8;border:1.5px solid #e1dbcf;border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;transition:border-color .35s,box-shadow .35s,background .35s,opacity .35s}
+.card .n{font-family:var(--mono);font-size:14.5px;color:var(--accent);font-weight:700;letter-spacing:.06em}
+.card b{font-size:24px;color:var(--ink);line-height:1.3}
+.card span{font-size:19px;color:#46535e;line-height:1.55}
+.card.on{border-color:var(--accent);box-shadow:0 0 0 4px rgba(232,114,44,.15);background:#fffaf5}
+.card.dk{background:var(--navy);border-color:var(--navy)}
+.card.dk b{color:#fff}.card.dk span{color:#c9d2da}.card.dk .n{color:#f6a26b}
+.card.dk.on{box-shadow:0 0 0 4px rgba(232,114,44,.3)}
+.card .lim{margin-top:auto;border-top:1px solid #e6e0d4;padding-top:10px;font-size:17.5px;color:#3d6a96;line-height:1.5;transition:color .35s}
+.card .lim.on{color:var(--deep);font-weight:700}
+.card .ic{width:46px;height:46px;margin-bottom:4px}
+.gapc{background:#fff3ea;border:1.5px solid #f1c4a4;border-radius:12px;padding:16px 22px;display:flex;flex-direction:column;gap:6px}
+.gapc b{font-size:24px;color:var(--ink)}
+.gapc span{font-size:20px;color:#4a3a30}
+
+/* 表格 */
+.tb{width:100%;border-collapse:collapse;font-size:20px;background:#fff;border-radius:10px;overflow:hidden}
+.tb th,.tb td{padding:9px 14px;border-bottom:1px solid #e3ded4;text-align:left;transition:background .35s,color .35s,opacity .35s;line-height:1.45;vertical-align:middle}
+.tb th{font-size:16px;color:#fff;font-weight:700;background:var(--navy);line-height:1.35}
+.tb td.n,.tb .mono{font-family:var(--mono)}
+.tb.tight td{padding:6px 14px}.tb.tight th{padding:8px 14px}
+.cards.mk .card{padding:18px 20px;gap:8px}.cards.mk .card b{font-size:26px}.cards.mk .card span{font-size:20.5px}.cards.mk .card .lim{font-size:19px}
+.tb tr.on td{background:#ffe9d6}
+.tb tr.on td:first-child{box-shadow:inset 4px 0 0 var(--accent)}
+.tb td.on{background:#fff1e4;color:#9a4a0c;font-weight:700}
+.tb th.me{background:var(--deep)}
+.tb td.me{background:#fff4ec}
+.tb.mx td{text-align:center;padding:9px 8px}
+.tb.mx td:first-child{text-align:left;font-weight:700;font-size:21px;padding-left:16px}
+.tb.mx th{text-align:center}.tb.mx th:first-child{text-align:left;padding-left:16px}
+.sy{display:block;font-size:29px;line-height:1.05;font-weight:700}
+.sy small{display:block;font-size:15.5px;font-weight:400;color:var(--muted);margin-top:3px;line-height:1.25}
+.sy.o{color:var(--ink)}.sy.t{color:#b07a1a}.sy.x{color:#a0a8b0}.sy.d{color:#b9bfc5}
+td.me .sy{color:var(--accent)}td.me .sy small{color:var(--deep);font-weight:700}
+
+/* 封面 */
+.cv-k{font-size:17px;letter-spacing:.16em;color:var(--deep);font-weight:500}
+.cv h1{font-size:62px;font-weight:900;line-height:1.2;margin-top:22px}
+.cv h1 em{font-style:normal;color:var(--accent)}
+.cv .s{font-size:26px;color:#46535e;margin-top:22px;line-height:1.6}
+.cv .a{font-size:20px;color:#3b4853;margin-top:26px;line-height:1.7}
+.howto{margin-top:40px;display:flex;flex-wrap:wrap;gap:10px}
+.howto span{font-size:15px;color:#46535e;border:1px solid var(--line);background:rgba(255,255,255,.85);border-radius:6px;padding:6px 11px}
+.howto b{color:var(--accent);margin-right:6px}
+.recap{margin-top:28px;display:flex;flex-direction:column;gap:12px}
+.recap div{display:grid;grid-template-columns:130px 1fr;gap:14px;align-items:baseline;font-size:21px;line-height:1.5;color:#33414c}
+.recap i{font-style:normal;font-size:16px;font-weight:700;color:#fff;background:var(--navy);border-radius:6px;padding:3px 0;text-align:center}
+
+/* ---------- 參數面板 ---------- */
+#param{display:flex;flex-direction:column;gap:8px}
+#ro{display:flex;gap:10px}
+#ro:empty{display:none}
+#ro .r{flex:1;min-width:0;border-right:1px solid #e6e1d7;padding-right:8px}
+#ro .r:last-child{border-right:0}
+#ro .l{font-size:13px;color:var(--muted);letter-spacing:.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#ro .v{font-family:var(--mono);font-size:22px;font-weight:500;color:#1d2a35;line-height:1.2;white-space:nowrap}
+#ro .v small{font-size:13px;color:var(--muted);margin-left:3px;font-weight:400}
+#ro .r.hi .v{color:var(--accent);font-weight:700}
+#pc{font-size:17px;line-height:1.55;color:#33414c;flex:1;min-height:0}
+#pc b{color:var(--blue)}
+#pc .ci{font-size:inherit;line-height:inherit;gap:6px;animation:none}
+#pc .lg{display:flex;flex-wrap:wrap;gap:4px 18px}
+#pc .lg span{display:flex;align-items:center;gap:8px}
+#pc .lg i{display:inline-block;width:24px;height:10px;border-radius:3px}
+.tgrad{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;font-size:15px;color:var(--muted)}
+.tgrad i{height:12px;border-radius:3px;background:linear-gradient(90deg,#2f7dc0,#c9c2bd,#e5702e)}
+.pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px 14px}
+.pgrid div{border-left:3px solid var(--accent);padding-left:9px}
+.pgrid small{display:block;font-size:13px;color:var(--muted)}
+.pgrid b{font-family:var(--mono);font-size:18px;color:var(--ink)!important;white-space:nowrap}
+#mbtn{position:absolute;right:12px;bottom:10px;z-index:3;display:flex;gap:6px}
+#mbtn button{font:inherit;font-size:14px;border:1px solid #c9c2b5;background:rgba(255,255,255,.94);color:#22303b;border-radius:6px;padding:5px 11px;cursor:pointer}
+#mbtn button:hover{border-color:var(--accent)}
+#mbtn button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+#ctrl{display:none}
+
+/* ---------- 標籤 ---------- */
+.tag{position:absolute;background:rgba(255,255,255,.96);border:1px solid #9aa6b0;border-radius:3px;padding:3px 8px;font-size:14.5px;line-height:1.35;color:#1d2a35;white-space:nowrap;transition:opacity .35s;box-shadow:0 2px 8px rgba(22,34,46,.08)}
+.tag small{display:block;font-size:12px;color:#5b6772}
+.tag.hot{border-color:var(--accent);color:#9a4a0c}
+.tag.cold{border-color:var(--cold);color:#1d5b93}
+
+/* ---------- 進度路線 ---------- */
+#route{position:absolute;left:0;right:0;top:834px;height:66px;z-index:4;pointer-events:none}
+#route .ln{position:absolute;left:80px;right:80px;top:30px;height:2px;background:#cfc9bd}
+#route .prog{position:absolute;left:80px;top:30px;height:2px;background:var(--accent);transition:width .6s}
+#route .st{position:absolute;top:20px;transform:translateX(-50%);text-align:center}
+#route .st b{display:block;width:21px;height:21px;line-height:17px;border-radius:50%;background:#fff;border:2px solid #a9a295;margin:0 auto;font-size:11.5px;font-weight:700;font-family:var(--mono);color:#6b7480}
+#route .st span{position:absolute;left:50%;top:25px;transform:translateX(-50%);white-space:nowrap;font-size:13px;color:#7d8790}
+#route .st.past b{background:#efb48c;border-color:#efb48c;color:#7a3d12}
+#route .st.cur b{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 0 0 5px rgba(232,114,44,.18)}
+#route .st.cur span{color:var(--accent);font-weight:700;font-size:14px}
+#route .st.wait span{visibility:hidden}
+
+#tools{position:absolute;right:20px;top:848px;z-index:7;display:flex;gap:6px}
+#tools button{border:1px solid #c9c2b5;background:rgba(255,255,255,.92);border-radius:6px;width:32px;height:28px;cursor:pointer;font-size:15px;color:#33414c}
+#tools button:hover{border-color:var(--accent)}
+#fade{position:absolute;inset:0;background:var(--bg);opacity:0;pointer-events:none;z-index:20;transition:opacity .22s}
+#err{position:absolute;inset:0;display:none;align-items:center;justify-content:center;z-index:40;background:var(--bg);font-size:22px;color:#7a2f12;text-align:center;line-height:1.8}
+#stage.notr .box,#stage.notr [data-s]{transition:none!important}
+#stage.notr .ci{animation:none!important}
+
+/* 章節帶入 */
+#chap{position:absolute;inset:0;z-index:30;display:none;pointer-events:none}
+#chap .bg{position:absolute;inset:0;background:var(--bg);opacity:0;transition:opacity .45s}
+#chap .ck{position:absolute;left:0;right:0;top:322px;text-align:center;font-family:var(--mono);font-size:26px;letter-spacing:.35em;color:var(--accent);opacity:0;transition:opacity .35s}
+#chap .cl{position:absolute;left:640px;width:320px;top:560px;height:4px;border-radius:2px;background:var(--accent);transform:scaleX(0);transition:transform .7s cubic-bezier(.2,.8,.2,1),opacity .3s}
+#chap .cn{position:absolute;left:800px;top:450px;font-size:112px;font-weight:900;letter-spacing:.04em;color:var(--ink);white-space:nowrap;opacity:0;transform:translate(-50%,-50%) scale(1.06);transition:transform .45s ease-out,opacity .45s}
+#chap.in .bg{opacity:1}#chap.in .ck{opacity:1}#chap.in .cl{transform:scaleX(1)}#chap.in .cn{opacity:1;transform:translate(-50%,-50%) scale(1)}
+#chap.fly .bg{opacity:0;transition:opacity .6s}#chap.fly .ck,#chap.fly .cl{opacity:0}
+#chap.fly .cn{transition:transform .75s cubic-bezier(.65,0,.25,1),color .75s}
+
+/* 請求項 */
+.claim{background:#fcfbf8;border:1.5px solid #e1dbcf;border-radius:12px;padding:14px 18px;display:flex;flex-direction:column;gap:4px}
+.claim p{font-size:19px;line-height:1.55;color:#2f3c47;border-radius:6px;padding:2px 8px;transition:background .35s,color .35s,box-shadow .35s}
+.claim p.el{margin-left:30px}
+.claim p.pre{font-weight:700;color:var(--ink)}
+.claim p.on{background:#fff1e4;box-shadow:inset 4px 0 0 var(--accent);color:#1d2a35}
+.claim .hl{color:var(--deep);font-weight:700}
+.claim u{text-decoration:none;border-bottom:2px solid var(--accent)}
+.anat{display:flex;gap:8px;align-items:center;font-size:17.5px;color:#33414c;flex-wrap:wrap}
+.anat i{font-style:normal;font-weight:700;color:#fff;background:var(--navy);border-radius:6px;padding:3px 12px}
+.anat i.a{background:var(--deep)}
+
+/* 流程圖 */
+.flow{position:relative;height:345px}
+.flow svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.fx{position:absolute;width:176px;height:90px;border:2px solid #b9b2a5;background:#fff;border-radius:10px;padding:8px 12px;display:flex;flex-direction:column;justify-content:center;transition:background .25s,border-color .25s,box-shadow .25s,transform .25s}
+.fx b{font-family:var(--mono);font-size:15px;color:var(--deep)}
+.fx span{font-size:16.5px;line-height:1.3;color:#22303b}
+.fx.q{border-color:#e7a37a;border-style:solid}
+.fx.live{background:#fff1e4;border-color:var(--accent);box-shadow:0 0 0 5px rgba(232,114,44,.2);transform:scale(1.04)}
+.fl{font-size:15px;fill:#5d6873;font-weight:700}
+.fa{fill:none;stroke:#7d8790;stroke-width:2}
+.th2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.th2 div{background:#fcfbf8;border:1.5px solid #e1dbcf;border-radius:10px;padding:10px 16px;font-size:18px;line-height:1.5;color:#3b4853}
+.th2 b{display:block;font-size:21px;color:var(--ink)}
+.th2 .pm{font-size:20px}
+
+/* 預期功效 */
+.eff{display:flex;flex-direction:column;gap:14px}
+.eff div{display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:center;font-size:22px;line-height:1.45;color:#26333e}
+.eff i{width:28px;height:28px;border-radius:50%;border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;color:var(--accent);font-style:normal;font-size:16px;font-weight:900}
+.mkt{background:var(--navy);border-radius:12px;padding:16px 22px;display:flex;flex-direction:column;gap:8px}
+.mkt h4{font-size:16px;color:#f6a26b;font-weight:700;letter-spacing:.06em}
+.mkt div{display:grid;grid-template-columns:28px 1fr;gap:8px;font-size:20px;line-height:1.45;color:#e9eef2}
+.mkt div i{font-style:normal;font-family:var(--mono);color:#f6a26b;font-weight:700}
+.blk h4{font-size:16px;color:var(--deep);font-weight:700;letter-spacing:.06em;margin-bottom:8px}
+.eff div{transition:color .35s}.eff div.on span{color:var(--deep);font-weight:700}
+.eff div.on i{background:var(--accent);color:#fff}
+
+/* 附屬項 */
+.dep{display:grid;grid-template-columns:32px 1fr;gap:12px;align-items:start;font-size:19.5px;line-height:1.55;color:#2f3c47;padding:7px 10px;border-radius:8px;transition:background .35s,box-shadow .35s,opacity .45s,transform .45s}
+.dep i{font-style:normal;font-family:var(--mono);font-weight:700;color:#fff;background:var(--navy);border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:15px}
+.dep.on{background:#fff1e4;box-shadow:inset 4px 0 0 var(--accent)}
+.mstep{font-size:19px;line-height:1.55;color:#2f3c47;padding:3px 10px}
+
+/* 申請書圖式＋符號 */
+.figw{position:relative;width:100%;max-width:640px;aspect-ratio:1800/1240;margin:auto}
+.figw img{position:absolute;inset:0;width:100%;height:100%;max-width:none;max-height:none}
+.fnum{position:absolute;width:7.6%;height:6.1%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:700;font-size:18px;color:var(--ink)}
+.fbx{position:absolute;width:18.7%;height:11.1%;display:flex;align-items:center;justify-content:center;text-align:center;font-size:14px;line-height:1.2;font-weight:700;color:var(--ink)}
+.fbx.dk{color:#fff}
+
+#rot{display:none;position:fixed;left:0;right:0;bottom:max(18px,env(safe-area-inset-bottom));text-align:center;color:#9fb0ba;font-size:14px;letter-spacing:.06em;pointer-events:none;z-index:20}
+@media (orientation:portrait) and (max-width:900px){#rot{display:block}}
+@media (prefers-reduced-motion:reduce){.box,[data-s],.fx{transition:none!important}.ci{animation:none!important}}
+</style>
+<script type="importmap">
+{"imports": {"three": "./vendor/three.module.js", "three/addons/controls/OrbitControls.js": "./vendor/OrbitControls.js"}}
+</script>
+</head>
+<body>
+<div id="rot">手機橫放看得更清楚　·　點畫面換下一步</div>
+<div id="stage" class="L-flat">
+  <div id="hdr" class="box"><div id="kick"></div><div id="ttl"></div><div id="pgb"></div></div>
+  <div id="content" class="box"></div>
+  <div id="model" class="box"><div id="mview"><canvas id="gl"></canvas><div id="lbl"><svg id="lsvg"></svg></div></div><div id="mtag"></div><div id="mbtn" class="ui"></div></div>
+  <div id="param" class="box"><div id="ro"></div><div id="pc"></div><div id="ctrl" class="ui"></div></div>
+  <div id="say"><span class="no" id="sayno"></span><span class="tx" id="saytx"></span><span id="dots"></span></div>
+  <div id="route"></div>
+  <div id="tools" class="ui"><button id="bPrev" title="上一步">‹</button><button id="bNext" title="下一步">›</button><button id="bFs" title="全螢幕 (F)">⛶</button></div>
+  <div id="fade"></div>
+  <div id="err"></div>
+</div>
+<script>
+window.addEventListener('error',function(ev){var e=document.getElementById('err');if(e){e.style.display='flex';e.innerHTML='程式錯誤：'+(ev.message||'')+'<br>行 '+(ev.lineno||'');}});
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+/* ================= 基本設定 ================= */
+const W = 1600, H = 900, TAU = Math.PI * 2;
+const $ = id => document.getElementById(id);
+const stage = $('stage'), glc = $('gl'), mview = $('mview');
+const C = {
+  steel: '#c3cad0', steel2: '#aab3bb', dark: '#4a5560', edge: '#3c5368', navy: '#16222e', cold: '#2f7dc0', water: '#2b7fd6',
+  accent: '#e8722c', probe: '#c2410c', cab: '#e4e7ea'
+};
+const HOTE = new THREE.Color('#e8722c');
+
+const renderer = new THREE.WebGLRenderer({ canvas: glc, antialias: true, alpha: true });
+renderer.setClearColor(0x000000, 0);
+const camera = new THREE.PerspectiveCamera(36, 1, 0.1, 900);
+camera.up.set(0, 0, 1); camera.position.set(20, -55, 24);
+const controls = new OrbitControls(camera, glc);
+controls.enableDamping = true; controls.dampingFactor = 0.08; controls.rotateSpeed = 0.7; controls.autoRotateSpeed = 0.8;
+
+let K = 1, PR = 1, VW = 0, VH = 0, VPR = 0;
+function fit() {
+  K = Math.min(innerWidth / W, innerHeight / H);
+  stage.style.transform = `translate(-50%,-50%) scale(${K})`;
+  PR = Math.min(2.5, (devicePixelRatio || 1) * K);
+}
+addEventListener('resize', fit);
+function sizeView() {
+  const w = mview.clientWidth, h = mview.clientHeight;
+  if (!w || !h) return false;
+  if (w !== VW || h !== VH || PR !== VPR) {
+    VW = w; VH = h; VPR = PR;
+    renderer.setPixelRatio(PR); renderer.setSize(w, h, false);
+    camera.aspect = w / h; camera.updateProjectionMatrix();
+  }
+  return true;
+}
+
+/* ================= 小工具 ================= */
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+const lerp = (a, b, t) => a + (b - a) * t;
+const fmt = (v, d = 2) => (Math.abs(v) < 1e-12 ? 0 : v).toFixed(d);
+const V3 = a => new THREE.Vector3(...a);
+const match = (n, list) => list.some(f => f.endsWith('*') ? n.startsWith(f.slice(0, -1)) : n === f);
+function canvasTex(w, h, fn) {
+  const c = document.createElement('canvas'); c.width = w; c.height = h; const x = c.getContext('2d'); fn(x, w, h);
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 4; return t;
+}
+
+/* ================= 零件系統（聚焦 / 高亮） ================= */
+function part(S, name, { pos = [0, 0, 0], ex = [0, 0, 0], eg = 'main' } = {}) {
+  const root = new THREE.Group(), spin = new THREE.Group(); root.add(spin); root.position.set(...pos); S.world.add(root);
+  const p = { name, root, spin, base: V3(pos), ex: V3(ex), eg, mats: [], vis: 1, visT: 1, hot: 0, hotT: 0 };
+  S.parts[name] = p; if (!S.egs.includes(eg)) S.egs.push(eg); return p;
+}
+function addMesh(p, geo, color, o = {}) {
+  const fill = new THREE.MeshStandardMaterial({
+    color, transparent: true, opacity: o.op ?? 0.96, metalness: o.metal ?? 0.15, roughness: o.rough ?? 0.55,
+    side: o.side ?? THREE.FrontSide, polygonOffset: true, polygonOffsetFactor: 1, polygonOffsetUnits: 1, map: o.map || null,
+    vertexColors: !!o.vc, emissive: '#000000'
+  });
+  const mesh = new THREE.Mesh(geo, fill);
+  (o.parent || p.spin).add(mesh);
+  const rec = { fill, base: new THREE.Color(color), op: fill.opacity, noDepth: !!o.noDepth, glow: o.glow ?? .45 };
+  if (o.noDepth) { fill.depthWrite = false; mesh.renderOrder = 2; }
+  if (o.edges !== false) {
+    const lg = new THREE.EdgesGeometry(geo, o.ang ?? 30);
+    const lm = new THREE.LineBasicMaterial({ color: o.edge || C.edge, transparent: true, opacity: o.eop ?? 0.7 });
+    mesh.add(new THREE.LineSegments(lg, lm));
+    rec.line = lm; rec.lbase = new THREE.Color(o.edge || C.edge); rec.lop = lm.opacity;
+  }
+  p.mats.push(rec); mesh.userData.rec = rec; return mesh;
+}
+function addObj(p, obj, mat, color, op = 1) {
+  p.spin.add(obj);
+  const rec = mat.isLineBasicMaterial || mat.isLineDashedMaterial ? { line: mat, lbase: new THREE.Color(color), lop: op } : { fill: mat, base: new THREE.Color(color), op };
+  p.mats.push(rec); return obj;
+}
+function boxG(x0, x1, y0, y1, z0, z1, sx = 1, sy = 1, sz = 1) {
+  return new THREE.BoxGeometry(x1 - x0, y1 - y0, z1 - z0, sx, sy, sz).translate((x0 + x1) / 2, (y0 + y1) / 2, (z0 + z1) / 2);
+}
+/* 方塊外框：每條邊細分，變形時才會跟著彎 */
+function boxLines(x0, x1, y0, y1, z0, z1, n = 20) {
+  const c = i => [i & 1 ? x1 : x0, i & 2 ? y1 : y0, i & 4 ? z1 : z0], out = [];
+  for (const [a, b] of [[0, 1], [2, 3], [4, 5], [6, 7], [0, 2], [1, 3], [4, 6], [5, 7], [0, 4], [1, 5], [2, 6], [3, 7]]) {
+    const A = c(a), B = c(b);
+    for (let k = 0; k < n; k++) { const u = k / n, v = (k + 1) / n; out.push(...A.map((q, j) => lerp(q, B[j], u)), ...A.map((q, j) => lerp(q, B[j], v))); }
+  }
+  return new Float32Array(out);
+}
+function poly(pts) {
+  const P = pts.map(V3), L = [0];
+  for (let i = 1; i < P.length; i++) L.push(L[i - 1] + P[i].distanceTo(P[i - 1]));
+  const len = L[L.length - 1];
+  return {
+    P, len, at(t, out) {
+      const d = (((t % 1) + 1) % 1) * len; let k = 1;
+      while (k < L.length - 1 && L[k] < d) k++;
+      const u = (d - L[k - 1]) / ((L[k] - L[k - 1]) || 1); return out.copy(P[k - 1]).lerp(P[k], u);
+    }
+  };
+}
+
+const IMG = { tilt: 'img/tilt.jpg', g8: 'img/g8.png', g23: 'img/g23.png', fig: 'img/fig_system.png' };
+
+/* =====================================================================
+   場景：龍門（示意，比例大致參考論文 COMSOL 模型；單位 1 = 100 mm，z 朝上，正面朝 −y）
+   橫樑 x −17～17、z 17.5～23.5；立柱中心 x ±8.25、寬 4、高 17.5
+   ===================================================================== */
+const XC = 8.25, ZB = 17.5, HB = 17;
+/* 變形示意（大幅放大）：上熱 → 橫樑伸長並上拱，立柱頂端被往外推 */
+function deform(x, y, z, a) {
+  if (!a) return [x, y, z];
+  if (Math.abs(x) < 2.3 && z > 10 && y < -2.8) return [x, y, z + a * 1.1];
+  if (z >= ZB - .01) { const u = clamp(x / HB, -1, 1); return [x + a * .12 * x, y, z + a * 1.1 * (1 - u * u)]; }
+  const s = clamp(z / ZB, 0, 1), sx = Math.sign(x) || 1, u = XC / HB;
+  return [x + a * .12 * sx * XC * s * s, y, z + a * 1.1 * (1 - u * u) * s];
+}
+const GA = new THREE.Color('#2f7dc0'), GM = new THREE.Color('#cfc8c2'), GB = new THREE.Color('#ee6c22'), STEEL = new THREE.Color('#c3cad0');
+const tc = new THREE.Color(), tc2 = new THREE.Color();
+function tempColor(z, f, g) {
+  const s = Math.pow(clamp(z / 23.5, 0, 1), .85), u = clamp(.5 + (s - .5) * g, 0, 1);
+  if (u < .5) tc.copy(GA).lerp(GM, u * 2); else tc.copy(GM).lerp(GB, (u - .5) * 2);
+  return tc2.copy(STEEL).lerp(tc, f);
+}
+function defBox(S, p, b, seg) {
+  const g = boxG(...b, ...seg);
+  g.setAttribute('color', new THREE.BufferAttribute(new Float32Array(g.attributes.position.count * 3).fill(1), 3));
+  const m = addMesh(p, g, '#ffffff', { vc: true, edges: false, op: 1, metal: .02, rough: .72 }); m.frustumCulled = false;
+  const lg = new THREE.BufferGeometry(); lg.setAttribute('position', new THREE.BufferAttribute(boxLines(...b, 24), 3));
+  const lm = new THREE.LineBasicMaterial({ color: C.edge, transparent: true, opacity: .75 });
+  const ls = new THREE.LineSegments(lg, lm); ls.frustumCulled = false; addObj(p, ls, lm, C.edge, .75);
+  S.defs.push({ g, p0: g.attributes.position.array.slice(), vc: true }, { g: lg, p0: lg.attributes.position.array.slice() });
+  return m;
+}
+function applyDeform(S) {
+  const a = S.params.tilt, f = S.params.field, gg = S.params.dT;
+  const key = a.toFixed(4) + '|' + f.toFixed(3) + '|' + gg.toFixed(3);
+  if (key === S.defKey) return; S.defKey = key;
+  for (const d of S.defs) {
+    const pos = d.g.attributes.position, arr = pos.array, p0 = d.p0;
+    for (let i = 0; i < arr.length; i += 3) { const q = deform(p0[i], p0[i + 1], p0[i + 2], a); arr[i] = q[0]; arr[i + 1] = q[1]; arr[i + 2] = q[2]; }
+    pos.needsUpdate = true;
+    if (d.vc) {
+      const col = d.g.attributes.color.array;
+      for (let i = 0; i < arr.length; i += 3) { const c = tempColor(p0[i + 2], f, gg); col[i] = c.r; col[i + 1] = c.g; col[i + 2] = c.b; }
+      d.g.attributes.color.needsUpdate = true;
+    }
+  }
+  for (const [p, c] of S.rigid) { const q = deform(c[0], c[1], c[2], a); p.spin.position.set(q[0] - c[0], q[1] - c[1], q[2] - c[2]); }
+}
+
+/* ---------- 控制邏輯示意（數值為設定的示意值，非實測） ---------- */
+function simReset(S) { S.sim = { Tu: 23.40, Tl: 22.90, on: false, acc: 0, hist: [], sw: 0, phase: 'S1', held: 0, chk: 0, cyc: 0, ht: 0, qU: .3, qL: .3 }; S.pcache = ''; }
+function simStep(S, dt) {
+  const s = S.sim, pr = S.params, sub = 4, h = dt / sub, tau = 3.4;
+  for (let i = 0; i < sub; i++) {
+    const d = s.Tu - s.Tl;
+    s.qU = s.on ? clamp(.3 + 4 * d, .3, 1) : .3;
+    s.qL = s.on ? Math.max(.15, s.qU * .5) : .3;
+    s.Tu += h / tau * ((24.24 - s.Tu) - 2 * s.qU * (s.Tu - 22));
+    s.Tl += h / tau * ((23.44 - s.Tl) - 2 * s.qL * (s.Tl - 22));
+  }
+  const dT = s.Tu - s.Tl;
+  s.acc += dt;
+  if (s.acc >= .5) {                       // 每個控制週期判斷一次
+    s.acc = 0; const m = dT + (Math.random() - .5) * .016, was = s.on;
+    if (!pr.ctl) s.on = false;
+    else if (pr.mode === 1) s.on = m >= .3;
+    else if (!s.on && m >= .3) s.on = true;
+    else if (s.on && m <= .1) s.on = false;
+    if (was !== s.on) { s.sw++; if (!s.on && pr.mode === 2) s.held = 1.1; }
+    if (s.on) s.chk = .3;
+  }
+  if (s.held > 0) { s.held -= dt; s.phase = 'S6'; }
+  else if (s.on) s.phase = s.chk > 0 ? 'S5' : 'S4';
+  else { s.cyc = (s.cyc + dt * 2.2) % 3; s.phase = ['S1', 'S2', 'S3'][Math.floor(s.cyc)]; }
+  s.chk = Math.max(0, s.chk - dt);
+  s.ht += dt; if (s.ht >= .08) { s.ht = 0; s.hist.push([dT, s.on ? 1 : 0]); if (s.hist.length > 260) s.hist.shift(); }
+  pr.dT = S.target.dT = clamp(dT / .6, 0, 1); pr.qU = S.target.qU = s.qU; pr.qL = S.target.qL = s.qL;
+  if (s.phase !== s.lastPh) { s.lastPh = s.phase; document.querySelectorAll('#content [data-sx]').forEach(e => e.classList.toggle('live', e.dataset.sx === s.phase)); }
+}
+function simPanel(S) {
+  const s = S.sim; if (!s) return '';
+  const now = performance.now(); if (S.pcache && now - S.pct < 90) return S.pcache; S.pct = now;
+  const Wp = 600, Hp = 86, X0 = 70, y = v => Hp - 8 - clamp(v, 0, .6) / .6 * (Hp - 16), x = i => X0 + (Wp - X0 - 6) * i / 259;
+  let pl = '', sh = '', st = -1; const n = s.hist.length;
+  s.hist.forEach((q, i) => { pl += `${x(i).toFixed(1)},${y(q[0]).toFixed(1)} `; });
+  for (let i = 0; i <= n; i++) {
+    const a = i < n && s.hist[i][1];
+    if (a && st < 0) st = i;
+    if (!a && st >= 0) { sh += `<rect x="${x(st).toFixed(1)}" y="4" width="${(x(i) - x(st)).toFixed(1)}" height="${Hp - 12}" fill="#2f7dc0" opacity=".12"/>`; st = -1; }
+  }
+  const line = (v, t, c) => `<line x1="${X0}" x2="${Wp - 4}" y1="${y(v)}" y2="${y(v)}" stroke="${c}" stroke-width="1.5" stroke-dasharray="6 5"/><text x="${X0 - 6}" y="${y(v) + 4}" text-anchor="end" font-size="12" fill="${c}" font-weight="700">${t}</text>`;
+  const th = S.params.mode === 1 ? line(.3, '門檻 0.3', '#a8440f') : line(.3, '啟動 0.3', '#a8440f') + line(.1, '停止 0.1', '#2f7dc0');
+  S.pcache = `<svg width="${Wp}" height="${Hp}" style="display:block;font-family:'Roboto Mono',monospace">
+    <rect x="${X0}" y="4" width="${Wp - X0 - 4}" height="${Hp - 12}" fill="#faf9f6" stroke="#e3ded4"/>${sh}${th}
+    <text x="${X0 + 6}" y="16" font-size="12" fill="#5d6873">ΔT（°C，示意）　淡藍底＝加大冷卻中</text>
+    <polyline points="${pl}" fill="none" stroke="#16222e" stroke-width="2"/></svg>`;
+  return S.pcache;
+}
+
+const LAB_G = {
+  l12: { p: 'beam', at: S => S.D(14, -2.75, 22.5), t: '12 橫樑', dx: 40, dy: -50 },
+  l11: { p: 'colL', at: S => S.D(-10.25, -2.5, 12), t: '11 立柱', dx: -50, dy: 10 },
+  hot: { p: 'beam', at: S => S.D(12, -2.75, 23.3), t: '上熱', s: '廠房高處較熱，橫樑受熱', dx: 40, dy: -56, hot: true },
+  cold: { p: 'colL', at: S => S.D(-10.25, -2.5, 1.5), t: '下冷', s: '立柱下段靠近地面', dx: -50, dy: 30, cold: true },
+  def: { p: 'beam', at: S => S.D(-4, -2.75, 23.5), t: '變形放大示意', s: '橫樑伸長上拱，立柱頂端被往外推', dx: -40, dy: -64, hot: true },
+  air0: { p: 'air', at: [-19, 8, .4], t: '地面 22 °C', dx: -30, dy: -22 },
+  air1: { p: 'air', at: [-19, 8, 10], t: '＋1 °C（100 cm）', dx: -30, dy: -22 },
+  air2: { p: 'air', at: [-19, 8, 20], t: '＋2 °C（200 cm）', dx: -30, dy: -22, hot: true },
+  s21: { p: 'sensU', at: [10.5, 0, 24.3], t: '21 第一溫度感測器', s: '橫樑上部，量 T上', dx: 20, dy: -64 },
+  s22: { p: 'sensL', at: [-8.25, -3.05, 1.8], t: '22 第二溫度感測器', s: '立柱下段，量 T下', dx: -70, dy: 34 },
+  m31: { p: 'plateFront', at: [-5, -2.97, 21.6], t: '31 上部溫控模組', s: '橫樑正面＋頂面（點位 9、11）', dx: -60, dy: -92 },
+  m32: { p: 'plateL', at: [-9.75, -2.72, 8.25], t: '32 下部溫控模組', s: '兩立柱正面（點位 1、5）', dx: -70, dy: 36 },
+  w33: { p: 'pipe', at: [14.5, -3.4, 12], t: '33 水路', s: '冷卻水送到上下模組', dx: 40, dy: -10 },
+  c40: { p: 'ctrl', at: [19.5, -1.2, 19], t: '40 控制單元', s: '算 ΔT，分別控制上下', dx: -60, dy: 64 },
+  u50: { p: 'supply', at: [19, -3, 3.6], t: '50 冷卻水供應單元', s: '冷卻機、泵、比例閥', dx: -30, dy: 64 },
+  p9: { p: 'pts', at: [-3.6, -3.05, 20.75], t: '點位 9', s: '橫樑正面', dx: -70, dy: -30 },
+  p11: { p: 'pts', at: [-3.6, 0, 23.9], t: '點位 11', s: '橫樑頂面', dx: -40, dy: -62 },
+  p1: { p: 'pts', at: [-8.25, -2.8, 9.6], t: '點位 1', s: '左立柱正面', dx: -70, dy: 0 },
+  p5: { p: 'pts', at: [8.25, -2.8, 9.6], t: '點位 5', s: '右立柱正面', dx: 60, dy: 10 },
+  mat: { p: 'plateL', at: [-6.75, -2.72, 9.6], t: '水冷板：鋁合金或銅', s: '與結構之間加導熱膏／導熱墊', dx: 70, dy: -40 },
+  zU: { p: 'plateTop', at: [3, 0, 23.72], t: '上部：加大冷卻', s: '流量依 ΔT 比例調整', dx: 30, dy: -60, cold: true },
+  zL: { p: 'plateR', at: [9.75, -2.72, 8.25], t: '下部：分別調整', s: '上：下流量比 1 : 0.5～1', dx: 50, dy: 36, cold: true },
+  gen: { p: 'plateFront', at: [-5, -2.97, 21.6], t: '「溫控模組」＝上位用語', s: '實施例是水冷板，範圍不限於水冷板', dx: -60, dy: -92, hot: true },
+};
+
+const SCENES = {};
+SCENES.gantry = (o = {}) => {
+  const sc = {
+    params: { field: 0, dT: 1, tilt: 0, air: 0, dev: 0, pipe: 0, sig: 0, pts: 0, qU: .3, qL: .3, sim: 0, ctl: 0, mode: 2, state: 'none' },
+    discrete: ['sim', 'ctl', 'mode', 'state'],
+    labels: LAB_G,
+    build(S) {
+      S.defs = []; S.rigid = []; S.plates = []; S.t = 0; S.fU = 0; S.fL = 0; S.fs = 0;
+      S.D = (x, y, z) => deform(x, y, z, S.params.tilt);
+      const grid = new THREE.GridHelper(70, 35, '#d3ccbf', '#e3ded4'); grid.rotation.x = Math.PI / 2; grid.position.set(3, 0, -.02);
+      grid.material.transparent = true; grid.material.opacity = .75; S.world.add(grid);
+
+      /* 廠房溫度背板：每升高 100 cm 加 1 °C（論文設定） */
+      const air = part(S, 'air');
+      const tex = canvasTex(512, 512, (x, w, h) => {
+        const gr = x.createLinearGradient(0, h, 0, 0);
+        gr.addColorStop(0, 'rgba(47,125,192,.34)'); gr.addColorStop(.5, 'rgba(207,200,194,.16)'); gr.addColorStop(1, 'rgba(229,112,46,.38)');
+        x.fillStyle = gr; x.fillRect(0, 0, w, h);
+        x.strokeStyle = 'rgba(22,34,46,.4)'; x.lineWidth = 2; x.setLineDash([10, 8]);
+        for (const zz of [10, 20]) { const yy = h - zz / 28 * h; x.beginPath(); x.moveTo(0, yy); x.lineTo(w, yy); x.stroke(); }
+      });
+      addMesh(air, new THREE.PlaneGeometry(44, 28).rotateX(Math.PI / 2).translate(3, 8, 14), '#ffffff', { map: tex, edges: false, op: 1, side: THREE.DoubleSide, noDepth: true, rough: 1, metal: 0 });
+
+      /* 結構：橫樑 12、立柱 11（頂點上色＋可變形） */
+      defBox(S, part(S, 'beam'), [-17, 17, -2.75, 2.75, 17.5, 23.5], [34, 1, 6]);
+      defBox(S, part(S, 'colL'), [-10.25, -6.25, -2.5, 2.5, 0, 17.5], [2, 1, 18]);
+      defBox(S, part(S, 'colR'), [6.25, 10.25, -2.5, 2.5, 0, 17.5], [2, 1, 18]);
+      const ram = part(S, 'ram');
+      addMesh(ram, boxG(-1.9, 1.9, -3.16, -3.0, 17.7, 23.3), C.steel2);
+      addMesh(ram, boxG(-1.1, 1.1, -4.6, -3.16, 12.6, 23.6), C.steel);
+      addMesh(ram, new THREE.CylinderGeometry(.55, .55, 1.3, 24).rotateX(Math.PI / 2).translate(0, -3.88, 11.95), C.dark, { edges: false });
+      addMesh(ram, new THREE.CylinderGeometry(.14, .14, 1.2, 12).rotateX(Math.PI / 2).translate(0, -3.88, 10.7), '#8c96a0', { edges: false });
+      S.rigid.push([ram, [0, -3.9, 18]]);
+      const bed = part(S, 'bed');
+      addMesh(bed, boxG(-5.4, 5.4, -10, 10, 0, 1.4), '#b7bec5');
+      addMesh(bed, boxG(-4.6, 4.6, -7, 5, 1.4, 2.2), '#d0d6db');
+      for (const x of [-2.7, -.9, .9, 2.7]) addMesh(bed, boxG(x - .12, x + .12, -7, 5, 2.2, 2.24), '#7c8792', { edges: false });
+
+      /* 溫控模組（水冷板）31 上部、32 下部 */
+      const PL = (name, b, c, zone, face) => {
+        const p = part(S, name), m = addMesh(p, boxG(...b), '#7fa9d1', { metal: .35, rough: .35, edge: '#1f4f7c', eop: .9 });
+        S.rigid.push([p, c]); S.plates.push({ rec: m.userData.rec, zone });
+        const [x0, x1, y0, y1, z0, z1] = b, pts = [], n = 4;       // 板面上的蛇形水路紋
+        for (let k = 0; k <= n; k++) {
+          const f = .15 + .7 * k / n;
+          if (face === 'y') { const z = lerp(z0, z1, f), y = y0 - .02; pts.push(k % 2 ? [x1 - .4, y, z] : [x0 + .4, y, z], k % 2 ? [x0 + .4, y, z] : [x1 - .4, y, z]); }
+          else { const y = lerp(y0, y1, f), z = z1 + .02; pts.push(k % 2 ? [x1 - .4, y, z] : [x0 + .4, y, z], k % 2 ? [x0 + .4, y, z] : [x1 - .4, y, z]); }
+        }
+        const g = new THREE.BufferGeometry().setFromPoints(pts.map(V3)), lm = new THREE.LineBasicMaterial({ color: '#1f4f7c', transparent: true, opacity: .55 });
+        addObj(p, new THREE.Line(g, lm), lm, '#1f4f7c', .55);
+      };
+      PL('plateFront', [-5.5, 5.5, -2.97, -2.75, 19.1, 22.4], [0, -2.86, 20.75], 'U', 'y');
+      PL('plateTop', [-5.5, 5.5, -1.6, 1.6, 23.5, 23.72], [0, 0, 23.6], 'U', 'z');
+      PL('plateL', [-9.75, -6.75, -2.72, -2.5, 6.0, 10.5], [-8.25, -2.6, 8.25], 'L', 'y');
+      PL('plateR', [6.75, 9.75, -2.72, -2.5, 6.0, 10.5], [8.25, -2.6, 8.25], 'L', 'y');
+
+      /* 溫度感測器 21、22 */
+      const su = part(S, 'sensU');
+      addMesh(su, new THREE.CylinderGeometry(.34, .34, .5, 18).rotateX(Math.PI / 2).translate(10.5, 0, 23.75), C.dark, { edges: false });
+      addMesh(su, new THREE.SphereGeometry(.34, 16, 12).translate(10.5, 0, 24.1), C.probe, { edges: false, op: 1 });
+      S.rigid.push([su, [10.5, 0, 23.6]]);
+      const sl = part(S, 'sensL');
+      addMesh(sl, new THREE.CylinderGeometry(.34, .34, .5, 18).translate(-8.25, -2.75, 1.8), C.dark, { edges: false });
+      addMesh(sl, new THREE.SphereGeometry(.34, 16, 12).translate(-8.25, -3.08, 1.8), C.probe, { edges: false, op: 1 });
+      S.rigid.push([sl, [-8.25, -2.6, 1.8]]);
+
+      /* 50 冷卻水供應單元、40 控制單元 */
+      const sup = part(S, 'supply');
+      addMesh(sup, boxG(19, 24, -3, 3, 0, 4.6), C.cab);
+      addMesh(sup, new THREE.CylinderGeometry(1.15, 1.15, .08, 32).translate(22.4, -3.04, 2.5), '#5c6670', { edges: false });
+      addMesh(sup, new THREE.CylinderGeometry(.75, .75, .1, 32).translate(22.4, -3.07, 2.5), '#8b959e', { edges: false });
+      addMesh(sup, boxG(18.3, 19, -3.9, -2.9, .9, 3.7), '#9aa5ae');
+      for (const z of [1.6, 3.0]) addMesh(sup, new THREE.CylinderGeometry(.28, .28, .5, 14).translate(18.65, -4.15, z), C.navy, { edges: false });
+      const ctl = part(S, 'ctrl');
+      addMesh(ctl, new THREE.CylinderGeometry(.32, .32, 13.4, 16).rotateX(Math.PI / 2).translate(21.5, 0, 11.3), '#9aa5ae', { edges: false });
+      addMesh(ctl, boxG(19.5, 23.5, -1.2, 1.2, 18, 22.6), C.navy, { edge: '#0b1117' });
+      const scr = addMesh(ctl, new THREE.PlaneGeometry(2.9, 1.7).rotateX(Math.PI / 2).translate(21.5, -1.23, 21.1), '#22384a', { edges: false, op: 1 });
+      const led = addMesh(ctl, new THREE.SphereGeometry(.22, 12, 8).translate(20.3, -1.26, 18.9), '#3fb27f', { edges: false, op: 1 });
+      S.scr = scr.userData.rec; S.led = led.userData.rec; S.scr.keepColor = S.led.keepColor = true;
+
+      /* 33 水路＋水流粒子 */
+      const pipe = part(S, 'pipe');
+      S.pU = poly([[19, -3.4, 3.0], [14.5, -3.4, 3.0], [14.5, -3.4, 20.5], [5.6, -3.4, 20.5], [5.6, -3.4, 24.05], [5.6, -.5, 24.05]]);
+      S.pL = poly([[19, -3.4, 1.6], [12.2, -3.4, 1.6], [12.2, -3.4, 6.4], [-9.9, -3.4, 6.4]]);
+      for (const pp of [S.pU, S.pL]) {
+        const cp = new THREE.CurvePath(); for (let i = 1; i < pp.P.length; i++) cp.add(new THREE.LineCurve3(pp.P[i - 1], pp.P[i]));
+        addMesh(pipe, new THREE.TubeGeometry(cp, pp.P.length * 16, .2, 8, false), C.water, { edges: false, op: .9, metal: .2, rough: .4 });
+      }
+      const dg = new THREE.SphereGeometry(.27, 10, 8); S.drops = [];
+      for (let i = 0; i < 16; i++) S.drops.push({ m: addMesh(pipe, dg, '#dff1ff', { edges: false, op: 1 }), U: true, ph: i / 16 });
+      for (let i = 0; i < 22; i++) S.drops.push({ m: addMesh(pipe, dg, '#dff1ff', { edges: false, op: 1 }), U: false, ph: i / 22 });
+
+      /* 訊號線（虛線）＋訊號脈衝 */
+      const sig = part(S, 'sig');
+      S.sigs = [
+        poly([[10.5, 0, 24.4], [10.5, 0, 26], [21.5, 0, 26], [21.5, 0, 22.6]]),
+        poly([[-8.25, -3.1, 1.8], [-8.25, -4.8, 1.8], [-8.25, -4.8, .06], [25.4, -4.8, .06], [25.4, 0, .06], [25.4, 0, 20.2], [23.55, 0, 20.2]]),
+        poly([[21.5, -1.3, 18], [21.5, -1.3, 4.65]]),
+      ];
+      for (const sp of S.sigs) {
+        const g = new THREE.BufferGeometry().setFromPoints(sp.P), m = new THREE.LineDashedMaterial({ color: '#5d6873', dashSize: .5, gapSize: .35, transparent: true });
+        const l = new THREE.Line(g, m); l.computeLineDistances(); addObj(sig, l, m, '#5d6873', 1);
+      }
+      const pg = new THREE.SphereGeometry(.24, 10, 8); S.pulses = [];
+      [0, 1, 2].forEach(k => { for (let i = 0; i < 3; i++) S.pulses.push({ m: addMesh(sig, pg, C.accent, { edges: false, op: 1 }), k, ph: i / 3 }); });
+
+      /* 點位標記（論文點位編號） */
+      const pts = part(S, 'pts'), mg = new THREE.SphereGeometry(.36, 16, 12);
+      for (const at of [[-3.6, -3.05, 20.75], [-3.6, 0, 23.9], [-8.25, -2.8, 9.6], [8.25, -2.8, 9.6]]) addMesh(pts, mg.clone().translate(...at), C.accent, { edges: false, op: 1 });
+    },
+    update(S, dt) {
+      S.t += dt; const P = S.parts, pr = S.params;
+      if (pr.state === 'before') Object.assign(S.target, { dT: 1, tilt: .75, qU: .3, qL: .3 });
+      else if (pr.state === 'after') Object.assign(S.target, { dT: .12, tilt: 0, qU: .75, qL: .45 });
+      if (pr.sim && S.sim) simStep(S, dt);
+      applyDeform(S);
+      P.air.alpha = pr.air;
+      for (const n of ['plateFront', 'plateTop', 'plateL', 'plateR', 'sensU', 'sensL', 'ctrl', 'supply']) P[n].alpha = pr.dev;
+      P.pipe.alpha = pr.pipe; P.sig.alpha = pr.sig; P.pts.alpha = pr.pts;
+      for (const pl of S.plates) pl.rec.base.set('#8fb6db').lerp(tc.set('#1a5fb4'), clamp(((pl.zone === 'U' ? pr.qU : pr.qL) - .2) / .8, 0, 1));
+      S.fU = (S.fU + dt * 6 * (.15 + 1.1 * pr.qU) / S.pU.len) % 1;
+      S.fL = (S.fL + dt * 6 * (.15 + 1.1 * pr.qL) / S.pL.len) % 1;
+      for (const d of S.drops) (d.U ? S.pU : S.pL).at(d.ph + (d.U ? S.fU : S.fL), d.m.position);
+      S.fs = (S.fs + dt * .35) % 1;
+      for (const q of S.pulses) S.sigs[q.k].at(q.ph + S.fs, q.m.position);
+      const act = pr.sim && S.sim ? S.sim.on : pr.qU > .55;
+      S.led.fill.color.set(act ? '#e8722c' : '#3fb27f'); S.led.fill.emissive.copy(S.led.fill.color).multiplyScalar(.7);
+      S.scr.fill.color.set(act ? '#4a2c1a' : '#22384a'); S.scr.fill.emissive.set(act ? '#6a2e0a' : '#0c3550');
+    },
+  };
+  if (o.sim) {
+    sc.enter = S => simReset(S);
+    sc.panel = simPanel;
+    sc.ro = [
+      { l: 'T上（橫樑上部）', f: S => S.sim ? fmt(S.sim.Tu) : '', u: '°C' },
+      { l: 'T下（立柱下段）', f: S => S.sim ? fmt(S.sim.Tl) : '', u: '°C' },
+      { l: 'ΔT = T上 − T下', f: S => S.sim ? fmt(S.sim.Tu - S.sim.Tl) : '', u: '°C', hi: true },
+      { l: '上部／下部流量', f: S => S.sim ? `${fmt(S.sim.qU * 5, 1)}／${fmt(S.sim.qL * 5, 1)}` : '', u: 'L/min', w: 1.25 },
+      { l: '閥門切換', f: S => S.sim ? String(S.sim.sw) : '', u: '次', w: .75 },
+    ];
+    sc.controls = [{ type: 'seg', key: 'mode', opts: [[2, '雙門檻'], [1, '單一門檻']] }, { type: 'btn', label: '重新開始', fn: S => simReset(S) }];
+  }
+  if (o.state) sc.controls = [{ type: 'seg', key: 'state', opts: [['before', '控制前'], ['after', '控制後（預期）']] }];
+  return sc;
+};
+
+/* =====================================================================
+   投影片內容（文字、數字依原 pptx 與講者備註）
+   ===================================================================== */
+const pt = (s, b, t, on) => `<div class="pt" data-s="${s}"${on !== undefined ? ` data-on="${on}"` : ''}><b>${b}</b>${t ? `<span>${t}</span>` : ''}</div>`;
+const fig = (src, cap, s, style = '') => `<div class="fig grow"${s !== undefined ? ` data-s="${s}"` : ''} style="${style}"><div class="im"><img src="${src}" alt=""></div>${cap ? `<div class="cap">${cap}</div>` : ''}</div>`;
+const CAM = {
+  g: { cam: [17, -50, 22], tgt: [0, 0, 11.5] },
+  gf: { cam: [0, -58, 13], tgt: [0, 0, 12.5] },
+  d: { cam: [22, -57, 25], tgt: [3.5, 0, 12] },
+  df: { cam: [3.5, -66, 13], tgt: [3.5, 0, 12.5] },
+  colL: { cam: [7, -36, 18], tgt: [-5, 0, 9] },
+  top: { cam: [12, -46, 42], tgt: [0, 0, 16] },
+  sens: { cam: [6, -54, 30], tgt: [3, 0, 12] },
+  sup: { cam: [36, -52, 26], tgt: [9, 0, 10] },
+};
+const DEV = { field: 1, dev: 1, pipe: 1, sig: 1 };
+const P_TEMP = `<div class="tgrad"><span>下冷</span><i></i><span>上熱</span></div><div style="margin-top:8px">顏色代表相對溫度高低（示意）。模型比例大致參考論文的 COMSOL 模型；變形量大幅放大，只為說明方向。</div>`;
+const P_SYS = `<div class="lg"><span><i style="background:#2b7fd6"></i>水冷板／水路 33</span><span><i style="background:#c2410c;width:12px;height:12px;border-radius:50%"></i>溫度感測器 21、22</span><span><i style="background:repeating-linear-gradient(90deg,#5d6873 0 6px,transparent 6px 10px)"></i>訊號線</span><span><i style="background:#16222e"></i>控制單元 40</span></div><div style="margin-top:8px">水冷板顏色越深代表流量越大；數字對應申請書的符號說明。拖曳可旋轉模型，按 R 回到預設視角。</div>`;
+const P_PARAM = `<div class="pgrid"><div><small>溫度｜冷卻水溫</small><b>21–23 °C</b></div><div><small>門檻｜啟動／停止</small><b>0.2–0.4／0.05–0.15 °C</b></div><div><small>壓力｜供水壓力</small><b>0.1–0.3 MPa</b></div><div><small>時間｜控制週期</small><b>5–30 秒</b></div></div><div style="margin-top:10px">流量 1–5 L/min、上下流量比 1 : 0.5～1 : 1。除冷卻水溫外多為本組設計值，詳見第 13 頁。</div>`;
+const ICON = {
+  fac: `<svg class="ic" viewBox="0 0 46 46" fill="none" stroke="#16222e" stroke-width="2.2" stroke-linejoin="round"><path d="M5 40V20l10 6v-6l10 6V12h8v28z"/><path d="M3 40h40"/><path d="M39 8v19" stroke="#e8722c"/><circle cx="39" cy="31" r="3.4" stroke="#e8722c"/></svg>`,
+  cnc: `<svg class="ic" viewBox="0 0 46 46" fill="none" stroke="#16222e" stroke-width="2.2" stroke-linejoin="round"><rect x="5" y="7" width="36" height="24" rx="3"/><path d="M17 39h12M23 31v8"/><path d="M10 25c5-1 7-12 13-12s7 9 13 8" stroke="#e8722c"/></svg>`,
+  chill: `<svg class="ic" viewBox="0 0 46 46" fill="none" stroke="#16222e" stroke-width="2.2" stroke-linejoin="round"><rect x="7" y="6" width="32" height="34" rx="3"/><path d="M23 13v20M14.3 18l17.4 10M14.3 28l17.4-10" stroke="#2f7dc0"/></svg>`,
+  chan: `<svg class="ic" viewBox="0 0 46 46" fill="none" stroke="#16222e" stroke-width="2.2" stroke-linejoin="round"><rect x="13" y="4" width="20" height="38" rx="2"/><path d="M19 8v6c0 3 8 3 8 6s-8 3-8 6 8 3 8 6v6" stroke="#2f7dc0"/></svg>`,
+};
+const SYM = { o: '○', t: '△', x: '×', d: '－' };
+const MX = [
+  ['量的是上下溫差', ['x', '單點溫度'], ['o', '立柱上下'], ['x', '流體溫度'], ['x', '前後溫差'], ['d', '未揭露'], ['o', '橫樑對立柱']],
+  ['同時顧橫樑和立柱', ['x', '只有橫樑'], ['x', '只有立柱'], ['t', '可貼多處'], ['x', '只有立柱'], ['x', '只有橫樑'], ['o', '兩者都有']],
+  ['上下分區、分別調整', ['x', '一個閥'], ['x', '單一迴路'], ['t', '分處冷熱'], ['x', '整體送風'], ['d', '未揭露'], ['o', '上下各自調']],
+  ['溫差雙門檻（啟動／停止）', ['t', '門檻用單點溫度'], ['t', '無停止門檻'], ['x', '無門檻'], ['x', '無門檻'], ['d', '未揭露'], ['o', '啟動＋停止']],
+  ['外貼、舊機台可加裝', ['x', '橫樑內迴路'], ['x', '結構內液體'], ['o', '可貼附'], ['t', '需加後罩'], ['d', '未揭露'], ['o', '外貼水冷板']],
+];
+const FIGN = [['12', 1.8, 3.9], ['11', 33.3, 45.2], ['31', 34.0, .6], ['32', .4, 62.9], ['21', 54.0, .6], ['22', .4, 87.1], ['33', 63.8, 50.0]];
+const FIG_SYS = `<div class="figw"><img src="${IMG.fig}" alt="系統構成圖式">${FIGN.map(([n, x, y]) => `<span class="fnum" style="left:${x}%;top:${y}%">${n}</span>`).join('')}
+  <span class="fbx dk" style="left:79.6%;top:11.6%">40<br>控制單元</span><span class="fbx" style="left:79.6%;top:80.3%">50<br>冷卻水供應</span></div>`;
+
+const DECK = {
+  title: '龍門溫差式均溫系統｜專利互動簡報',
+  stations: ['封面', '選題動機', '市面與前案', '改善方法', '系統與控制', '創新與驗證', '申請專利範圍', '預期功效'],
+  slides: [
+
+/* ---------- 1 封面 ---------- */
+{ kind: 'cover', scene: 'gantry', st: 0, noSay: true, noTag: true,
+  content: `<div class="cv"><div class="cv-k">專利分析｜期末小組報告</div>
+  <h1>龍門加工機之<br><em>溫差式</em>均溫系統<br>及其方法</h1>
+  <div class="s">發明專利申請書簡報</div>
+  <div class="a">四智四丙｜發明人：龔孟謙、周大凱、鄭楷諺、陳宣佑</div>
+  <div class="howto"><span><b>點畫面／→</b>下一步</span><span><b>←</b>上一步</span><span><b>拖曳</b>旋轉模型</span><span><b>1–7</b>跳章節</span><span><b>F</b>全螢幕</span></div></div>`,
+  steps: [{ set: { field: 1 }, cam: [26, -58, 24], tgt: [0, 0, 11], spin: true, lab: ['hot', 'cold'] }] },
+
+/* ---------- 2 選題動機 ---------- */
+{ st: 1, kick: '01 選題動機', title: '為什麼選這個題目？', scene: 'gantry', param: P_TEMP,
+  content: `<div class="row grow" style="gap:26px">
+  ${fig(IMG.tilt, '門橋溫度差異造成結構傾斜（研討會簡報）', 1, 'flex:0 0 238px')}
+  <div class="col" style="gap:12px">
+    ${pt(0, '① 熱變位是最大的誤差來源', '工具機加工誤差約 <i class="pm">40–70%</i> 來自熱變位（Bryan, 1990）；鋼材每公尺、每升高 1 °C 約伸長 <i class="pm">0.01 mm</i>。', '0')}
+    ${pt(1, '② 龍門上熱下冷就會傾斜', '廠房越高越熱（論文設定：每升高 100 cm 加 1 °C）；橫樑熱、立柱下段冷，龍門傾倒、彎曲，精度難守 <i class="pm">0.02 mm</i>。', '1-2')}
+    ${pt(3, '③ 延續本組研究，發展成專利', 'CSME2025 論文已用 COMSOL 比較 <i class="pm">30 組</i>點位，找出最有效的冷卻位置；本案再加上控制方法。', '3')}
+    <div class="note" data-s="3" style="margin-top:auto">來源：Bryan（1990）CIRP Annals；US 5,582,237；CSME2025 論文與研討會簡報 B15-004</div>
+  </div></div>`,
+  steps: [
+    { say: '第一，熱變位是工具機最大的誤差來源：加工誤差大約四到七成來自熱變位。', ...CAM.g, lab: ['l12', 'l11'] },
+    { say: '第二，廠房越高越熱：論文設定每升高 100 公分加 1 °C，龍門就變成上熱下冷。', set: { field: 1, air: 1 }, cam: [12, -54, 16], tgt: [0, 0, 12.5], lab: ['air0', 'air1', 'air2', 'hot', 'cold'] },
+    { say: '橫樑熱、立柱下段冷，整座龍門就會傾倒、彎曲，精度很難守在 0.02 毫米以內。', set: { field: 1, tilt: 1 }, ...CAM.gf, lab: ['def', 'hot', 'cold'] },
+    { say: '第三，這延續我們在 CSME2025 發表的研究：已用 COMSOL 比較 30 組冷卻點位。', set: { field: 1 }, ...CAM.g, spin: true },
+  ] },
+
+/* ---------- 3 市面做法 ---------- */
+{ st: 2, kick: '02 市面與前案｜市面做法', title: '市面上怎麼解決熱變位？',
+  content: `<div class="cards mk" style="grid-template-columns:repeat(4,1fr);gap:20px;height:405px">
+  ${[['做法 01', '恆溫廠房', '整間廠房控溫，讓環境溫度不隨高度和時間變化。', '限制：建置與電費高，大型龍門廠房很難做到。', ICON.fac],
+     ['做法 02', 'CNC 熱補償軟體', '用溫度感測器加軸位置資料預測變形，再讓刀具反向補償（如 Okuma TAS-C）。', '限制：結構還是在變形，傾斜不易靠補償修正。', ICON.cnc],
+     ['做法 03', '冷卻機', '冷卻主軸或切削液，帶走加工產生的熱（如 Haas 冷卻液冷卻機）。', '限制：處理主軸與切削熱，不是環境造成的上下溫差。', ICON.chill],
+     ['做法 04', '結構內建流道', '在床台或立柱鑄件內做流道，循環溫控液體（如 US 6,923,603）。', '限制：要在鑄件內做流道，舊機台難加裝。', ICON.chan]]
+    .map(([n, b, s, l, ic], i) => `<div class="card" data-s="${i}" data-on="${i}">${ic}<div class="n">${n}</div><b>${b}</b><span>${s}</span><div class="lim" data-on="${i},4">${l}</div></div>`).join('')}</div>
+  <div class="gapc" data-s="4"><b>共同缺口：沒有一種做法是「依龍門上下溫差，分別調整橫樑和立柱的冷卻」</b><span>本案的切入點：外貼水冷板＋上下溫差控制，直接讓結構均溫，也能和熱補償軟體一起用。</span></div>
+  <div class="note" data-s="0" style="margin-top:auto">來源：Okuma Thermo-Friendly Concept；Haas Coolant Chiller；US 7,114,895；US 6,923,603</div>`,
+  steps: [
+    { say: '做法一：恆溫廠房，整間控溫。效果好，但建置和電費很高，大型龍門廠房很難做到。' },
+    { say: '做法二：CNC 熱補償軟體，預測變形再反向補償；但結構還在變形，傾斜不易修正。' },
+    { say: '做法三：冷卻機，冷卻主軸或切削液，處理的是加工熱，不是環境的上下溫差。' },
+    { say: '做法四：在鑄件裡做流道、循環溫控液體；效果不錯，但舊機台沒辦法加裝。' },
+    { say: '共同缺口：沒有一種是依上下溫差，分別調整橫樑和立柱的冷卻，這就是本案切入點。' },
+  ] },
+
+/* ---------- 4 先前技術比對 ---------- */
+{ st: 2, kick: '02 市面與前案｜先前技術', title: '先前技術比對',
+  content: `<table class="tb" style="font-size:20.5px">
+    <tr><th style="width:24%">案號／文獻</th><th style="width:42%">做法</th><th>不足之處</th></tr>
+    ${[['EP 4011545 A1<br><span class="note">Tecnalia，2022 公開</span>', '立式車床橫樑內設冷卻迴路；單點溫度高於上限就開閥、低於下限就關閥', '只看單點絕對溫度；不分上下區域調整', 0],
+       ['US 6,923,603', '在立柱內部循環液體；實施例依立柱上下溫差開關泵浦', '單一迴路整體開關，上下無法分別調整；沒有停止門檻', 1],
+       ['US 5,582,237', '可貼附的袋狀熱交換單元，用加熱後的流體讓溫度分布均勻', '需要加熱器、泵浦與流體管路', 2],
+       ['US 6,675,549', '送同溫空氣到加工室與立柱後方，讓立柱前後溫度相同', '只處理前後溫差，要整個空間送風', 2],
+       ['中興大學碩論（2018）', '大型龍門機橫樑裝小型冷卻水塊，搭配類神經網路', '控溫位置只在橫樑', 2]]
+      .map(([a, b, c, s]) => `<tr data-s="${s}" data-on="${s}"><td class="n" style="font-size:19px">${a}</td><td>${b}</td><td>${c}</td></tr>`).join('')}
+  </table>
+  <div class="warn" data-s="1"><b>要特別注意：</b>「用上下溫差控制」本身不是新的（US 6,923,603 已有）→ 本案的差異在<b>橫樑對立柱的溫差、上下分區調整、啟動＋停止雙門檻</b>，下一頁逐項比較。</div>
+  <div class="note" data-s="0" style="margin-top:auto">來源：EPO、USPTO、Justia、國家圖書館博碩士論文</div>`,
+  steps: [
+    { say: '最接近的是 EP 4011545：橫樑內設冷卻迴路，量單點溫度，高於上限開閥、低於下限關閥。' },
+    { say: '要注意 US 6,923,603：實施例已用立柱上下溫差開關泵浦，但只有一條迴路、沒有停止門檻。' },
+    { say: '其他三件：可貼附的熱交換袋、送同溫空氣處理前後溫差，以及只在橫樑控溫的中興碩論。' },
+  ] },
+
+/* ---------- 5 差異比對 ---------- */
+{ st: 2, kick: '02 市面與前案｜差異比對', title: '本案跟既有專利差在哪？',
+  content: `<table class="tb mx">
+    <tr><th style="width:22%">比較特徵</th>${['EP 4011545', 'US 6,923,603', 'US 5,582,237', 'US 6,675,549', '中興碩論'].map(h => `<th>${h}</th>`).join('')}<th class="me">本案</th></tr>
+    ${MX.map(([f, ...cs], i) => `<tr data-s="${i}" data-on="${i}"><td>${f}</td>${cs.map(([k, t], j) => `<td${j === 5 ? ' class="me"' : ''}><span class="sy ${k}">${SYM[k]}<small>${t}</small></span></td>`).join('')}</tr>`).join('')}
+  </table>
+  <div class="note" data-s="0">○ 有　△ 部分符合　× 沒有　－ 資料未揭露（中興碩論只讀到摘要）</div>
+  <div class="lead" data-s="5" style="font-size:28px">五件前案沒有一件同時具備這五項，<em>本案的新穎性就在這個組合</em>。</div>
+  <div class="note" data-s="0" style="margin-top:auto">來源：EPO、USPTO、Google Patents 原文；中興大學碩論（2018）僅讀到摘要</div>`,
+  steps: [
+    { say: '量的是不是上下溫差：除了本案，只有 US 6,923,603 也是，但它只量立柱上下兩點。' },
+    { say: '有沒有同時顧到橫樑和立柱：表上這五件前案，都只顧其中一個。' },
+    { say: '上下能不能分別調整：US 6,923,603 一條迴路整體開關；US 5,582,237 依的是流體溫度。' },
+    { say: '有沒有啟動、停止兩個門檻：EP 4011545 用單點溫度，US 6,923,603 沒有停止門檻。' },
+    { say: '能不能外貼、加裝到舊機台：前案只有 US 5,582,237 做得到。' },
+    { say: '結論：五件前案沒有一件同時具備這五項，本案的新穎性就在這個組合。' },
+  ] },
+
+/* ---------- 6 改善方法 ---------- */
+{ st: 3, kick: '03 改善方法', title: '我們從哪裡突破？', scene: 'gantry', param: P_SYS,
+  content: `<div class="cards grow" style="grid-template-columns:repeat(3,1fr);grid-template-rows:1fr 1fr;gap:16px">
+  ${[['類別 01', '材料', '水冷板用鋁合金或銅，與結構之間加導熱膏或導熱墊，降低接觸熱阻。'],
+     ['類別 02', '機械結構', '在橫樑正面、上表面與兩立柱正面外貼水冷板，不必改造鑄件。'],
+     ['類別 03', '設計與電子電機運作方式', '控制單元讀兩支溫度感測器，依溫差和雙門檻，用比例閥分別調整上下流量。'],
+     ['類別 04', '技術整合與調整', '把 COMSOL 模擬選位、溫度感測、水冷與控制整合成一套：先模擬選點，再上實機。'],
+     ['類別 05', '參數改變', '溫度：水溫 21–23 °C<br>門檻：0.2–0.4／0.05–0.15 °C<br>壓力：0.1–0.3 MPa<br>時間：控制週期 5–30 秒'],
+     ['小結', '用到規則單 6 類中的 5 類', '製程改善不涉及：本案改的是機台本身，不是加工製程。']]
+    .map(([n, b, s], i) => `<div class="card${i === 5 ? ' dk' : ''}" data-s="${i}" data-on="${i}" style="padding:16px"><div class="n">${n}</div><b style="font-size:22.5px">${b}</b><span style="font-size:19.5px">${s}</span></div>`).join('')}</div>
+  <div class="note" data-s="0">類別依「115-1 專利分析分組上台簡報規則」</div>`,
+  steps: [
+    { say: '材料：水冷板用鋁合金或銅，和結構之間加導熱膏或導熱墊，降低接觸熱阻。', set: { field: 1, dev: 1 }, hot: ['plate*'], ...CAM.colL, lab: ['mat'] },
+    { say: '機械結構：在橫樑正面、上表面和兩支立柱正面外貼水冷板，不需要改造鑄件。', set: { field: 1, dev: 1 }, hot: ['plate*'], ...CAM.g, lab: ['m31', 'm32'] },
+    { say: '控制單元讀兩支溫度感測器，依溫差和兩個門檻，用比例閥分別調整上下流量。', set: { ...DEV, qU: .8, qL: .45 }, hot: ['sens*', 'ctrl', 'supply'], ...CAM.d, lab: ['s21', 's22', 'c40', 'u50'] },
+    { say: '技術整合：模擬選位、溫度感測、水冷和控制整合成一套，先用模擬選點，再上實機。', set: { ...DEV, pts: 1, qU: .6, qL: .4 }, ...CAM.d, lab: ['p9', 'p11', 'p1', 'p5'] },
+    { say: '參數改變：包括水溫、門檻、壓力和控制週期，後面第 13 頁會詳細說明。', set: { ...DEV, qU: .6, qL: .4 }, ...CAM.d, p: P_PARAM },
+    { say: '規則單六類改善方法用到五類；製程改善不涉及，因為改的是機台本身。', set: { ...DEV, qU: .6, qL: .4 }, ...CAM.d, spin: true },
+  ] },
+
+/* ---------- 7 系統構成 ---------- */
+{ st: 4, kick: '04 系統與控制｜系統構成', title: '系統構成與符號說明', scene: 'gantry', param: P_SYS,
+  content: `<table class="tb" style="font-size:20px">
+    <tr><th style="width:90px">符號</th><th>名稱</th></tr>
+    ${[['11', '立柱', 0], ['12', '橫樑', 0], ['21', '第一溫度感測器（橫樑上部）', 1], ['22', '第二溫度感測器（立柱下段）', 1], ['31', '上部溫控模組（點位 9、11）', 2], ['32', '下部溫控模組（點位 1、5）', 2],
+       ['33', '水路（藍色實線）', 3], ['40', '控制單元（虛線為訊號線）', 4], ['50', '冷卻水供應單元（冷卻機、泵、比例閥）', 3]]
+      .map(([n, t, s]) => `<tr data-on="${s}"><td class="n" style="font-weight:700">${n}</td><td>${t}</td></tr>`).join('')}
+  </table>
+  <div class="note" style="margin-top:auto">專利圖用數字標示元件，數字要和請求項、說明書一致。圖式為本組依論文點位繪製的示意圖。</div>`,
+  steps: [
+    { say: '專利圖用數字標示每個元件：11 是立柱，12 是橫樑，數字要和請求項一致。', set: { field: 0, dev: 1 }, focus: ['beam', 'colL', 'colR', 'ram', 'bed'], ...CAM.g, lab: ['l11', 'l12'] },
+    { say: '21 是第一溫度感測器，裝在橫樑上部；22 是第二溫度感測器，裝在立柱下段。', set: { field: 0, dev: 1 }, hot: ['sens*'], ...CAM.sens, lab: ['s21', 's22'] },
+    { say: '31 上部溫控模組在橫樑的 9、11 號點位；32 下部模組在兩支立柱的 1、5 號點位。', set: { field: 0, dev: 1, pts: 1 }, hot: ['plate*'], ...CAM.g, lab: ['m31', 'm32'] },
+    { say: '冷卻水供應單元 50 有冷卻機、泵和比例閥，藍色水路 33 把水送到上下模組。', set: { field: 0, dev: 1, pipe: 1, qU: .7, qL: .5 }, hot: ['pipe', 'supply'], ...CAM.sup, lab: ['w33', 'u50'] },
+    { say: '兩支感測器把溫度送到控制單元 40，算出溫差後透過比例閥分別調整上下水量。', set: { field: 0, ...DEV, qU: .7, qL: .5 }, hot: ['ctrl', 'sig'], ...CAM.d, lab: ['c40', 's21', 's22'] },
+    { say: '這就是申請書的圖式：本案的溫控模組以水冷板作為實施例。', set: { field: 0, ...DEV, qU: .7, qL: .5 }, ...CAM.df,
+      c: `<div class="fig grow" data-s="5"><div class="im" style="padding:10px">${FIG_SYS}</div><div class="cap"><b>申請書圖式</b>（本組依論文點位繪製的示意圖）：藍色實線為水路，虛線為訊號線，橘點為溫度感測器。</div></div>` },
+  ] },
+
+/* ---------- 8 控制方法 ---------- */
+{ st: 4, kick: '04 系統與控制｜控制方法', title: '均溫控制流程（請求項 7）', scene: 'gantry', sopt: { sim: true },
+  content: `<div class="flow">
+    <svg viewBox="0 0 792 345"><defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#7d8790"/></marker></defs>
+      <path class="fa" marker-end="url(#ah)" d="M176 112H203"/><path class="fa" marker-end="url(#ah)" d="M381 112H408"/><path class="fa" marker-end="url(#ah)" d="M586 112H614"/>
+      <path class="fa" marker-end="url(#ah)" d="M498 67V30H88V65"/><text class="fl" x="508" y="52">否</text><text class="fl" x="592" y="102">是</text>
+      <path class="fa" marker-end="url(#ah)" d="M680 157V217"/><path class="fa" marker-end="url(#ah)" d="M744 219V159"/><text class="fl" x="752" y="194">否</text>
+      <path class="fa" marker-end="url(#ah)" d="M616 264H588"/><text class="fl" x="594" y="254">是</text>
+      <path class="fa" marker-end="url(#ah)" d="M498 309V332H88V159"/><text class="fl" x="200" y="326">回到 S1，持續監測</text>
+    </svg>
+    <div class="fx" data-sx="S1" style="left:0;top:67px"><b>S1</b><span>量測 T上（橫樑上部）與 T下（立柱下段）</span></div>
+    <div class="fx" data-sx="S2" style="left:205px;top:67px"><b>S2</b><span>計算溫差<br>ΔT = T上 − T下</span></div>
+    <div class="fx q" data-sx="S3" style="left:410px;top:67px"><b>S3</b><span>ΔT ≥ 啟動門檻？</span></div>
+    <div class="fx" data-sx="S4" style="left:616px;top:67px"><b>S4</b><span>加大上部冷卻、調整下部模組（依 ΔT 比例）</span></div>
+    <div class="fx q" data-sx="S5" style="left:616px;top:219px"><b>S5</b><span>重新量測後，ΔT ≤ 停止門檻？</span></div>
+    <div class="fx" data-sx="S6" style="left:410px;top:219px"><b>S6</b><span>維持基本供水，持續監測</span></div>
+  </div>
+  <div class="th2" data-s="3"><div><b>啟動門檻 ΔT<sub>on</sub></b>例 <i class="pm">0.3 °C</i>（範圍 0.2～0.4 °C）</div><div><b>停止門檻 ΔT<sub>off</sub></b>例 <i class="pm">0.1 °C</i>（範圍 0.05～0.15 °C）</div></div>
+  <div class="note" style="margin-top:auto">右側是控制邏輯示意：溫度、流量是設定的示意值，不是實測或 COMSOL 結果。第 4 步可按模型右下「單一門檻」比較閥門切換次數。</div>`,
+  steps: [
+    { say: 'S1 量測橫樑上部和立柱下段的溫度，S2 計算溫差；只靠固定貼板，溫差會停在約 0.5 °C。', set: { ...DEV, sim: 1, ctl: 0 }, ...CAM.d, lab: ['s21', 's22'] },
+    { say: 'S3 溫差達到啟動門檻，就到 S4：加大上部冷卻，同時依溫差比例調整下部模組。', set: { ...DEV, sim: 1, ctl: 1 }, ...CAM.d, lab: ['zU', 'zL'] },
+    { say: 'S5 重新量測：還沒降到停止門檻就繼續調整；降到了就到 S6 維持基本供水，再回到 S1。', set: { ...DEV, sim: 1, ctl: 1 }, ...CAM.d, lab: ['c40'] },
+    { say: '用兩個不同的門檻，閥門才不會在門檻附近一直開開關關，這叫做「遲滯控制」。', set: { ...DEV, sim: 1, ctl: 1 }, ...CAM.d },
+  ] },
+
+/* ---------- 9 創新性 ---------- */
+{ st: 5, kick: '05 創新與驗證｜創新性', title: '本發明的三個創新點', scene: 'gantry', param: P_SYS,
+  content: `${[['創新點 01', '溫差＋雙門檻控制', '量測橫樑上部與立柱下段的溫差 ΔT，並設啟動、停止兩個門檻，避免閥門頻繁切換。', '對照：US 6,923,603 只量立柱上下，沒有停止門檻'],
+     ['創新點 02', '上下分區調整', '上部、下部水冷板分開調整流量，讓上下溫度趨於一致，而不是整台一起降溫。', '對照：前案沒有依上下溫差分別調整上部與下部'],
+     ['創新點 03', '依模擬的最少佈點', '依 COMSOL 比較 30 組點位組合的結果配置模組，只需兩組模組、兩個感測器。', '對照：傳統做法靠實機逐一貼片測試']]
+    .map(([n, b, s, l], i) => `<div class="card" data-s="${i}" data-on="${i}" style="display:grid;grid-template-columns:200px 1fr;gap:4px 18px;padding:12px 18px"><div><div class="n">${n}</div><b style="font-size:23px">${b}</b></div><div><span style="display:block;font-size:19.5px">${s}</span><span style="display:block;font-size:17px;color:#3d6a96;margin-top:4px">${l}</span></div></div>`).join('')}
+  <div class="gapc" data-s="3" data-on="3" style="margin-top:auto"><b style="font-size:22px">專利種類：本案改善的是「方法」與「系統」→ 申請發明專利</b><span style="font-size:18.5px">新型專利只保護物品的形狀、構造，不能保護方法；本案同時申請系統（請求項 1）與方法（請求項 7）。</span></div>`,
+  steps: [
+    { say: '創新點一：量橫樑上部和立柱下段的溫差，再設啟動、停止兩個門檻，避免閥門頻繁切換。', set: { ...DEV }, hot: ['sens*', 'sig'], ...CAM.sens, lab: ['s21', 's22'] },
+    { say: '創新點二，也是最核心的：上下水冷板分開調整流量，讓上下溫度趨於一致。', set: { ...DEV, qU: 1, qL: .4, dT: .45 }, hot: ['plate*'], ...CAM.d, lab: ['zU', 'zL'] },
+    { say: '創新點三：依 COMSOL 比較 30 組點位的結果配置，只需要兩組模組、兩支感測器。', set: { ...DEV, pts: 1, qU: .6, qL: .4 }, hot: ['plate*', 'sens*'], ...CAM.g, lab: ['p9', 'p11', 'p1', 'p5'] },
+    { say: '因為改善的是方法和系統，所以申請發明專利；新型只保護形狀和構造，不能保護方法。', set: { ...DEV, qU: .6, qL: .4 }, ...CAM.d, spin: true },
+  ] },
+
+/* ---------- 10 模擬驗證 ---------- */
+{ st: 5, kick: '05 創新與驗證｜模擬驗證', title: '模擬驗證：找出最有效的冷卻位置', scene: 'gantry', param: P_TEMP,
+  content: `${pt(0, '論文用 COMSOL 模擬', '地面 22 °C、每升高 100 cm 加 1 °C，以 22 °C 的貼板代替水路，比較 12 個點位的 30 種組合，以 <i class="pm">X 方向位移最接近 0</i> 為最佳。', '0')}
+  <table class="tb" data-s="0" style="font-size:19.5px">
+    <tr><th>組別</th><th>點位</th><th>X 位移（mm）</th><th>溫度範圍（°C）</th><th>本案用途</th></tr>
+    <tr><td>第 1 組</td><td class="n">1 + 8</td><td class="n">−1.23E-05</td><td class="n">23.0–23.5</td><td>—</td></tr>
+    <tr data-on="1,3"><td>第 8 組</td><td class="n">9 + 11</td><td class="n">−1.08E-05</td><td class="n">22.9–23.3</td><td>上部模組位置</td></tr>
+    <tr data-on="2-3"><td>第 23 組</td><td class="n">1 + 5</td><td class="n">−2.02E-06</td><td class="n">23.0–23.6</td><td>下部模組位置</td></tr>
+  </table>
+  <div class="gapc" data-s="2"><b style="font-size:22px">本案採用：第 8 組＋第 23 組</b><span style="font-size:18.5px">上部模組裝在橫樑正面與頂面（9、11），下部模組裝在兩立柱正面（1、5）。</span></div>
+  <div class="note" style="margin-top:auto">來源：CSME2025 論文與研討會簡報 B15-004（模擬設定、X 位移長條圖、溫度圖）</div>`,
+  steps: [
+    { say: '模擬條件：地面 22 °C、每升高 100 公分加 1 °C，用 22 °C 貼板代替水路，比較 30 種組合。', set: { field: 1, air: 1 }, cam: [12, -54, 16], tgt: [0, 0, 12.5], lab: ['air0', 'air1', 'air2'] },
+    { say: '第 8 組是橫樑正面和頂面的 9、11 號點位，效果好，當作上部模組的位置。', set: { field: 1, dev: 1, pts: 1 }, focus: ['beam', 'colL', 'colR', 'ram', 'bed', 'plateFront', 'plateTop', 'pts'], ...CAM.top, lab: ['p9', 'p11'] },
+    { say: '第 23 組是兩支立柱正面的 1、5 號點位，X 位移最接近 0，當作下部模組的位置。', set: { field: 1, dev: 1, pts: 1 }, focus: ['beam', 'colL', 'colR', 'ram', 'bed', 'plateL', 'plateR', 'pts'], ...CAM.g, lab: ['p1', 'p5'] },
+    { say: '但溫度圖顯示，貼板之後上下還差約 0.4 到 0.6 °C，所以本案再加上溫差控制。', set: { field: 1, dev: 1, dT: .85 }, ...CAM.df, lab: ['hot', 'cold'],
+      c: `<div class="row grow" style="gap:18px" data-s="3">${fig(IMG.g8, '<b>第 8 組</b>溫度圖（9 + 11）：22.9–23.3 °C')}${fig(IMG.g23, '<b>第 23 組</b>溫度圖（1 + 5）：23.0–23.6 °C')}</div>
+      <div class="warn" data-s="3"><b>貼板後上下仍差約 0.4–0.6 °C</b>（溫度範圍取自色階最低到最高值）→ 只靠固定貼板不夠，所以本案再加上溫差控制。</div>
+      <div class="note">來源：CSME2025 論文與研討會簡報 B15-004</div>` },
+  ] },
+
+/* ---------- 11 請求項 1 ---------- */
+{ st: 6, kick: '06 申請專利範圍｜獨立項', title: '獨立項：請求項 1', scene: 'gantry', param: P_SYS,
+  content: `<div class="claim">
+    <p class="pre" data-on="0">1. 一種龍門加工機之溫差式均溫系統，適用於包含二立柱（11）及一橫樑（12）之龍門結構，包含：</p>
+    <p class="el" data-on="1">一第一溫度感測器（21），設於該橫樑之上部；</p>
+    <p class="el" data-on="1">一第二溫度感測器（22），設於至少一該立柱之下段；</p>
+    <p class="el" data-on="2,5">至少一上部溫控模組（31），設於該橫樑；</p>
+    <p class="el" data-on="2,5">至少一下部溫控模組（32），設於該立柱；以及</p>
+    <p class="el" data-on="3">一控制單元（40），電性連接二溫度感測器並計算其溫差 ΔT，<u>分別控制</u>該上部溫控模組與該下部溫控模組；</p>
+    <p data-on="4">其中，<span class="hl">當該溫差 ΔT 大於或等於一啟動門檻時，該控制單元加大該上部溫控模組之冷卻量，並調整該下部溫控模組</span>，使該橫樑與該立柱之溫度趨於一致，直到該溫差 ΔT 小於或等於一停止門檻，且<u>該停止門檻小於該啟動門檻</u>。</p>
+  </div>
+  <div class="anat" data-s="5"><i>前言</i>一種…，包含 → <i>元件</i>逐項列出 → <i class="a">特徵</i>「其中」之後＝和先前技術不同處</div>
+  <div class="note" data-s="5">「溫控模組」是上位用語，以水冷板為實施例，保護範圍不限於水冷板。（本組撰寫之請求項草稿）</div>`,
+  steps: [
+    { say: '獨立項決定保護範圍有多大。第一段是前言：一種龍門加工機之溫差式均溫系統。', set: { field: 1, dev: 1 }, focus: ['beam', 'colL', 'colR', 'ram', 'bed'], ...CAM.g, lab: ['l11', 'l12'] },
+    { say: '接著逐項列出元件：第一溫度感測器在橫樑上部，第二溫度感測器在立柱下段。', set: { field: 1, dev: 1 }, hot: ['sens*'], ...CAM.sens, lab: ['s21', 's22'] },
+    { say: '至少一個上部溫控模組設在橫樑，至少一個下部溫控模組設在立柱。', set: { field: 1, dev: 1 }, hot: ['plate*'], ...CAM.g, lab: ['m31', 'm32'] },
+    { say: '控制單元算出溫差，「分別控制」上下模組，和 US 6,923,603 的整體開關劃清界線。', set: { ...DEV }, hot: ['ctrl', 'sig'], ...CAM.d, lab: ['c40'] },
+    { say: '「其中」之後是特徵：達到啟動門檻就加大上部冷卻，降到停止門檻才停，而且停止門檻比較小。', set: { ...DEV, qU: 1, qL: .45, dT: .5 }, hot: ['plate*'], ...CAM.d, lab: ['zU', 'zL'] },
+    { say: '我們寫「溫控模組」而不寫水冷板，別人改用其他控溫方式，也會落入保護範圍。', set: { field: 1, dev: 1 }, hot: ['plate*'], ...CAM.g, lab: ['gen'] },
+  ] },
+
+/* ---------- 12 附屬項與方法項 ---------- */
+{ st: 6, kick: '06 申請專利範圍｜附屬項', title: '附屬項與方法項',
+  content: `<div class="row grow" style="gap:22px">
+  <div class="claim" style="flex:1.55;gap:6px">
+    <div class="blk" data-s="0"><h4>附屬項（依附請求項 1）</h4><div class="note">格式：「如請求項 1 所述之系統，其中……」</div></div>
+    ${[['2', '上部溫控模組設於橫樑正面及上表面（點位 9、11），下部溫控模組設於二立柱正面（點位 1、5）。', 0],
+       ['3', '啟動門檻為 0.2～0.4 °C，停止門檻為 0.05～0.15 °C。', 1],
+       ['4', '溫控模組為內含水路（33）的水冷板，冷卻水溫度為 21～23 °C。', 2],
+       ['5', '更包含冷卻水供應單元（50），以比例閥調整各水冷板流量為 1～5 L/min，供水壓力為 0.1～0.3 MPa。', 2],
+       ['6', '水冷板材質為鋁合金或銅，與結構之間設有導熱介面材料。', 2]]
+      .map(([n, t, s]) => `<div class="dep" data-s="${s}" data-on="${s}"><i>${n}</i><span>${t}</span></div>`).join('')}
+  </div>
+  <div class="claim" style="flex:1;gap:6px" data-s="3">
+    <div class="blk"><h4>方法項</h4></div>
+    <div class="dep on" style="grid-template-columns:1fr;font-weight:700">7. 一種龍門加工機之均溫方法，包含：</div>
+    ${['(a) 量測橫樑上部溫度 T上 與立柱下段溫度 T下；', '(b) 計算溫差 ΔT = T上 − T下；', '(c) ΔT ≥ 啟動門檻時，加大上部冷卻並調整下部溫控模組；', '(d) ΔT ≤ 停止門檻時，維持基本冷卻量；', '(e) 重複步驟 (a)～(d)。'].map(t => `<div class="mstep">${t}</div>`).join('')}
+    <div class="note" style="margin-top:auto">對應第 8 頁的控制流程 S1～S6</div>
+  </div></div>
+  <div class="note" data-s="0">本組撰寫之請求項草稿；數值範圍見下一頁</div>`,
+  steps: [
+    { say: '附屬項再加限定條件，獨立項被推翻時還能撐住；請求項 2 限定模組在 9、11 和 1、5 號點位。' },
+    { say: '請求項 3 限定兩個門檻的範圍：啟動 0.2 到 0.4 °C，停止 0.05 到 0.15 °C。' },
+    { say: '第 4、5、6 項把水冷板的水溫、流量、壓力和材質寫清楚。' },
+    { say: '請求項 7 是方法項，保護「怎麼做」：量測、算溫差、調整、維持，然後重複。' },
+  ] },
+
+/* ---------- 13 保護參數 ---------- */
+{ st: 6, kick: '06 申請專利範圍｜保護參數', title: '保護參數與範圍',
+  content: `<div class="warn" style="padding:8px 14px">標示 <span class="chip a">建議值</span> 的範圍是本組的設計值，需用 COMSOL 補做模擬確認後再定案。</div>
+  <table class="tb tight" style="font-size:19px">
+    <tr><th style="width:17%">白板參數</th><th style="width:20%">本發明參數</th><th style="width:24%">範圍</th><th>依據</th></tr>
+    ${[['溫度 Temp', '啟動門檻 ΔT<sub>on</sub>', '0.2～0.4 °C', 'a', '低於貼板後的 0.4–0.6 °C 才會啟動', 0, 1],
+       ['溫度 Temp', '停止門檻 ΔT<sub>off</sub>', '0.05～0.15 °C', 'a', '需小於啟動門檻', 0, 0],
+       ['溫度 Temp', '冷卻水溫度', '21～23 °C', 'n', '論文貼板溫度設定 22 °C', 0, 1],
+       ['壓力 Pressure', '供水壓力／流量', '0.1～0.3 MPa／1～5 L/min', 'a', '待驗證', 1, 0],
+       ['比例 Ratio', '上部：下部流量比', '1 : 0.5～1 : 1', 'a', '上部較熱，給較多冷卻', 1, 0],
+       ['時間 Time', '控制週期', '5～30 秒', 'a', '待驗證', 1, 0],
+       ['材料 Materials', '結構／水冷板', 'AISI 4340／鋁合金或銅', 'n', '論文設定／導熱較佳', 2, 1],
+       ['製程 Process', '均溫方法', '步驟 (a)～(e)', '', '請求項 7', 2, 0],
+       ['模型 Model', '控制模型', '雙門檻遲滯、比例調流量', '', '流程圖 S3–S5；比例係數待驗證', 2, 0]]
+      .map(([a, b, r, k, t, s, paper]) => `<tr data-s="${s}" data-on="${s}${paper ? ',3' : ''}"><td>${a}</td><td>${b}</td><td class="n">${r}</td><td>${k === 'a' ? '<span class="chip a">建議值</span>' : k === 'n' ? '<span class="chip n">論文</span>' : ''}${t}</td></tr>`).join('')}
+  </table>
+  <div class="note" style="margin-top:auto">來源：CSME2025 論文與研討會簡報 B15-004；本組設計值</div>`,
+  steps: [
+    { say: '溫度有三個：啟動門檻 0.2 到 0.4 °C、停止門檻 0.05 到 0.15 °C、冷卻水溫 21 到 23 °C。' },
+    { say: '壓力 0.1 到 0.3 MPa、流量每分鐘 1 到 5 公升；還有上下流量比和 5 到 30 秒的控制週期。' },
+    { say: '材料是 AISI 4340 結構和鋁合金或銅水冷板；製程對應請求項 7，模型是雙門檻遲滯。' },
+    { say: '有論文依據的是水溫、結構材料和啟動門檻的上限；其他是設計值，之後用 COMSOL 驗證。' },
+  ] },
+
+/* ---------- 14 預期功效 ---------- */
+{ st: 7, kick: '07 預期功效', title: '預期功效：跟市面做法比', scene: 'gantry', sopt: { state: true },
+  param: `<div class="tgrad"><span>下冷</span><i></i><span>上熱</span></div><div style="margin-top:8px">按模型右下「控制前／控制後」切換。<b>控制後是預期效果的示意</b>，溫差控制的實際改善率仍待模擬驗證；變形量大幅放大。</div>`,
+  content: `<div class="blk"><h4>預期功效</h4><div class="eff">
+    ${['縮小上下溫差，減少龍門傾斜造成的加工誤差', '溫差超過門檻才加大冷卻，減少冷卻機不必要的運轉', '依模擬的最佳點位配置，只需兩組模組、兩個感測器', '水冷板貼在結構表面，不必改造鑄件內部']
+      .map((t, i) => `<div data-s="${i}" data-on="${i}"><i>✓</i><span>${t}</span></div>`).join('')}</div></div>
+  <div class="mkt" data-s="4"><h4>跟市面做法比</h4>
+    ${['不必整間恆溫，只控結構的上下溫差', '直接減少傾斜，也能和熱補償軟體並用', '補上冷卻機沒處理的環境上下溫差', '外貼即可，舊機台也能加裝'].map((t, i) => `<div><i>${i + 1}</i><span>${t}</span></div>`).join('')}</div>
+  <div class="warn" data-s="5">預期功效為本組依模擬結果推估；目前只有固定貼板的模擬，溫差控制的效果與改善率仍待模擬驗證。</div>`,
+  steps: [
+    { say: '第一，縮小上下溫差，減少龍門傾斜造成的加工誤差。模型右下可以切換控制前、控制後。', set: { ...DEV, state: 'before' }, ...CAM.gf, lab: ['hot', 'cold'] },
+    { say: '第二，溫差超過門檻才加大冷卻，減少冷卻機不必要的運轉。', set: { ...DEV, state: 'after' }, ...CAM.d },
+    { say: '第三，依模擬的最佳點位，只需要兩組模組、兩支感測器。', set: { ...DEV, state: 'after', pts: 1 }, hot: ['plate*', 'sens*'], ...CAM.g, lab: ['p9', 'p11', 'p1', 'p5'] },
+    { say: '第四，水冷板貼在結構表面，不必改造鑄件。', set: { ...DEV, state: 'after' }, hot: ['plate*'], ...CAM.colL, lab: ['mat'] },
+    { say: '跟市面比：不必整間恆溫、能和熱補償並用、補上冷卻機沒處理的溫差、舊機台也能加裝。', set: { ...DEV, state: 'after' }, ...CAM.d, spin: true },
+    { say: '也要誠實說明：目前只有固定貼板的模擬，溫差控制的效果和改善率還需要驗證。', set: { ...DEV, state: 'after' }, ...CAM.d },
+  ] },
+
+/* ---------- 15 結語 ---------- */
+{ kind: 'cover', scene: 'gantry', st: 7, noSay: true, noTag: true,
+  content: `<div class="cv"><div class="cv-k">結語</div>
+  <h1 style="font-size:60px">讓龍門<br>不再<em>上熱下冷</em></h1>
+  <div class="s">依上下溫差分區調整的龍門加工機均溫系統</div>
+  <div class="recap"><div><i>創新性</i>依上下溫差分區調整，加上啟動／停止雙門檻</div><div><i>解決的痛點</i>龍門上熱下冷造成傾斜，精度難守</div><div><i>權利範圍</i>「溫控模組」上位的獨立項，加上水冷板附屬項與各類參數</div></div>
+  <div class="a" style="font-size:30px;font-weight:900;color:var(--accent);margin-top:34px">謝謝聆聽・歡迎提問</div></div>`,
+  steps: [{ set: { ...DEV, dT: .12, qU: .6, qL: .4 }, cam: [32, -70, 30], tgt: [3.5, 0, 11], spin: true }] },
+
+  ],
+};
+
+/* ================= 引擎（沿用 AEM 互動簡報） ================= */
+const SLIDES = DECK.slides;
+SLIDES.forEach((S, i) => { S.id = 's' + i; S.kind = S.kind || (S.scene ? 'model' : 'flat'); if (!S.steps || !S.steps.length) S.steps = [{}]; });
+let cur = null, curI = -1;
+const tw = { active: false };
+
+function init3d(S) {
+  S.scene3 = new THREE.Scene(); S.world = new THREE.Group(); S.scene3.add(S.world);
+  S.scene3.add(new THREE.HemisphereLight(0xffffff, 0xc4beb2, 1.6));
+  const d1 = new THREE.DirectionalLight(0xffffff, 1.85); d1.position.set(10, -16, 26); S.scene3.add(d1);
+  const d2 = new THREE.DirectionalLight(0xe6eeff, .55); d2.position.set(-16, 10, 8); S.scene3.add(d2);
+  S.parts = {}; S.egs = ['main']; S.ex = {}; S.exT = {};
+}
+function prep(S) {
+  if (S.ready) return;
+  if (S.scene) {
+    const sc = SCENES[S.scene](S.sopt || {}); S.sc = sc;
+    S.params = { ...(sc.params || {}), ...(S.params || {}) };
+    S.labels = { ...(sc.labels || {}), ...(S.labels || {}) };
+    S.camScale = S.camScale || sc.camScale || 1;
+    S.ro = S.ro || sc.ro; S.controls = S.controls || sc.controls;
+    init3d(S); sc.build(S);
+    for (const g of S.egs) { S.ex[g] = 0; S.exT[g] = 0; }
+  } else S.params = { ...(S.params || {}) };
+  S.target = { ...S.params }; S.defaults = { ...S.params };
+  S.ready = true;
+}
+
+const SHOT = location.search.includes('shot');
+function flyTo(pos, tgt, dur, jump) {
+  if (SHOT) { dur = .01; jump = false; }
+  if (jump) {
+    const o = V3(pos).sub(V3(tgt)); o.applyAxisAngle(new THREE.Vector3(0, 0, 1), -0.5).multiplyScalar(1.4);
+    camera.position.copy(V3(tgt).add(o)); controls.target.copy(V3(tgt));
+  }
+  tw.p0 = camera.position.clone(); tw.t0 = controls.target.clone(); tw.p1 = V3(pos); tw.t1 = V3(tgt);
+  tw.k = 0; tw.d = dur; tw.active = true; controls.enabled = false;
+}
+function stepTween(dt) {
+  if (!tw.active) return;
+  tw.k = Math.min(1, tw.k + dt / tw.d); const e = ease(tw.k);
+  const t = tw.t0.clone().lerp(tw.t1, e), o0 = tw.p0.clone().sub(tw.t0), o1 = tw.p1.clone().sub(tw.t1);
+  const r = THREE.MathUtils.lerp(o0.length(), o1.length(), e);
+  const q = new THREE.Quaternion().setFromUnitVectors(o0.clone().normalize(), o1.clone().normalize());
+  const dir = o0.normalize().applyQuaternion(new THREE.Quaternion().slerp(q, e));
+  camera.position.copy(t).addScaledVector(dir, r); controls.target.copy(t); camera.lookAt(t);
+  if (tw.k >= 1) { tw.active = false; controls.enabled = true; controls.update(); }
+}
+
+function setParam(S, k, v, snap) {
+  if (S.sc && S.sc.discrete && S.sc.discrete.includes(k)) snap = true;
+  if (typeof v === 'number' && typeof S.params[k] === 'number' && !snap) S.target[k] = v;
+  else { const old = S.params[k]; S.params[k] = v; S.target[k] = v; if (old !== v && S.sc && S.sc.onParam) S.sc.onParam(S, k, v, old); }
+}
+function camPos(S, st) { const k = S.camScale || 1; return st.cam.map((v, i) => st.tgt[i] + (v - st.tgt[i]) * k); }
+
+/* 內容：同一頁內以 data-s 逐步顯現，或以 step.c 整段替換 */
+function pick(S, i, key, def) { for (let j = i; j >= 0; j--) { const st = S.steps[j]; if (st && st[key] !== undefined) return [st[key], key + j]; } return [def || '', key + 'd']; }
+function inRange(spec, i) { return String(spec).split(',').some(r => { const [a, b] = r.split('-').map(Number); return b === undefined ? i === a : i >= a && i <= b; }); }
+function reveal(root, i) {
+  if (!root) return;
+  root.querySelectorAll('[data-s]').forEach(e => e.classList.toggle('vis', i >= +e.dataset.s));
+  root.querySelectorAll('[data-on]').forEach(e => e.classList.toggle('on', inRange(e.dataset.on, i)));
+}
+function fill(box, S, i, key, def) {
+  const [html, id] = pick(S, i, key, def);
+  if (box.dataset.id !== S.id + id) {
+    box.dataset.id = S.id + id;
+    box.innerHTML = `<div class="ci">${typeof html === 'function' ? html(S) : html}</div>`;
+    const ci = box.firstChild; requestAnimationFrame(() => requestAnimationFrame(() => reveal(ci, S.step)));
+    if (S.sim) S.sim.lastPh = null;
+  } else reveal(box.firstChild, i);
+}
+function setLayout(cls) { stage.classList.remove('L-model', 'L-wide', 'L-flat', 'L-cover'); stage.classList.add(cls); }
+
+function applyStep(S, i, jump) {
+  S.step = i; const st = S.steps[i] || {};
+  const set = { ...S.defaults, ...(st.set || {}) };
+  for (const k in set) setParam(S, k, set[k], st.snap || jump);
+  setLayout(S.kind === 'model' ? (st.wide ? 'L-wide' : 'L-model') : S.kind === 'cover' ? 'L-cover' : 'L-flat');
+  fill($('content'), S, i, 'c', S.content);
+  const pc = $('pc'); fill(pc, S, i, 'p', S.param); pc.dataset.dyn = '';
+  if (S.scene) {
+    for (const g of S.egs) S.exT[g] = 0;
+    for (const n in S.parts) { const p = S.parts[n]; p.visT = st.focus ? (match(n, st.focus) ? 1 : 0.06) : 1; p.hotT = st.hot && match(n, st.hot) ? 1 : 0; }
+    if (st.cam) flyTo(camPos(S, st), st.tgt, st.dur || 1.6, jump);
+    controls.autoRotate = !!st.spin;
+    makeLabels(S, (st.lab || []).map(id => S.labels[id]).filter(Boolean));
+  } else { makeLabels(S, []); controls.autoRotate = false; }
+  $('sayno').textContent = `${i + 1} / ${S.steps.length}`;
+  const tx = $('saytx'); tx.style.opacity = 0; setTimeout(() => { tx.innerHTML = st.say || ''; tx.style.opacity = 1; }, 140);
+  $('dots').innerHTML = S.steps.length > 1 ? S.steps.map((_, k) => `<b class="${k === i ? 'on' : k < i ? 'done' : ''}"></b>`).join('') : '';
+}
+
+/* 標籤（引線＋白框） */
+let LB = [];
+function makeLabels(S, specs) {
+  const lay = $('lbl'), svg = $('lsvg');
+  LB.forEach(l => { l.el.remove(); l.ln.remove(); l.dot.remove(); }); LB = [];
+  specs.forEach((sp, i) => {
+    const el = document.createElement('div'); el.className = 'tag' + (sp.hot ? ' hot' : sp.cold ? ' cold' : '');
+    el.innerHTML = sp.t + (sp.s ? `<small>${sp.s}</small>` : ''); el.style.opacity = 0; lay.appendChild(el);
+    const ln = document.createElementNS('http://www.w3.org/2000/svg', 'line'); ln.setAttribute('stroke', '#6d7a86'); ln.setAttribute('stroke-width', '1.2');
+    const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle'); dot.setAttribute('r', '3.5'); dot.setAttribute('fill', '#e8722c');
+    svg.appendChild(ln); svg.appendChild(dot);
+    LB.push({ sp, el, ln, dot, born: performance.now() + 650 + i * 130 });
+  });
+}
+const tmpV = new THREE.Vector3();
+function updateLabels(S) {
+  const now = performance.now();
+  for (const L of LB) {
+    const p = S.parts[L.sp.p]; if (!p) continue;
+    const at = typeof L.sp.at === 'function' ? L.sp.at(S) : L.sp.at;
+    tmpV.set(...at); p.root.localToWorld(tmpV); tmpV.project(camera);
+    const x = (tmpV.x + 1) / 2 * VW, y = (1 - tmpV.y) / 2 * VH, ok = tmpV.z < 1 && now > L.born;
+    const bx = x + L.sp.dx, by = y + L.sp.dy, w = L.el.offsetWidth, h = L.el.offsetHeight;
+    let lx = L.sp.dx < 0 ? bx - w : bx; lx = clamp(lx, 4, VW - w - 4); const ty = clamp(by - h / 2, 4, VH - h - 4);
+    L.el.style.left = lx + 'px'; L.el.style.top = ty + 'px'; L.el.style.opacity = ok ? 1 : 0;
+    L.ln.setAttribute('x1', x); L.ln.setAttribute('y1', y); L.ln.setAttribute('x2', L.sp.dx < 0 ? lx + w : lx); L.ln.setAttribute('y2', ty + h / 2);
+    L.ln.style.opacity = L.dot.style.opacity = ok ? 1 : 0; L.dot.setAttribute('cx', x); L.dot.setAttribute('cy', y);
+  }
+}
+
+/* 參數面板：讀數；控制按鈕放在模型框右上 */
+function buildUI(S) {
+  const c = $('mbtn'); c.innerHTML = ''; S.ui = [];
+  for (const d of (S.controls || [])) {
+    if (d.type === 'seg') d.opts.forEach(([v, t]) => {
+      const b = document.createElement('button'); b.textContent = t; b.onclick = () => setParam(S, d.key, v, true); c.appendChild(b);
+      S.ui.push(() => b.classList.toggle('on', S.params[d.key] === v));
+    });
+    else if (d.type === 'btn') { const b = document.createElement('button'); b.textContent = d.label; b.onclick = () => d.fn(S); c.appendChild(b); }
+  }
+  const ro = $('ro'); ro.innerHTML = ''; S.roEl = [];
+  for (const r of (S.ro || [])) {
+    const d = document.createElement('div'); d.className = 'r' + (r.hi ? ' hi' : ''); if (r.w) d.style.flex = r.w;
+    d.innerHTML = `<div class="l">${r.l}</div><div class="v"><span></span><small>${r.u || ''}</small></div>`;
+    ro.appendChild(d); S.roEl.push([d.querySelector('span'), r.f]);
+  }
+  $('mtag').innerHTML = S.scene && !S.noTag ? '<b>此模型為示意</b>' : '';
+}
+
+function drawRoute(S) {
+  const r = $('route'), st = DECK.stations; r.innerHTML = '<div class="ln"></div><div class="prog"></div>';
+  const x0 = 150, x1 = W - 190, cur = S.st ?? -1;
+  st.forEach((s, i) => {
+    const x = x0 + (x1 - x0) * i / (st.length - 1);
+    const d = document.createElement('div'); d.className = 'st' + (i === cur ? ' cur' : i < cur ? ' past' : '');
+    d.style.left = x + 'px'; d.innerHTML = `<b>${i ? String(i).padStart(2, '0') : ''}</b><span>${s}</span>`; r.appendChild(d);
+  });
+  r.querySelector('.prog').style.width = cur >= 0 ? (x0 - 80 + (x1 - x0) * cur / (st.length - 1)) + 'px' : '0px';
+}
+
+/* 章節帶入：大字置中 → 約 1 秒後縮小飛到下方進度條 */
+const chapEl = document.createElement('div'); chapEl.id = 'chap';
+chapEl.innerHTML = '<div class="bg"></div><div class="ck"></div><div class="cn"></div><div class="cl"></div>';
+stage.appendChild(chapEl);
+let chapT = [];
+function chapEnd() {
+  chapT.forEach(clearTimeout); chapT = [];
+  chapEl.className = ''; chapEl.style.display = 'none';
+  const w = document.querySelector('#route .st.wait'); if (w) w.classList.remove('wait');
+}
+function chapIntro(i) {
+  chapEnd();
+  const cn = chapEl.querySelector('.cn');
+  chapEl.querySelector('.ck').textContent = 'CHAPTER ' + String(i).padStart(2, '0');
+  cn.textContent = DECK.stations[i]; cn.style.transform = ''; cn.style.color = '';
+  chapEl.style.display = 'block'; void chapEl.offsetWidth; chapEl.classList.add('in');
+  chapT.push(setTimeout(() => {
+    const sp = document.querySelectorAll('#route .st')[i]; if (!sp) return chapEnd();
+    sp.classList.add('wait');
+    const k = stage.getBoundingClientRect().width / W;
+    const t = sp.querySelector('span').getBoundingClientRect(), c = cn.getBoundingClientRect();
+    const dx = ((t.left + t.width / 2) - (c.left + c.width / 2)) / k, dy = ((t.top + t.height / 2) - (c.top + c.height / 2)) / k;
+    chapEl.classList.add('fly');
+    cn.style.transform = `translate(${dx}px, ${dy}px) translate(-50%,-50%) scale(${t.width / c.width})`;
+    cn.style.color = getComputedStyle(sp.querySelector('span')).color;
+    chapT.push(setTimeout(chapEnd, 800));
+  }, 1250));
+}
+
+function goSlide(n, atEnd, stepAt) {
+  if (n < 0 || n >= SLIDES.length) return;
+  const prevSt = cur ? cur.st : null, nst = SLIDES[n].st;
+  if (!SHOT && cur && n > curI && nst !== prevSt && nst > 0) chapIntro(nst); else chapEnd();
+  const fade = $('fade'); fade.style.opacity = 1;
+  setTimeout(() => {
+    const S = SLIDES[n]; prep(S); cur = S; curI = n;
+    if (S.sc && S.sc.enter) S.sc.enter(S);
+    $('kick').textContent = S.kick || ''; $('ttl').textContent = S.title || '';
+    $('pgb').textContent = `${n + 1} / ${SLIDES.length}`;
+    glc.style.visibility = S.scene ? 'visible' : 'hidden'; $('say').style.visibility = S.noSay ? 'hidden' : 'visible';
+    buildUI(S); drawRoute(S);
+    applyStep(S, stepAt !== undefined ? Math.min(stepAt, S.steps.length - 1) : (atEnd ? S.steps.length - 1 : 0), true);
+    try { history.replaceState(null, '', '#' + (n + 1)); } catch (e) { }
+    fade.style.opacity = 0;
+    if (SHOT) { for (let k = 0; k < 160; k++) frame(.05); LB.forEach(l => l.born = 0); frame(.05); }
+  }, 220);
+}
+function next() { if (!cur) return; if (chapEl.style.display === 'block') { chapEnd(); return; } if (cur.step < cur.steps.length - 1) applyStep(cur, cur.step + 1); else goSlide(curI + 1); }
+function prev() { if (!cur) return; if (cur.step > 0) applyStep(cur, cur.step - 1); else goSlide(curI - 1, true); }
+
+/* 輸入 */
+let down = null;
+stage.addEventListener('pointerdown', e => { if (e.target.closest('.ui')) { down = null; return; } down = { x: e.clientX, y: e.clientY }; });
+stage.addEventListener('pointerup', e => {
+  if (!down) return; const moved = Math.hypot(e.clientX - down.x, e.clientY - down.y) > 6; down = null;
+  if (moved || e.target.closest('.ui')) return;
+  if (e.button === 0) next(); else if (e.button === 2) prev();
+});
+stage.addEventListener('contextmenu', e => e.preventDefault());
+addEventListener('keydown', e => {
+  const k = e.key;
+  if (e.ctrlKey || e.altKey || e.metaKey) return;
+  if (['ArrowRight', 'PageDown', ' ', 'Enter'].includes(k)) { e.preventDefault(); next(); }
+  else if (['ArrowLeft', 'PageUp', 'Backspace'].includes(k)) { e.preventDefault(); prev(); }
+  else if (k === 'ArrowDown') { e.preventDefault(); goSlide(curI + 1); }
+  else if (k === 'ArrowUp') { e.preventDefault(); goSlide(curI - 1); }
+  else if (k === 'Home') goSlide(0); else if (k === 'End') goSlide(SLIDES.length - 1);
+  else if (k === 'z' || k === 'Z' || k === '0') goSlide(0);
+  else if (/^[1-7]$/.test(k)) { const t = SLIDES.findIndex(s => s.st === +k); if (t >= 0) goSlide(t); }
+  else if (k === 'f' || k === 'F') fs();
+  else if ((k === 'r' || k === 'R') && cur && cur.scene) { const st = cur.steps[cur.step]; if (st.cam) flyTo(camPos(cur, st), st.tgt, 1.2); }
+});
+function fs() { if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(() => { }); else document.exitFullscreen().catch(() => { }); }
+$('bPrev').onclick = prev; $('bNext').onclick = next; $('bFs').onclick = fs;
+
+/* 主迴圈 */
+let last = performance.now();
+function loop(now) { const dt = Math.min(0.05, (now - last) / 1000); last = now; frame(dt); requestAnimationFrame(loop); }
+function frame(dt) {
+  const S = cur; if (!S) return;
+  for (const k in S.target) {
+    const v = S.target[k];
+    if (typeof v === 'number' && typeof S.params[k] === 'number') { S.params[k] += (v - S.params[k]) * Math.min(1, dt * 2.6); if (Math.abs(v - S.params[k]) < 1e-4) S.params[k] = v; }
+  }
+  if (S.scene) {
+    S.sc.update(S, dt);
+    for (const n in S.parts) {
+      const p = S.parts[n]; p.vis += (p.visT - p.vis) * Math.min(1, dt * 4); p.hot += (p.hotT - p.hot) * Math.min(1, dt * 5);
+      p.root.position.copy(p.base);
+      p.root.visible = (p.alpha ?? 1) > .02 && p.vis > .07;
+      const v = .05 + .95 * p.vis * (p.alpha ?? 1), pulse = p.hot * (.75 + .25 * Math.sin(performance.now() / 260));
+      for (const r of p.mats) {
+        if (r.fill) {
+          r.fill.opacity = r.op * v;
+          if (!r.keepColor) { r.fill.color.copy(r.base); r.fill.emissive.copy(r.base).multiplyScalar(pulse * (r.glow ?? .45)); }
+          r.fill.depthWrite = !r.noDepth && p.vis > .5 && (p.alpha ?? 1) > .5;
+        }
+        if (r.line) { r.line.opacity = r.lop * v; r.line.color.copy(r.lbase).lerp(HOTE, p.hot); }
+      }
+    }
+    stepTween(dt); if (!tw.active) controls.update();
+    if (sizeView()) { renderer.render(S.scene3, camera); updateLabels(S); }
+    if (S.sc.panel && !pick(S, S.step, 'p', S.param)[0]) {
+      const pc = $('pc'), h = S.sc.panel(S); if (pc.dataset.dyn !== h) { pc.dataset.dyn = h; pc.innerHTML = h; }
+    }
+  }
+  if (S.roEl) for (const [el, f] of S.roEl) el.textContent = f(S);
+  if (S.ui) for (const u of S.ui) u();
+}
+
+fit();
+if (SHOT) stage.classList.add('notr');
+let start = 0, startStep;
+try { const m = location.hash.slice(1).split('-'); const h = parseInt(m[0], 10); if (h >= 1 && h <= SLIDES.length) start = h - 1; if (m[1]) startStep = parseInt(m[1], 10) - 1; } catch (e) { }
+goSlide(start, false, startStep);
+requestAnimationFrame(loop);
+window.__deck = {
+  goSlide, next, prev, get cur() { return cur; }, get i() { return curI; },
+  go(n, st) { return new Promise(r => { goSlide(n, false, st); setTimeout(() => { for (let i = 0; i < 90; i++) frame(1 / 30); LB.forEach(l => l.born = 0); frame(1 / 30); r('ok'); }, 300); }); }
+};
+</script>
+<script>addEventListener("load",function(){setTimeout(function(){["img/tilt.jpg","img/g8.png","img/g23.png","img/fig_system.png"].forEach(function(u){var i=new Image();i.src=u;});},1200);});</script>
+</body>
+</html>
