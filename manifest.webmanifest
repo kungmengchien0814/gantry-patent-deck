@@ -1,0 +1,17 @@
+{
+  "name": "龍門溫差式均溫系統｜專利互動簡報",
+  "short_name": "龍門簡報",
+  "description": "龍門加工機之溫差式均溫系統及其方法：15 頁互動簡報，加入主畫面後可離線使用。",
+  "lang": "zh-Hant",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0e151c",
+  "theme_color": "#0e151c",
+  "icons": [
+    { "src": "apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}

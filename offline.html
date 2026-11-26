@@ -6,6 +6,10 @@
 <meta name="description" content="龍門加工機之溫差式均溫系統及其方法：發明專利申請書互動簡報（15 頁，可旋轉 3D 模型、雙門檻控制示意）。">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#0e151c">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="龍門簡報">
 <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9InQiIHgxPSIwIiB5MT0iMSIgeDI9IjAiIHkyPSIwIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMmY3ZGMwIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2U4NzIyYyIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTQiIGZpbGw9IiMxNjIyMmUiLz4KICA8cmVjdCB4PSI5IiB5PSIxMyIgd2lkdGg9IjQ2IiBoZWlnaHQ9IjEwIiByeD0iMiIgZmlsbD0iI2U4NzIyYyIvPgogIDxyZWN0IHg9IjE1IiB5PSIyMyIgd2lkdGg9IjkiIGhlaWdodD0iMzAiIGZpbGw9InVybCgjdCkiLz4KICA8cmVjdCB4PSI0MCIgeT0iMjMiIHdpZHRoPSI5IiBoZWlnaHQ9IjMwIiBmaWxsPSJ1cmwoI3QpIi8+CiAgPHJlY3QgeD0iOSIgeT0iNTIiIHdpZHRoPSI0NiIgaGVpZ2h0PSIzIiByeD0iMS41IiBmaWxsPSIjOWRiYWQ2Ii8+Cjwvc3ZnPgo=">
 <title>龍門溫差式均溫系統｜專利互動簡報（離線版）</title>
 <style>
@@ -1685,6 +1689,22 @@ window.__deck = {
   evi(j, i) { const td = document.querySelector(`[data-ev="${j},${i}"]`); if (td) openEvi(td); return !!eviEl; },
   go(n, st) { return new Promise(r => { goSlide(n, false, st); setTimeout(() => { for (let i = 0; i < 90; i++) frame(1 / 30); LB.forEach(l => l.born = 0); frame(1 / 30); r('ok'); }, 300); }); }
 };
+</script>
+<script>
+/* 離線使用：只在正式網站（https）註冊 sw.js；下載下來直接開的檔案（file://）不會執行 */
+(function () {
+  var ok = location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+  if (!('serviceWorker' in navigator) || !ok) return;
+  if (!document.querySelector('link[rel="manifest"]')) { var l = document.createElement('link'); l.rel = 'manifest'; l.href = 'manifest.webmanifest'; document.head.appendChild(l); }
+  navigator.serviceWorker.addEventListener('message', function (e) {
+    if (!e.data || e.data.type !== 'offline-ready') return;
+    var t = document.getElementById('toast'); if (!t) return;
+    var home = navigator.standalone || (window.matchMedia && matchMedia('(display-mode: standalone)').matches);
+    t.textContent = home ? '已可離線使用：之後沒有網路也能從主畫面打開。' : '已可離線使用：之後沒有網路也能打開這個網址。iPad 建議再按「分享 → 加入主畫面」。';
+    t.classList.add('on'); setTimeout(function () { t.classList.remove('on'); }, 7000);
+  });
+  addEventListener('load', function () { navigator.serviceWorker.register('sw.js').catch(function () {}); });
+})();
 </script>
 </body>
 </html>
