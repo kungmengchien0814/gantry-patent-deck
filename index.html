@@ -33,7 +33,7 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;background:#0e151c;overflow:hidden;font-family:"Noto Sans TC","Microsoft JhengHei","PingFang TC",sans-serif;color:var(--ink)}
-#stage{position:absolute;left:50%;top:50%;width:1600px;height:900px;background:radial-gradient(ellipse at 70% 40%,#fbfaf6 0%,var(--bg) 72%);overflow:hidden;transform-origin:center center;user-select:none}
+#stage{position:fixed;left:50%;top:50%;width:1600px;height:900px;background:radial-gradient(ellipse at 70% 40%,#fbfaf6 0%,var(--bg) 72%);overflow:hidden;transform-origin:center center;user-select:none}
 
 /* ---------- 版面方框 ---------- */
 .box{position:absolute;background:var(--panel);border:1.5px solid #d6d0c4;border-radius:12px;overflow:hidden;
@@ -146,7 +146,7 @@ td.me .sy{color:var(--accent)}td.me .sy small{color:var(--deep);font-weight:700}
 .cv h1 em{font-style:normal;color:var(--accent)}
 .cv .s{font-size:26px;color:#46535e;margin-top:22px;line-height:1.6}
 .cv .a{font-size:20px;color:#3b4853;margin-top:26px;line-height:1.7}
-.howto{margin-top:40px;display:flex;flex-wrap:wrap;gap:10px}
+.howto{margin-top:40px;display:flex;flex-wrap:wrap;gap:10px;max-width:620px}
 .howto span{font-size:15px;color:#46535e;border:1px solid var(--line);background:rgba(255,255,255,.85);border-radius:6px;padding:6px 11px}
 .howto b{color:var(--accent);margin-right:6px}
 .recap{margin-top:28px;display:flex;flex-direction:column;gap:12px}
@@ -189,7 +189,7 @@ td.me .sy{color:var(--accent)}td.me .sy small{color:var(--deep);font-weight:700}
 
 /* ---------- 進度路線 ---------- */
 #route{position:absolute;left:0;right:0;top:834px;height:66px;z-index:4;pointer-events:none}
-#route .ln{position:absolute;left:80px;right:80px;top:30px;height:2px;background:#cfc9bd}
+#route .ln{position:absolute;left:80px;right:250px;top:30px;height:2px;background:#cfc9bd}
 #route .prog{position:absolute;left:80px;top:30px;height:2px;background:var(--accent);transition:width .6s}
 #route .st{position:absolute;top:20px;transform:translateX(-50%);text-align:center}
 #route .st b{display:block;width:21px;height:21px;line-height:17px;border-radius:50%;background:#fff;border:2px solid #a9a295;margin:0 auto;font-size:11.5px;font-weight:700;font-family:var(--mono);color:#6b7480}
@@ -202,6 +202,7 @@ td.me .sy{color:var(--accent)}td.me .sy small{color:var(--deep);font-weight:700}
 #tools{position:absolute;right:20px;top:848px;z-index:7;display:flex;gap:6px}
 #tools button{border:1px solid #c9c2b5;background:rgba(255,255,255,.92);border-radius:6px;width:32px;height:28px;cursor:pointer;font-size:15px;color:#33414c}
 #tools button:hover{border-color:var(--accent)}
+#tools button.tx{width:auto;padding:0 10px;font-family:inherit;font-size:14px;font-weight:500}
 #fade{position:absolute;inset:0;background:var(--bg);opacity:0;pointer-events:none;z-index:20;transition:opacity .22s}
 #err{position:absolute;inset:0;display:none;align-items:center;justify-content:center;z-index:40;background:var(--bg);font-size:22px;color:#7a2f12;text-align:center;line-height:1.8}
 #stage.notr .box,#stage.notr [data-s]{transition:none!important}
@@ -269,6 +270,81 @@ td.me .sy{color:var(--accent)}td.me .sy small{color:var(--deep);font-weight:700}
 .fbx{position:absolute;width:18.7%;height:11.1%;display:flex;align-items:center;justify-content:center;text-align:center;font-size:14px;line-height:1.2;font-weight:700;color:var(--ink)}
 .fbx.dk{color:#fff}
 
+/* 開場互動（第 2 頁） */
+.quiz{display:flex;flex-direction:column;gap:20px;height:100%}
+.quiz .qk{font-family:var(--mono);font-size:15px;letter-spacing:.14em;color:var(--deep);font-weight:700}
+.quiz .qq{font-size:36px;font-weight:900;line-height:1.35;color:var(--ink)}
+.quiz .qo{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.quiz .qo div{display:flex;align-items:center;gap:16px;font-size:28px;font-weight:700;color:#26333e;background:#fcfbf8;border:2px solid #e1dbcf;border-radius:12px;padding:16px 20px;transition:opacity .4s,border-color .4s,background .4s,box-shadow .4s,color .4s}
+.quiz .qo i{flex:none;width:46px;height:46px;border-radius:50%;background:var(--navy);color:#fff;font-style:normal;font-family:var(--mono);font-size:22px;display:flex;align-items:center;justify-content:center;transition:background .4s}
+.quiz .qo.on div{opacity:.38}
+.quiz .qo.on div.ans{opacity:1;border-color:var(--accent);background:#fff1e4;color:var(--deep);box-shadow:0 0 0 5px rgba(232,114,44,.18)}
+.quiz .qo.on div.ans i{background:var(--accent)}
+.qans{background:var(--navy);border-radius:12px;padding:14px 22px;display:flex;flex-direction:column;gap:4px}
+.qans b{font-size:28px;color:#fff}.qans b em{font-style:normal;color:#f6a26b;font-family:var(--mono)}
+.qans span{font-size:18px;color:#c9d2da}
+
+/* 台灣前案（第 4 頁第 4 步） */
+.cards.tw .card{padding:16px 18px;gap:7px}
+.cards.tw .card b{font-size:23px}
+.cards.tw .card span{font-size:18.5px;line-height:1.55}
+.cards.tw .card .lim{font-size:17px}
+.cards.tw .qy{display:flex;flex-direction:column;margin:2px 0 6px}
+.cards.tw .qy div{display:flex;justify-content:space-between;align-items:baseline;gap:10px;border-bottom:1px solid rgba(255,255,255,.14);padding:5px 0}
+.cards.tw .card .qy span{font-size:15.5px;line-height:1.4;color:#e9eef2}
+.cards.tw .qy i{font-style:normal;font-family:var(--mono);font-size:14.5px;color:#f6a26b;font-weight:700;white-space:nowrap}
+
+/* 差異矩陣：點格子看原文依據 */
+.tb.mx td.ev{cursor:pointer}
+.tb.mx tr.vis td.ev:hover{background:#fff6ee;box-shadow:inset 0 0 0 2px #f3c9a8}
+.tb.mx td.ev.sel{background:#ffe2c9!important;box-shadow:inset 0 0 0 2px var(--accent)!important}
+.evh{color:var(--deep);font-weight:700;margin-left:6px}
+.evi{position:absolute;z-index:12;width:470px;background:#fff;border:1.5px solid var(--accent);border-radius:12px;box-shadow:0 14px 40px rgba(22,34,46,.22);padding:14px 18px 12px;display:flex;flex-direction:column;gap:10px;animation:fin .25s ease both}
+.evi .eh{display:flex;align-items:baseline;gap:10px;padding-right:30px;flex-wrap:wrap}
+.evi .eh b{font-size:19px;color:var(--ink);white-space:nowrap}
+.evi .eh span{font-size:15px;color:var(--muted)}
+.evi .ex{position:absolute;right:8px;top:6px;border:0;background:none;font-size:18px;color:#7d8790;cursor:pointer;width:30px;height:30px;border-radius:6px}
+.evi .ex:hover{background:#f1ede6}
+.evi .eb{display:grid;grid-template-columns:96px 1fr;gap:14px;align-items:start}
+.evi .eb .sy{text-align:center}
+.evi .loc{display:inline-block;font-style:normal;font-family:var(--mono);font-size:13.5px;color:#fff;background:var(--navy);border-radius:4px;padding:1px 8px;margin-bottom:6px}
+.evi p{font-size:17.5px;line-height:1.6;color:#26333e}
+.evi q{display:block;margin-top:6px;font-size:15px;line-height:1.45;color:#5d6873;font-style:italic;border-left:3px solid #f1c4a4;padding-left:8px;quotes:none}
+.evi .ef{display:flex;justify-content:space-between;align-items:center;gap:10px;border-top:1px solid #eee7dc;padding-top:8px;font-size:14px;color:var(--muted)}
+.evi .ef a{color:var(--deep);font-weight:700;text-decoration:none;white-space:nowrap}
+.evi .ef a:hover{text-decoration:underline}
+
+/* 備答卡（Q） */
+#qa{position:absolute;inset:0;z-index:35;background:rgba(14,21,28,.55);display:none;align-items:center;justify-content:center}
+#qa.open{display:flex}
+#qa .qw{width:1480px;height:810px;background:var(--bg);border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.35);display:flex;flex-direction:column;overflow:hidden;animation:fin .3s ease both}
+#qa .qh{display:flex;align-items:center;gap:16px;padding:16px 26px;background:var(--navy);color:#fff}
+#qa .qh b{font-size:24px;white-space:nowrap}
+#qa .qh span{font-size:15px;color:#c9d2da;flex:1;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+#qa .qh button{border:1px solid rgba(255,255,255,.4);background:none;color:#fff;border-radius:6px;padding:5px 14px;font:inherit;font-size:15px;cursor:pointer;white-space:nowrap}
+#qa .qh button:hover{border-color:#f6a26b}
+#qa .qb{flex:1;display:grid;grid-template-columns:560px 1fr;min-height:0}
+#qa .ql{position:relative;overflow:auto;padding:10px 12px 14px 18px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:1px}
+#qa .ql h5{font-size:13.5px;letter-spacing:.1em;color:var(--deep);margin:9px 0 3px 8px}
+#qa .ql button{display:grid;grid-template-columns:28px 1fr auto;gap:10px;align-items:center;text-align:left;border:0;background:none;border-radius:8px;padding:5px 10px;font:inherit;font-size:16.5px;color:#26333e;cursor:pointer;line-height:1.35}
+#qa .ql button i{font-style:normal;font-family:var(--mono);font-size:13.5px;color:#7d8790;width:24px;height:24px;display:flex;align-items:center;justify-content:center;border-radius:50%}
+#qa .ql button:hover{background:#ece8df}
+#qa .ql button.sel{background:#fff1e4;box-shadow:inset 4px 0 0 var(--accent)}
+#qa .ql button.rel i{color:#fff;background:var(--accent);font-weight:700}
+#qa .qd{padding:26px 40px;overflow:auto;display:flex;flex-direction:column;gap:16px}
+#qa .qd .qn{font-family:var(--mono);font-size:15px;color:var(--deep);letter-spacing:.08em}
+#qa .qd h3{font-size:31px;line-height:1.35;color:var(--ink)}
+#qa .qd p{font-size:23px;line-height:1.75;color:#26333e}
+#qa .qd .qs{font-size:16px;color:var(--muted);line-height:1.6;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+#qa .qd .qs button{font:inherit;font-size:15px;border:1px solid #c9c2b5;background:#fff;border-radius:6px;padding:2px 10px;cursor:pointer;color:#33414c}
+#qa .qd .qs button:hover{border-color:var(--accent)}
+.tg{display:inline-block;font-style:normal;font-size:13px;font-weight:700;border-radius:20px;padding:1px 9px;white-space:nowrap;line-height:1.6}
+.tg.t0{background:#e3f1e7;color:#24683c}.tg.t1{background:#e4eef8;color:#1d5b93}.tg.t2{background:#fff0de;color:#9a4a0c}.tg.t3{background:#fbe3dc;color:#a3311a}
+
+/* 提示訊息 */
+#toast{position:absolute;left:50%;bottom:120px;transform:translate(-50%,10px);z-index:45;background:var(--navy);color:#fff;font-size:17px;border-radius:10px;padding:12px 20px;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;max-width:960px;text-align:center;line-height:1.5}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+
 #rot{display:none;position:fixed;left:0;right:0;bottom:max(18px,env(safe-area-inset-bottom));text-align:center;color:#9fb0ba;font-size:14px;letter-spacing:.06em;pointer-events:none;z-index:20}
 @media (orientation:portrait) and (max-width:900px){#rot{display:block}}
 @media (prefers-reduced-motion:reduce){.box,[data-s],.fx{transition:none!important}.ci{animation:none!important}}
@@ -286,7 +362,7 @@ td.me .sy{color:var(--accent)}td.me .sy small{color:var(--deep);font-weight:700}
   <div id="param" class="box"><div id="ro"></div><div id="pc"></div><div id="ctrl" class="ui"></div></div>
   <div id="say"><span class="no" id="sayno"></span><span class="tx" id="saytx"></span><span id="dots"></span></div>
   <div id="route"></div>
-  <div id="tools" class="ui"><button id="bPrev" title="上一步">‹</button><button id="bNext" title="下一步">›</button><button id="bFs" title="全螢幕 (F)">⛶</button></div>
+  <div id="tools" class="ui"><button id="bPv" class="tx" title="講者視窗 (P)">講者</button><button id="bQa" class="tx" title="備答卡 (Q)">備答</button><button id="bPrev" title="上一步">‹</button><button id="bNext" title="下一步">›</button><button id="bFs" title="全螢幕 (F)">⛶</button></div>
   <div id="fade"></div>
   <div id="err"></div>
 </div>
@@ -697,14 +773,91 @@ const ICON = {
 const SYM = { o: '○', t: '△', x: '×', d: '－' };
 const MX = [
   ['量的是上下溫差', ['x', '單點溫度'], ['o', '立柱上下'], ['x', '流體溫度'], ['x', '前後溫差'], ['d', '未揭露'], ['o', '橫樑對立柱']],
-  ['同時顧橫樑和立柱', ['x', '只有橫樑'], ['x', '只有立柱'], ['t', '可貼多處'], ['x', '只有立柱'], ['x', '只有橫樑'], ['o', '兩者都有']],
-  ['上下分區、分別調整', ['x', '一個閥'], ['x', '單一迴路'], ['t', '分處冷熱'], ['x', '整體送風'], ['d', '未揭露'], ['o', '上下各自調']],
-  ['溫差雙門檻（啟動／停止）', ['t', '門檻用單點溫度'], ['t', '無停止門檻'], ['x', '無門檻'], ['x', '無門檻'], ['d', '未揭露'], ['o', '啟動＋停止']],
+  ['同時顧橫樑和立柱', ['x', '只有橫樑'], ['x', '只有立柱'], ['t', '可貼多處'], ['x', '立柱前後'], ['x', '只有橫樑'], ['o', '兩者都有']],
+  ['上下分區、分別調整', ['x', '一個閥'], ['x', '單一迴路'], ['t', '分處冷熱'], ['x', '前後分配送風'], ['d', '未揭露'], ['o', '上下各自調']],
+  ['溫差雙門檻（啟動／停止）', ['t', '門檻用單點溫度'], ['t', '分段、無停止門檻'], ['x', '依油溫切換'], ['t', '空調溫度區間'], ['d', '未揭露'], ['o', '啟動＋停止']],
   ['外貼、舊機台可加裝', ['x', '橫樑內迴路'], ['x', '結構內液體'], ['o', '可貼附'], ['t', '需加後罩'], ['d', '未揭露'], ['o', '外貼水冷板']],
+];
+/* 差異矩陣每一格的原文依據：EVI[前案 j][特徵 i] = [出處, 摘要（改寫）, 原文短句（每份文件最多一句）] */
+const EV_SRC = [
+  { n: 'EP 4011545 A1', who: 'Tecnalia｜2022 公開（2024 視為撤回，仍屬前案）', url: 'https://patents.google.com/patent/EP4011545A1/en' },
+  { n: 'US 6,923,603 B2', who: 'Makino｜2005 公告', url: 'https://patents.google.com/patent/US6923603B2/en' },
+  { n: 'US 5,582,237 A', who: 'Miyano｜1996 公告', url: 'https://patents.google.com/patent/US5582237A/en' },
+  { n: 'US 6,675,549 B1', who: 'Makino｜2004 公告', url: 'https://patents.google.com/patent/US6675549B1/en' },
+  { n: '中興大學碩論（2018）', who: '國家圖書館博碩士論文｜目前只讀到摘要', url: '' },
+  { n: '本案（請求項草稿）', who: '本組撰寫的申請專利範圍', url: '' },
+];
+const EVI = [
+  [['〔0040〕、請求項 10', '只用一支溫度感測器 TS 量橫樑溫度，判斷依據是單點的絕對溫度，不是兩點的溫差。'],
+   ['請求項 1、〔0032〕', '冷卻迴路設在立式車床的橫樑（cross-rail）內，沒有處理立柱。'],
+   ['〔0034〕、〔0041〕', '兩條支路 CC1、CC2 串聯，由同一個四通閥切換，無法分別調整不同區域。'],
+   ['〔0042〕、請求項 12、14；〔0027〕', '溫度高於上限 UT 開始冷卻、低於下限 LT 停止，流量依 T − UT 調整；有兩個門檻，但比的是單點溫度。', '…falls below a lower threshold temperature LT'],
+   ['〔0037〕', '管路放在導軌鑽出的孔道內，屬於結構內部的迴路，舊機台難以加裝。']],
+  [['請求項 5', '立柱上部、下部各設一支溫度感測器（31、33），依兩者的溫差決定泵浦運轉。'],
+   ['請求項 1、說明書', '液體只在立柱內部循環；說明書只提到立柱可以是門型，沒有冷卻橫樑。'],
+   ['請求項 1、說明書', '一台泵浦（19）讓整條迴路一起開或關；請求項 1 還寫明外部管路不另設冷卻手段。'],
+   ['說明書（實施例）', '溫差大於 2 °C 連續運轉、1～2 °C 每 20 分鐘運轉 10 分鐘、低於 1 °C 改用計時運轉；是分段運轉，沒有「降到多少就停」的停止門檻。', 'an operation with a timer is preferentially selected'],
+   ['請求項 1', '液體封在立柱鑄件內部，必須在製造時就做好流道。']],
+  [['實施例 1、2', '依油溫或水溫控制；另一種做法依各部位溫度，但沒有比較上下兩點的溫差。'],
+   ['實施例 2（FIG. 4）', '多個袋狀熱交換單元可貼在機台不同部位，未特別針對龍門的橫樑與立柱。'],
+   ['實施例 2（FIG. 4）', '四組單元各有泵浦（61～64），可分處送水；但調整依據是水溫，不是結構上下溫差。'],
+   ['實施例 1', '把油溫和設定值比較，切換加熱或冷卻；沒有溫差門檻，也沒有啟動／停止兩個門檻。'],
+   ['請求項 1～3', '可撓性袋狀熱交換器，以可拆接頭貼附在結構表面，不必改鑄件。']],
+  [['實施例 1、2', '實施例 2 送同溫空氣讓立柱前後同溫；實施例 1 床台前後感測器 D、E 的溫差只用來停止加工，不用來控制冷卻。'],
+   ['實施例 2', '處理的是立柱前面和後面，沒有涉及橫樑。'],
+   ['實施例 2', '風量事先分配到加工室與立柱後方，不依溫差即時調整上下。'],
+   ['實施例 1', '空調在設定的溫度區間內開關；溫差超標時只停止加工，不是溫差雙門檻控制。'],
+   ['實施例 2', '要加裝立柱後罩和送風機，屬於改裝，不只是外貼。']],
+  [['摘要', '摘要沒有說明量的是單點溫度還是溫差，標為未揭露；待讀全文確認。'],
+   ['摘要', '在大型龍門機的橫樑裝小型冷卻水塊，搭配類神經網路；控溫位置只在橫樑。'],
+   ['摘要', '摘要沒有說明是否分區調整，標為未揭露。'],
+   ['摘要', '摘要沒有說明控制門檻，標為未揭露。'],
+   ['摘要', '摘要沒有說明水塊怎麼安裝，標為未揭露。']],
+  [['請求項 1', '第一溫度感測器（21）設在橫樑上部、第二溫度感測器（22）設在立柱下段，控制單元計算兩者的溫差 ΔT。'],
+   ['請求項 1、2', '上部溫控模組（31）設在橫樑、下部溫控模組（32）設在立柱；請求項 2 限定點位 9、11 和 1、5。'],
+   ['請求項 1、5', '控制單元「分別控制」上下模組，以比例閥各自調整流量。'],
+   ['請求項 1、3', 'ΔT ≥ 啟動門檻時加大上部冷卻，降到停止門檻以下才停；停止門檻小於啟動門檻，範圍見請求項 3。'],
+   ['請求項 2、4、6', '溫控模組設在橫樑與立柱的表面，以水冷板為實施例，和結構之間加導熱介面材料；不必改造鑄件。']],
 ];
 const FIGN = [['12', 1.8, 3.9], ['11', 33.3, 45.2], ['31', 34.0, .6], ['32', .4, 62.9], ['21', 54.0, .6], ['22', .4, 87.1], ['33', 63.8, 50.0]];
 const FIG_SYS = `<div class="figw"><img src="${IMG.fig}" alt="系統構成圖式">${FIGN.map(([n, x, y]) => `<span class="fnum" style="left:${x}%;top:${y}%">${n}</span>`).join('')}
   <span class="fbx dk" style="left:79.6%;top:11.6%">40<br>控制單元</span><span class="fbx" style="left:79.6%;top:80.3%">50<br>冷卻水供應</span></div>`;
+
+/* 第 2 頁：開場互動（第 0–1 步）→ 選題動機（第 2–5 步） */
+const QUIZ = `<div class="quiz">
+  <div class="qk">開場互動｜請舉手</div>
+  <div class="qq">工具機的加工誤差，<br>大約有幾成來自「熱變位」？</div>
+  <div class="qo" data-on="1">${[['A', '不到 1 成'], ['B', '1～2 成'], ['C', '2～4 成'], ['D', '4～7 成']].map(([k, t]) => `<div${k === 'D' ? ' class="ans"' : ''}><i>${k}</i>${t}</div>`).join('')}</div>
+  <div class="qans" data-s="1"><b>答案：D，約 <em>40–70%</em></b><span>熱變位是工具機最大的誤差來源（Bryan, 1990, CIRP Annals）</span></div>
+  <div class="note" style="margin-top:auto">請大家舉手作答，再按 → 公布答案</div>
+</div>`;
+const MOTIV = `<div class="row grow" style="gap:26px">
+  ${fig(IMG.tilt, '門橋溫度差異造成結構傾斜（研討會簡報）', 3, 'flex:0 0 238px')}
+  <div class="col" style="gap:12px">
+    ${pt(2, '① 熱變位是最大的誤差來源', '工具機加工誤差約 <i class="pm">40–70%</i> 來自熱變位（Bryan, 1990）；鋼材每公尺、每升高 1 °C 約伸長 <i class="pm">0.01 mm</i>。', '2')}
+    ${pt(3, '② 龍門上熱下冷就會傾斜', '廠房越高越熱（論文設定：每升高 100 cm 加 1 °C）；橫樑熱、立柱下段冷，龍門傾倒、彎曲，精度難守 <i class="pm">0.02 mm</i>。', '3-4')}
+    ${pt(5, '③ 延續本組研究，發展成專利', 'CSME2025 論文已用 COMSOL 比較 <i class="pm">30 組</i>點位，找出最有效的冷卻位置；本案再加上控制方法。', '5')}
+    <div class="note" data-s="5" style="margin-top:auto">來源：Bryan（1990）CIRP Annals；US 5,582,237；CSME2025 論文與研討會簡報 B15-004</div>
+  </div></div>`;
+
+/* 第 4 頁第 4 步：台灣前案（Google Patents 國別 TW，2026-11-26 檢索） */
+const TWPA = `<div class="lead" style="font-size:26px">我們也查了<em>台灣前案</em>（Google Patents，國別 TW）</div>
+  <div class="cards tw grow" style="grid-template-columns:1.06fr 1fr 1fr 1fr;gap:16px">
+    <div class="card dk"><div class="n">查過的範圍｜2026-11-26</div><b>3 組條件，去重後 9 件</b>
+      <div class="qy">${[['B23Q 11/14＋溫差', '約 5 件'], ['B23Q 11/14＋龍門／門型／橫樑', '約 5 件'], ['B23Q 11/0003＋立柱', '2 件']].map(([a, b]) => `<div><span>${a}</span><i>${b}</i></div>`).join('')}</div>
+      <span>9 件逐件看過；其餘 5 件是工件夾具恆溫、定溫水、控制盤散熱、熱變位補償與籠式機架，和本案的控制方式無關。</span></div>
+    <div class="card"><div class="n">TWI566878B｜東芝機械</div><b>門型雙柱，柱與樑內有水槽</b>
+      <span>立柱和橫樑內部做成互通的水槽，灌恆溫冷卻水（與 US 9,511,465 同族）。</span>
+      <div class="lim">差異：只有水位感測，不量溫度、不分區；做在鑄件裡，舊機台不能加裝。</div></div>
+    <div class="card"><div class="n">TWI618597B｜TWI777382B</div><b>用溫差控制冷卻設備</b>
+      <span>依液溫或送風溫度和機體溫度的差，啟停或降頻冷卻機；工研院那件也在避免壓縮機反覆開關。</span>
+      <div class="lim">差異：控制的是加工液、主軸送風的溫度，不是結構上下溫差，也不分上下區。</div></div>
+    <div class="card"><div class="n">TW201700213A｜中興大學</div><b>主軸支撐件外貼溫控片</b>
+      <span>單柱機在主軸支撐件外貼電熱片和致冷晶片，依變形分析決定要啟用哪些溫控片。</span>
+      <div class="lim">差異：單柱機；說明書沒有依溫度或溫差自動啟停的門檻。</div></div>
+  </div>
+  <div class="gapc"><b>所以本案的差異是：國內前案也沒有一件同時做到「量橫樑對立柱的溫差＋上下分區調整＋啟動／停止雙門檻」</b><span>結論和國外前案相同，下一頁逐項比較。智慧局 GPSS 尚未檢索，正式申請前建議再用分類號 B23Q 11/14 查一次。</span></div>
+  <div class="note">來源：Google Patents（2026-11-26 檢索，國別 TW）；TWI566878B、TWI618597B、TWI777382B、TW201700213A 原文</div>`;
 
 const DECK = {
   title: '龍門溫差式均溫系統｜專利互動簡報',
@@ -717,21 +870,16 @@ const DECK = {
   <h1>龍門加工機之<br><em>溫差式</em>均溫系統<br>及其方法</h1>
   <div class="s">發明專利申請書簡報</div>
   <div class="a">四智四丙｜發明人：龔孟謙、周大凱、鄭楷諺、陳宣佑</div>
-  <div class="howto"><span><b>點畫面／→</b>下一步</span><span><b>←</b>上一步</span><span><b>拖曳</b>旋轉模型</span><span><b>1–7</b>跳章節</span><span><b>F</b>全螢幕</span></div></div>`,
+  <div class="howto"><span><b>點畫面／→</b>下一步</span><span><b>←</b>上一步</span><span><b>拖曳</b>旋轉模型</span><span><b>1–7</b>跳章節</span><span><b>F</b>全螢幕</span><span><b>P</b>講者視窗</span><span><b>Q</b>備答卡</span></div></div>`,
   steps: [{ set: { field: 1 }, cam: [26, -58, 24], tgt: [0, 0, 11], spin: true, lab: ['hot', 'cold'] }] },
 
 /* ---------- 2 選題動機 ---------- */
 { st: 1, kick: '01 選題動機', title: '為什麼選這個題目？', scene: 'gantry', param: P_TEMP,
-  content: `<div class="row grow" style="gap:26px">
-  ${fig(IMG.tilt, '門橋溫度差異造成結構傾斜（研討會簡報）', 1, 'flex:0 0 238px')}
-  <div class="col" style="gap:12px">
-    ${pt(0, '① 熱變位是最大的誤差來源', '工具機加工誤差約 <i class="pm">40–70%</i> 來自熱變位（Bryan, 1990）；鋼材每公尺、每升高 1 °C 約伸長 <i class="pm">0.01 mm</i>。', '0')}
-    ${pt(1, '② 龍門上熱下冷就會傾斜', '廠房越高越熱（論文設定：每升高 100 cm 加 1 °C）；橫樑熱、立柱下段冷，龍門傾倒、彎曲，精度難守 <i class="pm">0.02 mm</i>。', '1-2')}
-    ${pt(3, '③ 延續本組研究，發展成專利', 'CSME2025 論文已用 COMSOL 比較 <i class="pm">30 組</i>點位，找出最有效的冷卻位置；本案再加上控制方法。', '3')}
-    <div class="note" data-s="3" style="margin-top:auto">來源：Bryan（1990）CIRP Annals；US 5,582,237；CSME2025 論文與研討會簡報 B15-004</div>
-  </div></div>`,
+  content: QUIZ,
   steps: [
-    { say: '第一，熱變位是工具機最大的誤差來源：加工誤差大約四到七成來自熱變位。', ...CAM.g, lab: ['l12', 'l11'] },
+    { say: '開場先問大家一題：工具機的加工誤差，大約有幾成來自熱變位？請舉手選一個。', set: { field: 1 }, ...CAM.g, spin: true },
+    { say: '答案是 D，大約四到七成：熱變位是工具機最大的誤差來源。', set: { field: 1 }, ...CAM.g, lab: ['hot', 'cold'] },
+    { say: '所以第一個原因：熱變位是最大的誤差來源；鋼材每公尺、每升高 1 °C 約伸長 0.01 毫米。', c: MOTIV, ...CAM.g, lab: ['l12', 'l11'] },
     { say: '第二，廠房越高越熱：論文設定每升高 100 公分加 1 °C，龍門就變成上熱下冷。', set: { field: 1, air: 1 }, cam: [12, -54, 16], tgt: [0, 0, 12.5], lab: ['air0', 'air1', 'air2', 'hot', 'cold'] },
     { say: '橫樑熱、立柱下段冷，整座龍門就會傾倒、彎曲，精度很難守在 0.02 毫米以內。', set: { field: 1, tilt: 1 }, ...CAM.gf, lab: ['def', 'hot', 'cold'] },
     { say: '第三，這延續我們在 CSME2025 發表的研究：已用 COMSOL 比較 30 組冷卻點位。', set: { field: 1 }, ...CAM.g, spin: true },
@@ -772,22 +920,23 @@ const DECK = {
     { say: '最接近的是 EP 4011545：橫樑內設冷卻迴路，量單點溫度，高於上限開閥、低於下限關閥。' },
     { say: '要注意 US 6,923,603：實施例已用立柱上下溫差開關泵浦，但只有一條迴路、沒有停止門檻。' },
     { say: '其他三件：可貼附的熱交換袋、送同溫空氣處理前後溫差，以及只在橫樑控溫的中興碩論。' },
+    { say: '我們也查了台灣前案：9 件裡沒有一件同時具備溫差、上下分區和雙門檻，結論和國外一致。', c: TWPA },
   ] },
 
 /* ---------- 5 差異比對 ---------- */
 { st: 2, kick: '02 市面與前案｜差異比對', title: '本案跟既有專利差在哪？',
   content: `<table class="tb mx">
     <tr><th style="width:22%">比較特徵</th>${['EP 4011545', 'US 6,923,603', 'US 5,582,237', 'US 6,675,549', '中興碩論'].map(h => `<th>${h}</th>`).join('')}<th class="me">本案</th></tr>
-    ${MX.map(([f, ...cs], i) => `<tr data-s="${i}" data-on="${i}"><td>${f}</td>${cs.map(([k, t], j) => `<td${j === 5 ? ' class="me"' : ''}><span class="sy ${k}">${SYM[k]}<small>${t}</small></span></td>`).join('')}</tr>`).join('')}
+    ${MX.map(([f, ...cs], i) => `<tr data-s="${i}" data-on="${i}"><td>${f}</td>${cs.map(([k, t], j) => `<td class="ev${j === 5 ? ' me' : ''}" data-ev="${j},${i}"><span class="sy ${k}">${SYM[k]}<small>${t}</small></span></td>`).join('')}</tr>`).join('')}
   </table>
-  <div class="note" data-s="0">○ 有　△ 部分符合　× 沒有　－ 資料未揭露（中興碩論只讀到摘要）</div>
+  <div class="note" data-s="0">○ 有　△ 部分符合　× 沒有　－ 資料未揭露（中興碩論只讀到摘要）　<b class="evh">▸ 點任一格，看原文出處</b></div>
   <div class="lead" data-s="5" style="font-size:28px">五件前案沒有一件同時具備這五項，<em>本案的新穎性就在這個組合</em>。</div>
-  <div class="note" data-s="0" style="margin-top:auto">來源：EPO、USPTO、Google Patents 原文；中興大學碩論（2018）僅讀到摘要</div>`,
+  <div class="note" data-s="0" style="margin-top:auto">來源：EPO、USPTO、Google Patents 原文。另查到東芝 US 9,511,465（＝TWI566878B）同時冷卻橫樑與立柱，但不量溫度、不分區，結論不變。</div>`,
   steps: [
     { say: '量的是不是上下溫差：除了本案，只有 US 6,923,603 也是，但它只量立柱上下兩點。' },
-    { say: '有沒有同時顧到橫樑和立柱：表上這五件前案，都只顧其中一個。' },
+    { say: '有沒有同時顧到橫樑和立柱：表上五件都只顧其中一個；東芝那件兩者都冷卻，但不量溫度。' },
     { say: '上下能不能分別調整：US 6,923,603 一條迴路整體開關；US 5,582,237 依的是流體溫度。' },
-    { say: '有沒有啟動、停止兩個門檻：EP 4011545 用單點溫度，US 6,923,603 沒有停止門檻。' },
+    { say: '有沒有啟動、停止兩個門檻：EP 4011545 用單點溫度，US 6,923,603 是分段運轉、沒有停止門檻。' },
     { say: '能不能外貼、加裝到舊機台：前案只有 US 5,582,237 做得到。' },
     { say: '結論：五件前案沒有一件同時具備這五項，本案的新穎性就在這個組合。' },
   ] },
@@ -994,6 +1143,85 @@ const DECK = {
   ],
 };
 
+/* 講者備註（由原 pptx 抽出；第 2 頁加了網頁版開場互動） */
+const NOTES = [{"slide": 1, "secs": 50, "script": "各位老師、同學好，我們是四智四丙的龔孟謙、周大凱、鄭楷諺、陳宣佑。\n我們這組的期末專利題目是「龍門加工機之溫差式均溫系統及其方法」。先解釋一下題目：「溫差式」是說我們用龍門上下的溫度差來做控制；「系統及其方法」代表我們同時保護裝置本身和控制方法，所以申請的是發明專利。\n右邊這張圖就是我們要解決的問題：龍門加工機上面熱、下面冷。接下來先說明我們為什麼選這個題目。", "qa": ["題材來源？→ 屬白板第②種「研討會」，來自本組 CSME2025 論文 B15-004。", "為什麼申請發明，不申請新型？→ 要保護控制方法和參數範圍，新型只保護形狀、構造，不能保護方法；新型不做實質審查、約 3–6 個月有結果，發明要實質審查、約 1–3 年（11/17 板書）。", "論文已經公開，還有新穎性嗎？→ 發明專利在自己公開後 12 個月內申請，可主張優惠期；論文 2025/12/5 公開，期限約到 2026/12/5。"], "memo": ["發明人學號：3B261084 龔孟謙、3B261086 周大凱、3B261117 鄭楷諺、3B261097 陳宣佑。發明專利寫「發明人」，新型寫「創作人」，設計寫「設計人」。"]}, {"slide": 2, "secs": 105, "script": "【開場互動｜約 20 秒，網頁版新增】先問大家：工具機的加工誤差，大約有幾成來自熱變位？請舉手選 A 到 D。答案是 D，約四到七成。\n為什麼選這個題目？有三個原因。\n第一，熱變位是工具機最大的誤差來源。文獻統計，加工誤差大約有四到七成來自熱變位；鋼材每一公尺、每升高一度，就會伸長大約 0.01 毫米。龍門加工機的結構動輒好幾公尺，只要一兩度的溫差，就會有幾十微米的變形。\n第二，龍門加工機很高，廠房越高的地方越熱。橫樑熱、立柱下段冷，整座龍門就會往一邊傾斜，就像左邊這張圖，加工精度很難守在 0.02 毫米以內。\n第三，這個題目延續我們在 CSME2025 研討會發表的研究。我們已經用 COMSOL 比較了 30 組冷卻點位，找出最有效的位置；這次再加上控制方法，整理成一件發明專利。依照規則單的分類，屬於 E 類「現有機械的改善方式」。\n下一頁，我們先看市面上現在怎麼解決熱變位。", "qa": [], "memo": []}, {"slide": 3, "secs": 95, "script": "目前業界處理熱變位，大致有四種做法。\n做法一是恆溫廠房，整間廠房控溫。效果好，但建置和電費都很高，大型龍門的廠房很難做到。\n做法二是 CNC 熱補償軟體，例如 Okuma 的 TAS-C，用溫度感測器加上軸的位置資料預測變形，再讓刀具反向補償。問題是結構本身還是在變形，而傾斜這種變形很難靠補償修正；三菱重工推出龍門機時也提到，立柱的傾斜和收縮是補正功能修正不了的。\n做法三是冷卻機，冷卻的是主軸或切削液，處理的是加工產生的熱，不是環境造成的上下溫差。\n做法四是在鑄件裡面做流道、循環溫控液體。效果不錯，但要改鑄件，舊機台沒辦法加裝。\n所以這四種做法有一個共同缺口：沒有一種是依照龍門上下的溫差，分別調整橫樑和立柱的冷卻。這就是我們的切入點：外貼水冷板，加上上下溫差控制，直接讓結構均溫，而且可以和熱補償軟體一起使用。", "qa": ["市售龍門機有沒有處理立柱變形的？→ 有。三菱（現 Nidec）MVR 系列從 2014 年的 MVR-Eχ 起標配「熱穩定立柱」，在立柱內封入溫度控制介質，再加上橫樑隔熱，官方數據是 X、Z 軸直角度變化每 500 mm 在 6 μm 以內。差異：它是出廠就做在立柱裡，官方資料沒提到依溫差控制，也不能加裝到舊機台；本案是主動依溫差調整、外貼可加裝。", "Mazak、FANUC 呢？→ Mazak 依主軸轉速和機台溫度抑制刀尖位置變化，FANUC 用多支溫度感測器以 AI 建立熱變位模型。兩者本質上都屬於做法二：補償刀尖位置，不是讓結構不變形，可以和本案並用。"], "memo": []}, {"slide": 4, "secs": 105, "script": "接下來是先前技術，也就是專利說明書一定要寫的「習知技術」。我們找了五件最相關的前案。\n最接近的是 EP 4011545。它在橫樑裡設冷卻迴路，量單一點的溫度，高於上限就開閥、低於下限就關閥；但它只看單點溫度，也不分上下區域調整。\n第二件 US 6,923,603 要特別注意：它的實施例已經用立柱上下的溫差來開關泵浦，所以「用上下溫差控制」這件事本身不是新的。但它只有立柱裡一條迴路、一台泵浦整體開關，上下沒辦法分別調整，也沒有停止門檻。\n另外，US 5,582,237 用可貼附的熱交換袋，需要加熱器和管路；US 6,675,549 是送同溫空氣，讓立柱前後同溫，處理的是前後溫差；中興大學的碩士論文是在橫樑裝冷卻水塊，控溫位置只在橫樑。\n最後補充台灣前案：我們用 Google Patents 查了國別 TW，去重後 9 件逐件看過；最接近的是東芝 TWI566878B，以及兩件用溫差控制冷卻機的專利，但都不是依結構上下溫差分區調整，結論和國外前案一致。\n下一頁，我們把這五件前案和本案放在一起逐項比較。", "qa": [], "memo": ["中興碩論目前只讀到摘要，控制方式待讀全文確認。", "台灣前案已用 Google Patents（國別 TW，2026-11-26）查過 9 件：TWI566878B 東芝（柱與樑內部水槽）、TWI618597B（依加工液與機體溫差啟停冷卻機）、TWI777382B 工研院（主軸送風，避免壓縮機反覆開關）、TW201700213A 中興（主軸支撐外貼溫控片）、TWI334809B（工件夾具恆溫）、TWI718287B Disco（定溫水）、TWI814955B 星精密（控制盤散熱）、TW320588B 日立精機（熱變位補償）、TW498011B 宮野（籠式機架通溫控液）。智慧局 GPSS 尚未檢索，正式申請前建議再查一次。"]}, {"slide": 5, "secs": 90, "script": "這頁回答最重要的問題：本案跟既有專利差在哪？我們挑了五個特徵逐一比較。\n第一，量的是不是上下溫差：除了本案，只有 US 6,923,603 也是，但它只量立柱的上下兩點；本案量的是橫樑上部對立柱下段。\n第二，有沒有同時顧到橫樑和立柱：表上這五件前案都只顧其中一個；另外查到東芝的 US 9,511,465 兩者都冷卻，但它不量溫度、也不分區。\n第三，上部和下部能不能分別調整：US 6,923,603 是一條迴路整體開關；US 5,582,237 雖然可以分處冷卻或加熱，但依據的是流體溫度，不是結構的溫差。\n第四，有沒有啟動、停止兩個門檻：EP 4011545 有上下限，但用的是單點溫度；US 6,923,603 是依溫差分段運轉，沒有停止門檻。\n第五，能不能外貼、加裝到舊機台：前案只有 US 5,582,237 做得到。\n結論是：這五件前案沒有一件同時具備這五項，本案的新穎性就在這個組合。", "qa": ["有沒有前案也同時顧橫樑和立柱？→ 有：東芝機械 US 9,511,465（台灣同族 TWI566878B），雙柱龍門的立柱和橫樑內部做成互通的水槽，裝固定溫度的冷卻水。差異：它只有水位感測器，沒有量溫度，不依溫差控制、也不分區調整；水槽做在鑄件內部，舊機台不能加裝；而且它是做光學模具的小型超精密機，不是一般大型龍門機。所以本案「溫差量測＋分區調整＋雙門檻＋外貼」的組合仍然成立。", "中興碩論只讀到摘要，未揭露的項目標「－」。"], "memo": ["網頁版：點矩陣任一格會跳出原文出處和摘要，被追問時可以直接點給老師看。"]}, {"slide": 6, "secs": 75, "script": "接下來說明我們從哪裡突破。規則單列了六類改善方法，本案用到其中五類。\n材料：水冷板用鋁合金或銅，和結構之間加導熱膏或導熱墊，降低接觸熱阻。\n機械結構：在橫樑正面、上表面和兩支立柱正面外貼水冷板，不需要改造鑄件。\n設計與電子電機運作方式：控制單元讀兩支溫度感測器，依照溫差和兩個門檻，用比例閥分別調整上下的流量。\n技術整合與調整：把 COMSOL 模擬選位、溫度感測、水冷和控制整合成一套，先用模擬選點，再上實機。\n參數改變：包括水溫、門檻、壓力和控制週期，後面會詳細說明。\n唯一不涉及的是製程改善，因為我們改的是機台本身，不是加工製程。接下來兩頁看這套系統怎麼組成、怎麼運作。", "qa": [], "memo": []}, {"slide": 7, "secs": 70, "script": "這頁是系統構成，對應專利申請書的「圖式」和「符號說明」。專利圖會用數字標示每個元件，這些數字要和請求項、說明書一致。\n11 是立柱，12 是橫樑。21 是第一溫度感測器，裝在橫樑上部；22 是第二溫度感測器，裝在立柱下段。31 是上部溫控模組，裝在橫樑的 9、11 號點位；32 是下部溫控模組，裝在兩支立柱的 1、5 號點位。\n運作方式是：兩支感測器把上、下溫度送到控制單元 40；控制單元算出溫差後，透過冷卻水供應單元 50 的比例閥，分別調整流到上部和下部模組的水量。藍色實線是水路 33，虛線是訊號線。本案的溫控模組以水冷板作為實施例。", "qa": [], "memo": []}, {"slide": 8, "secs": 65, "script": "這是控制流程，也就是方法項請求項 7 的步驟。\nS1，量測橫樑上部和立柱下段的溫度；S2，計算溫差 ΔT。S3，判斷溫差有沒有達到啟動門檻：沒有的話，就直接回到 S1 繼續量測。\n如果達到了，就到 S4，加大上部冷卻，同時依溫差比例調整下部模組。接著 S5，重新量測，看溫差有沒有降到停止門檻以下：還沒有，就回到 S4 繼續調整；降到了，就到 S6 恢復基本供水，再回到 S1 持續監測。\n這裡用兩個不同的門檻，例如啟動 0.3 度、停止 0.1 度，是為了避免溫差在門檻附近時，閥門一直開開關關，這叫做「遲滯控制」。", "qa": [], "memo": []}, {"slide": 9, "secs": 80, "script": "整理一下，本發明有三個創新點。\n第一，溫差加雙門檻控制。我們量的是橫樑上部和立柱下段的溫差，並且設啟動、停止兩個門檻，避免閥門頻繁切換。對照前案，US 6,923,603 只量立柱上下，也沒有停止門檻。\n第二，上下分區調整，這是本案最核心的一點。上部和下部的水冷板分開調整流量，讓上下溫度趨於一致，而不是整台一起降溫；表上的前案沒有一件是依上下溫差，分別調整上部和下部。\n第三，依模擬結果用最少的佈點。根據 COMSOL 比較 30 組點位的結果配置模組，只需要兩組模組、兩支感測器，不必在實機上一片一片貼片測試。\n最後，因為本案改善的是方法和系統，所以申請發明專利；新型專利只保護形狀和構造，不能保護方法。", "qa": ["US 5,582,237 也讓溫度均勻，差在哪？→ 它用加熱後的流體讓溫度分布均勻，依據的是流體溫度，沒有用結構的上下溫差來控制，也沒有分上下區調整。"], "memo": []}, {"slide": 10, "secs": 65, "script": "這頁是本案的數據基礎，來自我們的 CSME2025 論文。\n模擬條件是：地面 22 度，每升高 100 公分加 1 度，用 22 度的貼板代替水路；把龍門分成 12 個點位，比較 30 種組合。因為 Y、Z 方向的變動很小，所以用 X 方向位移最接近 0 當作判斷標準。\n結果是第 8 組，也就是橫樑正面和頂面，以及第 23 組，兩支立柱正面，效果最好。所以本案把第 8 組當作上部模組的位置，第 23 組當作下部模組的位置。\n但從右邊的溫度圖可以看到，貼板之後上下還是差了大約 0.4 到 0.6 度。只靠固定貼板不夠，這就是本案再加上溫差控制的原因。", "qa": [], "memo": ["X 位移取自研討會簡報；論文表一、表二的第 1、6、8、23 組數值和簡報差 10 倍以上，報告前請用原始 COMSOL 資料確認。", "若被問為什麼不選 X 位移絕對值更小的第 13、20、28 組，要能說明選組時除了 X 位移還考慮了什麼（例如上下溫差），請依你們實際的選組理由準備。"]}, {"slide": 11, "secs": 85, "script": "接下來是權利範圍的核心：獨立項，請求項 1。獨立項決定保護範圍有多大，所以要寫得越上位、涵蓋越廣越好。\n寫法分三段。前言說明這是什麼：「一種龍門加工機之溫差式均溫系統」。接著逐項列出元件：兩支溫度感測器、上部和下部溫控模組，以及控制單元。最後「其中」之後寫特徵，也就是和先前技術不同的地方：溫差達到啟動門檻時，控制單元加大上部冷卻、調整下部模組，直到溫差降到停止門檻，而且停止門檻小於啟動門檻。\n這裡有兩個用字是刻意的。第一，我們寫「溫控模組」而不寫「水冷板」，這樣別人改用其他控溫方式，也會落入保護範圍。第二，「分別控制」上下模組，以及「停止門檻小於啟動門檻」這兩句，是為了和 US 6,923,603 一條迴路、整體開關的做法劃清界線。", "qa": [], "memo": []}, {"slide": 12, "secs": 55, "script": "附屬項是在獨立項之外再加限定條件。範圍比較窄，但比較不容易被前案推翻；如果審查時獨立項被認為沒有新穎性，附屬項還能撐住，就像多層防線。\n請求項 2 限定模組的位置，也就是模擬找出的 9、11 和 1、5 號點位；第 3 項限定兩個門檻的範圍；第 4、5、6 項把水冷板的水溫、流量、壓力和材質寫清楚。\n右邊的請求項 7 是方法項，保護的是「怎麼做」：量測、算溫差、達到啟動門檻就調整、降到停止門檻就維持基本冷卻，然後重複，對應前面的流程圖。", "qa": [], "memo": []}, {"slide": 13, "secs": 75, "script": "這頁把白板上老師列的參數，逐一對應到本案。\n溫度有三個：啟動門檻 0.2 到 0.4 度、停止門檻 0.05 到 0.15 度、冷卻水溫 21 到 23 度。壓力是 0.1 到 0.3 MPa，流量每分鐘 1 到 5 公升。比例是上部對下部的流量比。時間是 5 到 30 秒的控制週期。材料是結構用的 AISI 4340，以及鋁合金或銅的水冷板。製程對應請求項 7 的方法步驟；模型是雙門檻遲滯，加上依溫差比例調整流量的控制模型。\n要老實說明的是：有論文依據的是冷卻水溫、結構材料，以及啟動門檻的上限。貼板後上下還差 0.4 到 0.6 度，門檻要比它低，控制才會啟動。其他是我們的設計值，之後要用 COMSOL 模擬驗證。", "qa": ["範圍怎麼來的？→ 專利的數值範圍要有實施例支持；冷卻水溫和材料來自論文，其餘是設計值，下一步用 COMSOL 跑出數值。", "「Model」如果老師指的是模擬模型，就是論文的 COMSOL 模型。"], "memo": []}, {"slide": 14, "secs": 70, "script": "最後整理預期功效。左邊是本案本身的好處：第一，縮小上下溫差，減少龍門傾斜造成的加工誤差；第二，溫差超過門檻才加大冷卻，減少冷卻機不必要的運轉；第三，依模擬的最佳點位，只需要兩組模組、兩支感測器；第四，水冷板貼在結構表面，不必改造鑄件。\n右邊對照前面四種市面做法：跟恆溫廠房比，不必整間控溫；跟熱補償軟體比，我們直接減少傾斜，也能和補償一起用；跟冷卻機比，我們補上它沒處理的環境上下溫差；跟結構內流道比，外貼就好，舊機台也能加裝。\n也要誠實說明限制：目前只有固定貼板的模擬，溫差控制的效果和改善率，還需要模擬驗證。", "qa": [], "memo": ["還缺三樣數據：不加貼板的基準位移（才能算改善率）、加入溫差控制後的模擬、門檻與流量等參數的驗證。"]}, {"slide": 15, "secs": 45, "script": "總結一下，本案要讓龍門不再上熱下冷。我們用橫樑和立柱的上下溫差作為依據，分區調整溫控模組，再用兩個門檻避免頻繁切換。\n回到白板的三個要求：創新性是依上下溫差分區調整；解決的痛點是龍門上熱下冷造成傾斜；權利範圍是以「溫控模組」為上位用語的獨立項，加上水冷板的附屬項和各類參數。\n以上是我們的報告，謝謝聆聽，歡迎老師和同學提問。", "qa": ["US 6,923,603 也用上下溫差，差在哪？→ 它只量立柱上下兩點，立柱裡一條迴路、一台泵浦整體開關，也沒有停止門檻；本案量橫樑上部對立柱下段，橫樑和立柱上的溫控模組分別調整，並用啟動、停止兩個門檻避免頻繁切換。", "參數範圍怎麼來？→ 冷卻水溫與結構材料來自論文，其餘是設計值，將以 COMSOL 驗證。", "為什麼申請發明不申請新型？→ 新型只保護形狀、構造，不能保護方法，也不做實質審查；本案要保護控制方法和參數範圍，所以申請發明。", "要不要申請國外或 PCT？→ 台灣不是 PCT 會員，智慧局不受理 PCT 申請；可以先在台灣申請，再在 12 個月內主張優先權向其他國家申請（台灣是 WTO 會員，優先權會被承認）。PCT 只有申請案、沒有「PCT 專利」，最後還是要進入各國的國家階段審查。"], "memo": []}];
+
+/* =====================================================================
+   備答卡（Q 鍵）與講者分工（講者視窗 P 鍵使用）
+   tag：0 有依據　1 推論　2 待驗證　3 待補　4 部分待補　5 部分待驗證
+   pg：和哪幾頁有關（打開備答卡時，目前這頁相關的題目會標橘色）
+   ===================================================================== */
+const QA = [
+  { g: '驗證與數據', tag: 2, pg: [8, 10, 14],
+    q: '溫差控制真的有效嗎？有數據嗎？',
+    a: '老實說，控制的效果還沒有數據。目前有的是固定貼板的 COMSOL 結果：貼板後上下仍差約 0.4～0.6 °C，這正是本案要再加溫差控制的原因。下一步要補三樣：不加貼板的基準位移（才能算改善率）、加入溫差控制後的模擬，以及門檻和流量的驗證。網頁第 8 頁的控制動畫是邏輯示意，不是實測。',
+    src: '第 10、14 頁；CSME2025 論文與研討會簡報 B15-004' },
+  { g: '驗證與數據', tag: 3, pg: [10],
+    q: '為什麼選第 8、23 組，不選 X 位移更小的第 13、20、28 組？',
+    a: '（請依你們實際的選組理由改寫）可以準備的方向：一、除了 X 位移，也比較了上下溫度範圍和安裝可行性；二、第 8 組在橫樑、第 23 組在立柱，正好各做一組上部、下部模組，配合「上下分區調整」。回答前請先用原始 COMSOL 資料核對第 10 頁的數字。',
+    src: '第 10 頁備註；論文表一、表二（部分數值和簡報差 10 倍以上，待確認）' },
+  { g: '前案差異', tag: 0, pg: [4, 5, 9, 11, 15],
+    q: 'US 6,923,603 也用上下溫差控制，差在哪？',
+    a: '它量的是立柱上下兩點，液體只在立柱裡，一台泵浦讓整條迴路一起開關；溫差大於 2 °C 連續運轉、1～2 °C 間歇、低於 1 °C 改用計時，沒有停止門檻。本案量的是橫樑上部對立柱下段，上下模組分別調整，並用啟動、停止兩個門檻。請求項 1 寫「分別控制」和「停止門檻小於啟動門檻」，就是為了和它劃清界線。',
+    src: 'US 6,923,603 B2 請求項 1、5 與實施例' },
+  { g: '前案差異', tag: 0, pg: [4, 5, 8],
+    q: 'EP 4011545 也有上限、下限，和雙門檻有什麼不同？',
+    a: 'EP 4011545 的上下限比的是「一支感測器的溫度」：高於上限開始冷卻、低於下限停止，而且冷卻只在橫樑裡。本案的兩個門檻比的是「橫樑對立柱的溫差」，並分別調整上下模組。遲滯控制本身是常見手法，工研院的 TWI777382B 也在避免設備反覆開關；本案主張的不是遲滯本身，而是它和溫差、分區調整的組合。',
+    src: 'EP 4011545 A1〔0040〕〔0042〕、請求項 10、12、14；TWI777382B' },
+  { g: '前案差異', tag: 0, pg: [5],
+    q: '有沒有前案也同時顧到橫樑和立柱？',
+    a: '有：東芝機械的 US 9,511,465（台灣同族 TWI566878B）。它把門型雙柱機的立柱和橫樑內部做成互通的水槽，灌恆溫冷卻水。差異是：它只有水位感測器、不量溫度，不依溫差控制、也不分區；水槽做在鑄件裡，舊機台不能加裝；而且是做光學模具的小型超精密機。所以「溫差＋分區＋雙門檻＋外貼」的組合仍然成立。',
+    src: 'US 9,511,465 B2／TWI566878B' },
+  { g: '前案差異', tag: 4, pg: [4, 5],
+    q: '台灣有沒有類似的專利？碩論只讀摘要可以嗎？',
+    a: '我們用 Google Patents 查了國別 TW，以分類號 B23Q 11/14、11/0003 搭配溫差、龍門、立柱等關鍵字，去重後 9 件逐件看過。最接近的是東芝 TWI566878B；用溫差控制冷卻機的有 TWI618597B 和工研院 TWI777382B，但控制的是加工液或送風的溫度，不是結構上下溫差。中興碩論目前只讀到摘要，智慧局 GPSS 也還沒查，正式申請前會補齊。',
+    src: '第 4 頁第 4 步；Google Patents（2026-11-26 檢索）' },
+  { g: '前案差異', tag: 1, pg: [3, 14],
+    q: '跟 CNC 熱補償軟體比，有什麼好處？',
+    a: '熱補償是先算出變形、再讓刀具反向移動，結構本身還是在變形；三菱重工推出龍門機時也提到，立柱的傾斜和收縮是補正修不了的。本案直接讓上下溫度一致、減少傾斜。兩者不衝突：本案先把變形變小，熱補償再修剩下的，可以一起用。',
+    src: '第 3 頁；Okuma、三菱重工公開資料' },
+  { g: '技術', tag: 5, pg: [8, 12, 13],
+    q: '門檻 0.3 °C／0.1 °C 是怎麼訂的？',
+    a: '啟動門檻要比固定貼板後殘留的 0.4～0.6 °C 低，控制才會啟動，所以上限有論文依據；停止門檻要明顯小於啟動門檻，中間留一段遲滯，閥門才不會在門檻附近一直切換。目前 0.2～0.4 °C 和 0.05～0.15 °C 是設計值，之後用加入控制的 COMSOL 模擬確認。',
+    src: '第 13 頁；請求項 3' },
+  { g: '技術', tag: 1, pg: [2, 8],
+    q: '為什麼用溫差控制，不直接控制溫度？',
+    a: '龍門傾斜的原因是上下熱膨脹不一樣，不是整體溫度高。整台一起變熱、一起伸長，主要是平移，比較容易補償；上下不一樣才會傾倒、彎曲。所以控制目標是讓上下一致，用溫差最直接，也比較不受季節或室溫整體變化影響。',
+    src: '第 2 頁；熱變形原理（推論）' },
+  { g: '技術', tag: 1, pg: [12, 13],
+    q: '水冷板會不會結露？',
+    a: '冷卻水設定 21～23 °C，只比室溫低一兩度。一般廠房的露點大約在 11～16 °C（依溫濕度而定），水溫明顯高於露點，正常情況不會結露。若廠房很潮濕，可以加一支露點感測器，讓水溫保持在露點加 2 °C 以上。',
+    src: '推論；冷卻水溫見請求項 4' },
+  { g: '技術', tag: 1, pg: [6, 12, 14],
+    q: '舊機台怎麼加裝？會不會干涉導軌？',
+    a: '水冷板用螺絲或夾具固定在橫樑正面、上表面和立柱正面，中間加導熱墊，不必改鑄件。安裝時要避開導軌、滑座行程和護罩，管路沿既有的拖鏈或外側走線。實際位置要依各機型外型調整，需要和機台廠確認。',
+    src: '請求項 2、6；推論' },
+  { g: '專利程序', tag: 0, pg: [1, 9],
+    q: '為什麼申請發明，不申請新型？',
+    a: '本案要保護的是控制方法和參數範圍。新型只保護物品的形狀、構造，不能保護方法，也不做實質審查；發明要實質審查、時間較長（約 1～3 年），但能同時保護系統（請求項 1）和方法（請求項 7）。',
+    src: '專利法；11/17 板書' },
+  { g: '專利程序', tag: 0, pg: [1, 15],
+    q: '論文已經公開了，還有新穎性嗎？',
+    a: '可以主張優惠期：發明專利在自己公開後 12 個月內申請，該次公開不會被拿來否定新穎性或進步性。論文 2025/12/5 公開，期限約到 2026/12/5。要注意優惠期只排除自己的公開；這段期間如果別人公開或先申請相同技術，仍然會影響本案。',
+    src: '專利法第 22 條第 3 項；智慧局專利審查基準' },
+  { g: '專利程序', tag: 0, pg: [15],
+    q: '要不要申請國外或 PCT？',
+    a: '台灣不是 PCT 會員，智慧局不受理 PCT 申請。做法是先在台灣申請，再於 12 個月內主張優先權向其他國家申請；台灣是 WTO 會員，優先權會被承認。PCT 本身只是申請程序，沒有「PCT 專利」，最後仍要進入各國審查。',
+    src: '專利法第 28 條；WTO 會員互相承認優先權' },
+  { g: '成本', tag: 2, pg: [3, 14],
+    q: '成本大概多少？划算嗎？',
+    a: '主要硬體是兩組水冷板、兩支溫度感測器、比例閥和控制器，冷卻水可以接工廠現有的冷卻機。和整間恆溫廠房的建置與電費相比，規模小很多；而且溫差超過門檻才加大冷卻，可以減少冷卻機不必要的運轉。確切金額還沒估，要等零件報價後再算回收期。',
+    src: '推論；第 14 頁' },
+];
+
+/* 講者分工（建議，可改）：pages 用頁碼 1–15 */
+const SPEAK = [
+  { name: '龔孟謙', pages: [1, 2, 3, 15], color: '#e8722c' },
+  { name: '周大凱', pages: [4, 5, 6], color: '#2f7dc0' },
+  { name: '鄭楷諺', pages: [7, 8, 9, 10], color: '#2f7d4a' },
+  { name: '陳宣佑', pages: [11, 12, 13, 14], color: '#8a5cb8' },
+];
+
 /* ================= 引擎（沿用 AEM 互動簡報） ================= */
 const SLIDES = DECK.slides;
 SLIDES.forEach((S, i) => { S.id = 's' + i; S.kind = S.kind || (S.scene ? 'model' : 'flat'); if (!S.steps || !S.steps.length) S.steps = [{}]; });
@@ -1070,6 +1298,7 @@ function fill(box, S, i, key, def) {
 function setLayout(cls) { stage.classList.remove('L-model', 'L-wide', 'L-flat', 'L-cover'); stage.classList.add(cls); }
 
 function applyStep(S, i, jump) {
+  closeEvi();
   S.step = i; const st = S.steps[i] || {};
   const set = { ...S.defaults, ...(st.set || {}) };
   for (const k in set) setParam(S, k, set[k], st.snap || jump);
@@ -1086,6 +1315,7 @@ function applyStep(S, i, jump) {
   $('sayno').textContent = `${i + 1} / ${S.steps.length}`;
   const tx = $('saytx'); tx.style.opacity = 0; setTimeout(() => { tx.innerHTML = st.say || ''; tx.style.opacity = 1; }, 140);
   $('dots').innerHTML = S.steps.length > 1 ? S.steps.map((_, k) => `<b class="${k === i ? 'on' : k < i ? 'done' : ''}"></b>`).join('') : '';
+  syncPresenter();
 }
 
 /* 標籤（引線＋白框） */
@@ -1139,7 +1369,7 @@ function buildUI(S) {
 
 function drawRoute(S) {
   const r = $('route'), st = DECK.stations; r.innerHTML = '<div class="ln"></div><div class="prog"></div>';
-  const x0 = 150, x1 = W - 190, cur = S.st ?? -1;
+  const x0 = 150, x1 = W - 300, cur = S.st ?? -1;
   st.forEach((s, i) => {
     const x = x0 + (x1 - x0) * i / (st.length - 1);
     const d = document.createElement('div'); d.className = 'st' + (i === cur ? ' cur' : i < cur ? ' past' : '');
@@ -1204,12 +1434,29 @@ stage.addEventListener('pointerdown', e => { if (e.target.closest('.ui')) { down
 stage.addEventListener('pointerup', e => {
   if (!down) return; const moved = Math.hypot(e.clientX - down.x, e.clientY - down.y) > 6; down = null;
   if (moved || e.target.closest('.ui')) return;
-  if (e.button === 0) next(); else if (e.button === 2) prev();
+  if (e.button === 0) {
+    /* 差異矩陣：已顯示的格子 → 開原文依據；再點一次或點別處 → 關閉 */
+    const ev = e.target.closest('[data-ev]');
+    if (ev) { const r = ev.closest('[data-s]'); if (!r || r.classList.contains('vis')) { if (ev === eviTd) closeEvi(); else openEvi(ev); return; } }
+    if (eviEl) { closeEvi(); return; }
+    next();
+  } else if (e.button === 2) { if (eviEl) { closeEvi(); return; } prev(); }
 });
 stage.addEventListener('contextmenu', e => e.preventDefault());
-addEventListener('keydown', e => {
+/* 講者視窗只轉送翻頁類按鍵 */
+const PV_KEYS = ['ArrowRight', 'PageDown', ' ', 'Enter', 'ArrowLeft', 'PageUp', 'Backspace', 'ArrowDown', 'ArrowUp', 'Home', 'End', 'z', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', 'r', 'R'];
+addEventListener('keydown', e => onKey(e, false));
+function onKey(e, fromPV) {
   const k = e.key;
   if (e.ctrlKey || e.altKey || e.metaKey) return;
+  if (qaOpen()) {
+    if (k === 'Escape' || k === 'q' || k === 'Q') { e.preventDefault(); closeQA(); }
+    else if (['ArrowDown', 'ArrowRight', 'PageDown'].includes(k)) { e.preventDefault(); qaSel(QS + 1); }
+    else if (['ArrowUp', 'ArrowLeft', 'PageUp'].includes(k)) { e.preventDefault(); qaSel(QS - 1); }
+    return;
+  }
+  if (k === 'Escape') { closeEvi(); return; }
+  if (fromPV && !PV_KEYS.includes(k)) return;
   if (['ArrowRight', 'PageDown', ' ', 'Enter'].includes(k)) { e.preventDefault(); next(); }
   else if (['ArrowLeft', 'PageUp', 'Backspace'].includes(k)) { e.preventDefault(); prev(); }
   else if (k === 'ArrowDown') { e.preventDefault(); goSlide(curI + 1); }
@@ -1219,9 +1466,185 @@ addEventListener('keydown', e => {
   else if (/^[1-7]$/.test(k)) { const t = SLIDES.findIndex(s => s.st === +k); if (t >= 0) goSlide(t); }
   else if (k === 'f' || k === 'F') fs();
   else if ((k === 'r' || k === 'R') && cur && cur.scene) { const st = cur.steps[cur.step]; if (st.cam) flyTo(camPos(cur, st), st.tgt, 1.2); }
-});
+  else if (k === 'q' || k === 'Q') openQA();
+  else if (k === 'p' || k === 'P') openPresenter();
+}
 function fs() { if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(() => { }); else document.exitFullscreen().catch(() => { }); }
 $('bPrev').onclick = prev; $('bNext').onclick = next; $('bFs').onclick = fs;
+$('bPv').onclick = () => openPresenter(); $('bQa').onclick = () => (qaOpen() ? closeQA() : openQA());
+
+/* ================= 簡報工具：原文依據、備答卡、講者視窗 ================= */
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const mmss = ms => { const s = Math.max(0, Math.round(ms / 1000)); return String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0'); };
+
+/* 提示訊息 */
+const toastEl = document.createElement('div'); toastEl.id = 'toast'; stage.appendChild(toastEl);
+let toastT = 0;
+function toast(m, ms = 4800) { toastEl.textContent = m; toastEl.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => toastEl.classList.remove('on'), ms); }
+
+/* 差異矩陣（第 5 頁）：點格子看原文依據 */
+let eviEl = null, eviTd = null;
+function closeEvi() { if (eviEl) { eviEl.remove(); eviEl = null; } if (eviTd) { eviTd.classList.remove('sel'); eviTd = null; } }
+function openEvi(td) {
+  closeEvi();
+  const [j, i] = td.dataset.ev.split(',').map(Number), e = EVI[j] && EVI[j][i], s = EV_SRC[j], m = MX[i] && MX[i][j + 1];
+  if (!e || !s || !m) return;
+  eviTd = td; td.classList.add('sel');
+  const el = document.createElement('div'); el.className = 'evi ui';
+  el.innerHTML = `<button class="ex" title="關閉（Esc）">✕</button><div class="eh"><b>${s.n}</b><span>${MX[i][0]}</span></div>`
+    + `<div class="eb"><span class="sy ${m[0]}">${SYM[m[0]]}<small>${m[1]}</small></span><div><i class="loc">${e[0]}</i><p>${e[1]}</p>${e[2] ? `<q>原文：“${e[2]}”</q>` : ''}</div></div>`
+    + `<div class="ef"><span>${s.who}</span>${s.url ? `<a href="${s.url}" target="_blank" rel="noopener">看原文 ↗</a>` : ''}</div>`;
+  el.querySelector('.ex').onclick = closeEvi;
+  el.style.visibility = 'hidden'; stage.appendChild(el); eviEl = el;
+  const sr = stage.getBoundingClientRect(), k = sr.width / W, cr = td.getBoundingClientRect();
+  const x = (cr.left - sr.left) / k, y = (cr.top - sr.top) / k, w = cr.width / k, h = cr.height / k, pw = el.offsetWidth, ph = el.offsetHeight;
+  let top = y + h + 10; if (top + ph > 830) top = Math.max(14, y - ph - 10);
+  el.style.left = clamp(x + w / 2 - pw / 2, 16, W - pw - 16) + 'px'; el.style.top = top + 'px'; el.style.visibility = '';
+}
+
+/* 備答卡（Q） */
+const TAGS = [['t0', '有依據'], ['t1', '推論'], ['t2', '待驗證'], ['t3', '待補'], ['t2', '部分待補'], ['t2', '部分待驗證']];
+const tagH = t => `<em class="tg ${TAGS[t][0]}">${TAGS[t][1]}</em>`;
+const qaEl = document.createElement('div'); qaEl.id = 'qa'; qaEl.className = 'ui';
+let QS = 0;
+{
+  let g0 = '', list = '';
+  QA.forEach((q, i) => { if (q.g !== g0) { g0 = q.g; list += `<h5>${q.g}</h5>`; } list += `<button data-i="${i}"><i>${i + 1}</i><span>${q.q}</span>${tagH(q.tag)}</button>`; });
+  qaEl.innerHTML = `<div class="qw"><div class="qh"><b>備答卡</b><span>可能被問的 ${QA.length} 題・每題約 30 秒｜橘色號碼＝和目前這頁有關｜↑↓ 換題・Q 或 Esc 關閉</span><button id="qaX">關閉 ✕</button></div>`
+    + `<div class="qb"><div class="ql">${list}</div><div class="qd" id="qaD"></div></div></div>`;
+  stage.appendChild(qaEl);
+  qaEl.querySelector('#qaX').onclick = closeQA;
+  qaEl.querySelectorAll('.ql button').forEach(b => b.onclick = () => qaSel(+b.dataset.i));
+  qaEl.addEventListener('click', e => {
+    if (e.target === qaEl) { closeQA(); return; }
+    const g = e.target.closest('[data-go]'); if (g) { closeQA(); goSlide(+g.dataset.go - 1); }
+  });
+}
+function qaSel(i) {
+  QS = (i + QA.length) % QA.length; const q = QA[QS];
+  qaEl.querySelectorAll('.ql button').forEach(b => b.classList.toggle('sel', +b.dataset.i === QS));
+  const L = qaEl.querySelector('.ql'), sb = L.querySelector('button.sel');
+  if (sb) { if (sb.offsetTop < L.scrollTop) L.scrollTop = sb.offsetTop - 30; else if (sb.offsetTop + sb.offsetHeight > L.scrollTop + L.clientHeight) L.scrollTop = sb.offsetTop + sb.offsetHeight - L.clientHeight + 10; }
+  $('qaD').innerHTML = `<div class="qn">Q${QS + 1}｜${q.g}</div><h3>${q.q}</h3><p>${q.a}</p>`
+    + `<div class="qs">${tagH(q.tag)}<span>依據：${q.src}</span></div>`
+    + `<div class="qs"><span>相關頁：</span>${q.pg.map(p => `<button data-go="${p}">第 ${p} 頁</button>`).join('')}</div>`;
+}
+function openQA() {
+  closeEvi(); const n = curI + 1;
+  qaEl.querySelectorAll('.ql button').forEach(b => b.classList.toggle('rel', QA[+b.dataset.i].pg.includes(n)));
+  const f = QA.findIndex(q => q.pg.includes(n));
+  qaEl.classList.add('open'); qaSel(f >= 0 ? f : QS);
+}
+function closeQA() { qaEl.classList.remove('open'); }
+function qaOpen() { return qaEl.classList.contains('open'); }
+
+/* 講者視窗（P）：講稿、計時、下一步預告、本頁備答；主視窗翻頁時同步 */
+const PS = []; { let a = 0; SLIDES.forEach((_, i) => { PS[i] = a; a += NOTES[i] ? NOTES[i].secs : 0; }); }
+const TOTAL = NOTES.reduce((a, n) => a + n.secs, 0);
+const TM = { run: false, t0: 0, acc: 0, slideAt: 0, slideI: -1 };
+const elapsed = () => TM.acc + (TM.run ? performance.now() - TM.t0 : 0);
+function tmToggle() { if (TM.run) { TM.acc += performance.now() - TM.t0; TM.run = false; } else { TM.run = true; TM.t0 = performance.now(); } updTimer(); }
+function tmReset() { TM.acc = 0; TM.t0 = performance.now(); TM.slideAt = 0; updTimer(); }
+const speakerOf = i => SPEAK.find(s => s.pages.includes(i + 1));
+const pagesStr = ps => { const r = []; ps.forEach(p => { const l = r[r.length - 1]; if (l && p === l[1] + 1) l[1] = p; else r.push([p, p]); }); return 'p' + r.map(([a, b]) => a === b ? a : a + '–' + b).join('、'); };
+const PV_CSS = `*{box-sizing:border-box;margin:0;padding:0}html,body{height:100%}
+body{font-family:"Noto Sans TC","Microsoft JhengHei","PingFang TC",sans-serif;background:#0e151c;color:#e9eef2;display:flex;flex-direction:column;overflow:hidden}
+header{display:flex;align-items:center;gap:18px;padding:12px 20px;background:#16222e;border-bottom:1px solid #263544}
+.pg{flex:1;display:flex;align-items:baseline;gap:14px;min-width:0}
+.pg b{font-family:"Roboto Mono",Consolas,monospace;font-size:28px;color:#f6a26b;white-space:nowrap}
+#vTtl{font-size:21px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#vStep{font-size:14px;color:#9fb0ba;white-space:nowrap}
+.tm{display:flex;align-items:center;gap:10px}
+#vClock{font-family:"Roboto Mono",Consolas,monospace;font-size:34px;font-weight:700}
+#vPace{font-size:14px;padding:4px 12px;border-radius:20px;background:#263544;color:#c9d2da;white-space:nowrap}
+#vPace.ok{background:#1f4a2e;color:#c7ecd2}#vPace.late{background:#5a2414;color:#ffd2c2}#vPace.early{background:#1d3b5a;color:#cfe3f6}
+button{font:inherit;font-size:15px;border:1px solid #3a4c5e;background:#1c2b39;color:#e9eef2;border-radius:6px;padding:6px 12px;cursor:pointer}
+button:hover{border-color:#e8722c}
+.spk{display:flex;align-items:center;gap:10px;padding:8px 20px;font-size:15px;color:#9fb0ba;border-bottom:1px solid #1f2d3a;min-height:42px}
+.spk i{width:12px;height:12px;border-radius:50%}.spk b{font-size:20px;color:#fff;margin-right:6px}
+main{flex:1;display:grid;grid-template-columns:1.4fr 1fr;min-height:0}
+section{padding:12px 20px 16px;overflow:auto;display:flex;flex-direction:column;gap:8px;min-height:0}
+section.r{border-left:1px solid #1f2d3a;background:#111b24}
+h6{font-size:13px;letter-spacing:.12em;color:#f6a26b;font-weight:700;margin-top:6px}
+h6 small{color:#7d8f9c;font-weight:400;letter-spacing:0;margin-left:10px}
+.say{font-size:25px;line-height:1.5;font-weight:700;color:#fff;border-left:4px solid #e8722c;padding-left:14px}
+.scr p{font-size:18.5px;line-height:1.75;color:#d5dde3;margin-bottom:10px}
+.nx{font-size:17px;line-height:1.6;color:#d5dde3;background:#16222e;border-radius:8px;padding:10px 14px}
+.nx b{color:#fff}.nx .sw{display:block;margin-top:6px;color:#ffb08a;font-weight:700}
+ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+li{font-size:15.5px;line-height:1.6;color:#d5dde3;background:#16222e;border-radius:8px;padding:8px 12px}
+li.q{border-left:3px solid #2f7dc0}li.q b{color:#9cc6ee}li.empty{background:none;color:#6c7d8a;padding:0}
+footer{display:flex;align-items:center;gap:10px;padding:10px 20px;background:#16222e;border-top:1px solid #263544}
+footer button{font-size:17px;padding:8px 18px}.hint{font-size:13px;color:#7d8f9c}
+#vSplit{margin-left:auto;display:flex;flex-wrap:wrap;gap:4px 14px;font-size:13.5px;color:#9fb0ba;justify-content:flex-end}
+#vSplit span{display:flex;align-items:center;gap:6px}#vSplit i{width:10px;height:10px;border-radius:50%}#vSplit span.cur{color:#fff;font-weight:700}`;
+const PV_BODY = `<header><div class="pg"><b id="vPg"></b><span id="vTtl"></span><span id="vStep"></span></div>
+<div class="tm"><b id="vClock">00:00</b><span id="vPace"></span><button id="tStart">開始</button><button id="tReset">歸零</button></div></header>
+<div class="spk" id="vSpk"></div>
+<main><section class="l"><h6>現在這一步</h6><div class="say" id="vSay"></div><h6>本頁講稿<small id="vSecs"></small></h6><div class="scr" id="vScript"></div></section>
+<section class="r"><h6>接下來</h6><div class="nx" id="vNext"></div><h6>本頁備答</h6><ul id="vQa"></ul><h6>備註</h6><ul id="vMemo"></ul></section></main>
+<footer><button id="pPrev">‹ 上一步</button><button id="pNext">下一步 ›</button><span class="hint">鍵盤 ← → 也能翻頁</span><div id="vSplit"></div></footer>`;
+let PW = null;
+function openPresenter() {
+  if (PW && !PW.closed) { PW.focus(); syncPresenter(true); return; }
+  let w = null; try { w = window.open('', 'gantry-presenter', 'width=1180,height=760'); } catch (e) { }
+  if (!w) { toast('瀏覽器擋下了講者視窗：請允許這個網站開啟彈出式視窗，再按 P 或「講者」。'); return; }
+  try {
+    w.document.open();
+    w.document.write(`<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="utf-8"><title>講者視窗｜${DECK.title}</title><style>${PV_CSS}</style></head><body>${PV_BODY}</body></html>`);
+    w.document.close();
+    const d = w.document;
+    d.getElementById('pPrev').onclick = () => prev();
+    d.getElementById('pNext').onclick = () => next();
+    d.getElementById('tStart').onclick = tmToggle;
+    d.getElementById('tReset').onclick = tmReset;
+    d.addEventListener('keydown', e => onKey(e, true));
+  } catch (e) { try { w.close(); } catch (e2) { } toast('這個瀏覽環境不允許講者視窗，請改用網站版或離線版。'); return; }
+  PW = w; TM.slideI = -1; syncPresenter(true);
+}
+function syncPresenter(force) {
+  if (!PW || PW.closed || !cur) return;
+  let d; try { d = PW.document; } catch (e) { return; }
+  const g = id => d.getElementById(id); if (!g('vPg')) return;
+  const n = curI, N = NOTES[n] || { secs: 0, script: '', qa: [], memo: [] }, st = cur.steps[cur.step] || {}, sp = speakerOf(n);
+  if (TM.slideI !== n) { if (TM.slideI >= 0 && !TM.run && elapsed() === 0) tmToggle(); TM.slideI = n; TM.slideAt = elapsed(); force = true; }
+  g('vPg').textContent = `${n + 1} / ${SLIDES.length}`;
+  g('vTtl').textContent = cur.title || (n ? '結語' : '封面');
+  g('vStep').textContent = `${cur.kick ? cur.kick + '｜' : ''}第 ${cur.step + 1} / ${cur.steps.length} 步`;
+  g('vSay').textContent = st.say || '（這一步沒有字幕，照講稿說）';
+  if (force) {
+    g('vSpk').innerHTML = sp ? `<i style="background:${sp.color}"></i>講者 <b>${sp.name}</b><span>負責 ${pagesStr(sp.pages)}</span>` : '';
+    g('vScript').innerHTML = N.script.split('\n').map(t => `<p>${esc(t)}</p>`).join('');
+    g('vScript').parentNode.scrollTop = 0;
+    g('vSecs').textContent = `預計 ${mmss(N.secs * 1000)}（全場第 ${mmss(PS[n] * 1000)}～${mmss((PS[n] + N.secs) * 1000)}）`;
+    const rel = QA.map((q, i) => [q, i]).filter(([q]) => q.pg.includes(n + 1));
+    g('vQa').innerHTML = N.qa.map(t => `<li>${esc(t)}</li>`).join('') + rel.map(([q, i]) => `<li class="q"><b>備答卡 Q${i + 1}</b>　${esc(q.q)}</li>`).join('') || '<li class="empty">（無）</li>';
+    g('vMemo').innerHTML = N.memo.map(t => `<li>${esc(t)}</li>`).join('') || '<li class="empty">（無）</li>';
+    g('vSplit').innerHTML = SPEAK.map(s => `<span class="${s === sp ? 'cur' : ''}"><i style="background:${s.color}"></i>${s.name} ${pagesStr(s.pages)}</span>`).join('') + '<span>（建議分工，可改）</span>';
+  }
+  let nx;
+  if (cur.step < cur.steps.length - 1) nx = `<b>下一步：</b>${esc(cur.steps[cur.step + 1].say || '（無字幕）')}`;
+  else if (n < SLIDES.length - 1) {
+    const S2 = SLIDES[n + 1], sp2 = speakerOf(n + 1), s0 = S2.steps && S2.steps[0] && S2.steps[0].say;
+    nx = `<b>下一頁：第 ${n + 2} 頁｜${esc(S2.title || '結語')}</b>${s0 ? '<br>' + esc(s0) : ''}${sp2 && sp2 !== sp ? `<span class="sw">換人：${sp2.name} 上台</span>` : ''}`;
+  } else nx = '<b>最後一頁</b>：謝謝聆聽，開放提問（主畫面按 Q 開備答卡）';
+  g('vNext').innerHTML = nx;
+  updTimer();
+}
+function updTimer() {
+  if (!PW || PW.closed) return; let d; try { d = PW.document; } catch (e) { return; }
+  const c = d.getElementById('vClock'), p = d.getElementById('vPace'); if (!c || !p) return;
+  const e = elapsed(), n = Math.max(0, curI), N = NOTES[n] || { secs: 0 }, a = PS[n] * 1000, b = a + N.secs * 1000;
+  c.textContent = mmss(e);
+  if (!TM.run && e === 0) { p.className = ''; p.textContent = `尚未計時｜全場預計 ${mmss(TOTAL * 1000)}（翻頁就自動開始）`; }
+  else {
+    let t = `本頁 ${mmss(e - TM.slideAt)} / ${mmss(N.secs * 1000)}`, cls = 'ok';
+    if (e > b + 5000) { cls = 'late'; t += `｜落後 ${mmss(e - b)}`; } else if (e < a - 5000) { cls = 'early'; t += `｜超前 ${mmss(a - e)}`; } else t += '｜進度剛好';
+    p.className = cls; p.textContent = t;
+  }
+  d.getElementById('tStart').textContent = TM.run ? '暫停' : e ? '繼續' : '開始';
+}
+setInterval(updTimer, 500);
 
 /* 主迴圈 */
 let last = performance.now();
@@ -1266,6 +1689,8 @@ goSlide(start, false, startStep);
 requestAnimationFrame(loop);
 window.__deck = {
   goSlide, next, prev, get cur() { return cur; }, get i() { return curI; },
+  openQA, closeQA, openPresenter, get pw() { return PW; }, closeEvi,
+  evi(j, i) { const td = document.querySelector(`[data-ev="${j},${i}"]`); if (td) openEvi(td); return !!eviEl; },
   go(n, st) { return new Promise(r => { goSlide(n, false, st); setTimeout(() => { for (let i = 0; i < 90; i++) frame(1 / 30); LB.forEach(l => l.born = 0); frame(1 / 30); r('ok'); }, 300); }); }
 };
 </script>
