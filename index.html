@@ -196,13 +196,26 @@ td.me .sy{color:var(--accent)}td.me .sy small{color:var(--deep);font-weight:700}
 #route{position:absolute;left:0;right:0;top:834px;height:66px;z-index:4;pointer-events:none}
 #route .ln{position:absolute;left:80px;right:250px;top:30px;height:2px;background:#cfc9bd}
 #route .prog{position:absolute;left:80px;top:30px;height:2px;background:var(--accent);transition:width .6s}
-#route .st{position:absolute;top:20px;transform:translateX(-50%);text-align:center}
+#route .st{position:absolute;top:14px;transform:translateX(-50%);text-align:center;padding:6px 22px 30px;pointer-events:auto;cursor:pointer;-webkit-tap-highlight-color:transparent}
 #route .st b{display:block;width:21px;height:21px;line-height:17px;border-radius:50%;background:#fff;border:2px solid #a9a295;margin:0 auto;font-size:11.5px;font-weight:700;font-family:var(--mono);color:#6b7480}
-#route .st span{position:absolute;left:50%;top:25px;transform:translateX(-50%);white-space:nowrap;font-size:13px;color:#7d8790}
+#route .st span{position:absolute;left:50%;top:31px;transform:translateX(-50%);white-space:nowrap;font-size:13px;color:#7d8790}
 #route .st.past b{background:#efb48c;border-color:#efb48c;color:#7a3d12}
 #route .st.cur b{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 0 0 5px rgba(232,114,44,.18)}
 #route .st.cur span{color:var(--accent);font-weight:700;font-size:14px}
 #route .st.wait span{visibility:hidden}
+#route .st b{transition:transform .15s,border-color .15s,box-shadow .15s}
+#route .st:hover b{transform:scale(1.18);border-color:var(--accent)}
+#route .st:hover span{color:var(--deep)}
+#route .st.open b{border-color:var(--accent);box-shadow:0 0 0 5px rgba(232,114,44,.25)}
+/* 進度路線：點章節跳轉，多頁章節跳出頁面選單 */
+#jump{position:absolute;z-index:38;min-width:260px;max-width:400px;background:#fff;border:1.5px solid var(--accent);border-radius:12px;box-shadow:0 12px 34px rgba(22,34,46,.22);padding:10px 10px 8px;display:flex;flex-direction:column;gap:2px;animation:fin .2s ease both}
+#jump .jh{font-size:13px;letter-spacing:.06em;color:var(--deep);font-weight:700;padding:2px 8px 7px;border-bottom:1px solid #eee7dc;margin-bottom:3px;white-space:nowrap}
+#jump button{display:flex;align-items:baseline;gap:10px;text-align:left;border:0;background:none;border-radius:8px;padding:7px 10px;font:inherit;font-size:16px;color:#26333e;cursor:pointer;white-space:nowrap}
+#jump button i{font-style:normal;font-family:var(--mono);font-size:13.5px;color:#7d8790;min-width:22px}
+#jump button:hover{background:#f6efe6}
+#jump button.cur{background:#fff1e4;box-shadow:inset 3px 0 0 var(--accent);color:var(--deep);font-weight:700}
+#jump button.cur i{color:var(--accent)}
+#jump:after{content:"";position:absolute;bottom:-8px;left:var(--ax,50%);width:13px;height:13px;background:#fff;border-right:1.5px solid var(--accent);border-bottom:1.5px solid var(--accent);transform:translateX(-50%) rotate(45deg)}
 
 #tools{position:absolute;right:20px;top:848px;z-index:7;display:flex;gap:6px}
 #tools button{border:1px solid #c9c2b5;background:rgba(255,255,255,.92);border-radius:6px;width:32px;height:28px;cursor:pointer;font-size:15px;color:#33414c}
@@ -1372,12 +1385,17 @@ function buildUI(S) {
   $('mtag').innerHTML = S.scene && !S.noTag ? '<b>此模型為示意</b>' : '';
 }
 
+const RX0 = 150, RX1 = W - 300;
+const stationX = c => RX0 + (RX1 - RX0) * c / (DECK.stations.length - 1);
+const pagesOf = c => SLIDES.map((s, i) => ((s.st ?? -1) === c ? i : -1)).filter(i => i >= 0);
+const pageRange = c => { const p = pagesOf(c); return p.length > 1 ? `第 ${p[0] + 1}–${p[p.length - 1] + 1} 頁` : `第 ${p[0] + 1} 頁`; };
 function drawRoute(S) {
   const r = $('route'), st = DECK.stations; r.innerHTML = '<div class="ln"></div><div class="prog"></div>';
-  const x0 = 150, x1 = W - 300, cur = S.st ?? -1;
+  const x0 = RX0, x1 = RX1, cur = S.st ?? -1;
   st.forEach((s, i) => {
-    const x = x0 + (x1 - x0) * i / (st.length - 1);
-    const d = document.createElement('div'); d.className = 'st' + (i === cur ? ' cur' : i < cur ? ' past' : '');
+    const x = stationX(i);
+    const d = document.createElement('div'); d.className = 'st ui' + (i === cur ? ' cur' : i < cur ? ' past' : '') + (jumpEl && +jumpEl.dataset.ch === i ? ' open' : '');
+    d.dataset.ch = i; d.title = `跳到「${s}」（${pageRange(i)}）`;
     d.style.left = x + 'px'; d.innerHTML = `<b>${i ? String(i).padStart(2, '0') : ''}</b><span>${s}</span>`; r.appendChild(d);
   });
   r.querySelector('.prog').style.width = cur >= 0 ? (x0 - 80 + (x1 - x0) * cur / (st.length - 1)) + 'px' : '0px';
@@ -1414,6 +1432,7 @@ function chapIntro(i) {
 
 function goSlide(n, atEnd, stepAt) {
   if (n < 0 || n >= SLIDES.length) return;
+  closeJump();
   const prevSt = cur ? cur.st : null, nst = SLIDES[n].st;
   if (!SHOT && cur && n > curI && nst !== prevSt && nst > 0) chapIntro(nst); else chapEnd();
   const fade = $('fade'); fade.style.opacity = 1;
@@ -1430,8 +1449,8 @@ function goSlide(n, atEnd, stepAt) {
     if (SHOT) { for (let k = 0; k < 160; k++) frame(.05); LB.forEach(l => l.born = 0); frame(.05); }
   }, 220);
 }
-function next() { if (!cur) return; if (chapEl.style.display === 'block') { chapEnd(); return; } if (cur.step < cur.steps.length - 1) applyStep(cur, cur.step + 1); else goSlide(curI + 1); }
-function prev() { if (!cur) return; if (cur.step > 0) applyStep(cur, cur.step - 1); else goSlide(curI - 1, true); }
+function next() { if (!cur) return; closeJump(); if (chapEl.style.display === 'block') { chapEnd(); return; } if (cur.step < cur.steps.length - 1) applyStep(cur, cur.step + 1); else goSlide(curI + 1); }
+function prev() { if (!cur) return; closeJump(); if (cur.step > 0) applyStep(cur, cur.step - 1); else goSlide(curI - 1, true); }
 
 /* 輸入 */
 let down = null;
@@ -1444,8 +1463,9 @@ stage.addEventListener('pointerup', e => {
     const ev = e.target.closest('[data-ev]');
     if (ev) { const r = ev.closest('[data-s]'); if (!r || r.classList.contains('vis')) { if (ev === eviTd) closeEvi(); else openEvi(ev); return; } }
     if (eviEl) { closeEvi(); return; }
+    if (jumpEl) { closeJump(); return; }
     next();
-  } else if (e.button === 2) { if (eviEl) { closeEvi(); return; } prev(); }
+  } else if (e.button === 2) { if (eviEl) { closeEvi(); return; } if (jumpEl) { closeJump(); return; } prev(); }
 });
 stage.addEventListener('contextmenu', e => e.preventDefault());
 /* 講者視窗只轉送翻頁類按鍵 */
@@ -1460,7 +1480,7 @@ function onKey(e, fromPV) {
     else if (['ArrowUp', 'ArrowLeft', 'PageUp'].includes(k)) { e.preventDefault(); qaSel(QS - 1); }
     return;
   }
-  if (k === 'Escape') { closeEvi(); return; }
+  if (k === 'Escape') { closeEvi(); closeJump(); return; }
   if (fromPV && !PV_KEYS.includes(k)) return;
   if (['ArrowRight', 'PageDown', ' ', 'Enter'].includes(k)) { e.preventDefault(); next(); }
   else if (['ArrowLeft', 'PageUp', 'Backspace'].includes(k)) { e.preventDefault(); prev(); }
@@ -1506,6 +1526,34 @@ function openEvi(td) {
   let top = y + h + 10; if (top + ph > 830) top = Math.max(14, y - ph - 10);
   el.style.left = clamp(x + w / 2 - pw / 2, 16, W - pw - 16) + 'px'; el.style.top = top + 'px'; el.style.visibility = '';
 }
+
+/* 進度路線：點章節直接跳過去；同一章有好幾頁時，再跳出頁面選單讓你選 */
+let jumpEl = null;
+function closeJump() {
+  if (jumpEl) { jumpEl.remove(); jumpEl = null; }
+  document.querySelectorAll('#route .st.open').forEach(x => x.classList.remove('open'));
+}
+function openJump(c, target) {
+  closeJump(); closeEvi();
+  const pages = pagesOf(c), el = document.createElement('div');
+  el.id = 'jump'; el.className = 'ui'; el.dataset.ch = c;
+  el.innerHTML = `<div class="jh">${c ? String(c).padStart(2, '0') + '　' : ''}${DECK.stations[c]}｜${pageRange(c)}，點頁面跳過去</div>`
+    + pages.map(i => `<button data-i="${i}" class="${i === target ? 'cur' : ''}"><i>${i + 1}</i><span>${SLIDES[i].title || (i ? '結語' : '封面')}</span></button>`).join('');
+  el.style.visibility = 'hidden'; stage.appendChild(el); jumpEl = el;
+  const x = stationX(c), w = el.offsetWidth, h = el.offsetHeight, left = clamp(x - w / 2, 12, W - w - 12);
+  el.style.left = left + 'px'; el.style.top = (834 - h + 6) + 'px'; el.style.setProperty('--ax', (x - left) + 'px'); el.style.visibility = '';
+  el.querySelectorAll('button').forEach(b => b.onclick = () => goSlide(+b.dataset.i));
+  const st = document.querySelector(`#route .st[data-ch="${c}"]`); if (st) st.classList.add('open');
+}
+$('route').addEventListener('click', e => {
+  const s = e.target.closest('.st'); if (!s) return;
+  const c = +s.dataset.ch, pages = pagesOf(c); if (!pages.length) return;
+  if (jumpEl && +jumpEl.dataset.ch === c) { closeJump(); return; }     // 再點同一站：收起選單
+  const inCh = pages.includes(curI);
+  if (pages.length === 1) { goSlide(pages[0]); return; }              // 只有一頁：直接跳
+  if (!inCh) goSlide(pages[0]);                                          // 先跳到這章第一頁
+  openJump(c, inCh ? curI : pages[0]);                                   // 再列出這章的頁面
+});
 
 /* 備答卡（Q） */
 const TAGS = [['t0', '有依據'], ['t1', '推論'], ['t2', '待驗證'], ['t3', '待補'], ['t2', '部分待補'], ['t2', '部分待驗證']];
